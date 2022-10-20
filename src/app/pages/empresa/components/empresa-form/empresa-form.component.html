@@ -1,0 +1,120 @@
+<app-simple-wrapper [width]="11" [padding]="2">
+  <app-form-wrapper [title]="title + ' Empresa'">
+    <form class="grid fromgrid" [formGroup]="empresaForm" (ngSubmit)="submit()">
+      <!-- ID -->
+      <app-input-numeric
+        class="col-1"
+        label="ID"
+        [control]="$any(empresaForm.controls['id'])"
+      ></app-input-numeric>
+      <!-- CNPJ -->
+      <app-input-cpf-cnpj
+        class="col-7"
+        label="CNPJ"
+        [isCnpj]="true"
+        [control]="$any(empresaForm.controls['cnpj'])"
+      ></app-input-cpf-cnpj>
+      <!-- Cód. do Regime Tributário -->
+      <app-input-dropdown
+        class="col-2"
+        [options]="[{ label: 'Simples Nacional', value: 0 }]"
+        label="Cód. do Regime Tributário"
+        [control]="$any(empresaForm.controls['crt'])"
+      ></app-input-dropdown>
+      <!-- Status -->
+      <app-input-dropdown
+        class="col-2"
+        [options]="[
+          { label: 'Ativo', value: 'A' },
+          { label: 'Inativo', value: 'I' }
+        ]"
+        label="Status"
+        [control]="$any(empresaForm.controls['status'])"
+      ></app-input-dropdown>
+      <!-- Fantasia -->
+      <app-input-text
+        class="col-6"
+        label="Fantasia"
+        [control]="$any(empresaForm.controls['xfant'])"
+      ></app-input-text>
+      <!-- Razão Social -->
+      <app-input-text
+        class="col-6"
+        label="Razão Social"
+        [control]="$any(empresaForm.controls['xrazaoSocial'])"
+      ></app-input-text>
+      <!-- Logradouro -->
+      <app-input-text
+        class="col-5"
+        label="Logradouro"
+        [control]="$any(empresaForm.controls['xlgr'])"
+      ></app-input-text>
+      <!-- Número -->
+      <app-input-numeric
+        class="col-2"
+        label="Número"
+        [control]="$any(empresaForm.controls['nro'])"
+      ></app-input-numeric>
+      <!-- Complemento -->
+      <app-input-text
+        class="col-3"
+        label="Complemento"
+        [control]="$any(empresaForm.controls['xcpl'])"
+      ></app-input-text>
+      <!-- CEP -->
+      <app-input-cep
+        class="col-2"
+        label="CEP"
+        [control]="$any(empresaForm.controls['cep'])"
+      ></app-input-cep>
+      <!-- Bairro -->
+      <app-input-text
+        class="col-4"
+        label="Bairro"
+        [control]="$any(empresaForm.controls['xbairro'])"
+      ></app-input-text>
+      <!-- Município -->
+      <app-input-text
+        class="col-4"
+        label="Município"
+        [control]="$any(empresaForm.controls['xmun'])"
+      ></app-input-text>
+      <!-- Cidade -->
+      <app-input-text
+        class="col-3"
+        label="Cidade"
+        [control]="$any(empresaForm.controls['cidade'])"
+      ></app-input-text>
+      <!-- UF -->
+      <app-input-text
+        class="col-1"
+        label="UF"
+        [control]="$any(empresaForm.controls['uf'])"
+      ></app-input-text>
+      <!-- Telefone -->
+      <app-input-celular
+        class="col-6"
+        label="Telefone"
+        [isFixo]="true"
+        [control]="$any(empresaForm.controls['fone'])"
+      ></app-input-celular>
+      <!-- Inscrição Estadual -->
+      <app-input-numeric
+        class="col-6"
+        label="Inscrição Estadual"
+        [control]="$any(empresaForm.controls['ie'])"
+      ></app-input-numeric>
+      <!-- Botão -->
+      <div class="col-12 flex">
+        <button
+        pButton
+        type="submit"
+        label="Salvar"
+        class="ml-auto"
+        [loading]="loading"
+        [disabled]="empresaForm.invalid"
+        ></button>
+      </div>
+    </form>
+  </app-form-wrapper>
+</app-simple-wrapper>
