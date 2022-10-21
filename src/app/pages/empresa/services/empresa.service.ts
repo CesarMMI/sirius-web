@@ -34,7 +34,7 @@ export class EmpresaService {
 
   public getById(id: number): IEmpesa | undefined {
     console.log(this.empresas$.value.data);
-    return this.empresas$.value.data.find((empresa) => id === empresa.id);
+    return this.empresas$.value.data.find((empresa: any) => id === empresa.id);
   }
 
   public create(empresa: IEmpesa) {
