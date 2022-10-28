@@ -1,0 +1,10 @@
+<ng-container *ngIf="produtos$ | async as produtos">
+  <app-table
+    title="Produtos"
+    [cols]="cols"
+    [data]="produtos"
+  ></app-table>
+</ng-container>
+
+<!-- (chooseEvent)="onChooseEvent($event)"
+    (pageEvent)="onPageEvent($event)" -->

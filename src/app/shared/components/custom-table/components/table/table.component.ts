@@ -11,13 +11,14 @@ import { ITableData } from "src/app/shared/components/custom-table/models/TableD
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
-  styleUrls: ["./table.component.scss"],  
+  styleUrls: ["./table.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
   // Data
-  @Input() data: ITableData = { data: [], totalPages: 0 };
   @Input() cols!: ICol[];
+  @Input() data: ITableData = { data: [], totalPages: 0 };
+  @Output() pageEvent = new EventEmitter<any>();
   // Header
   @Input() title: string = "";
   // Choose

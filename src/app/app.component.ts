@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
+    <div class="w-screen h-screen">
     <router-outlet></router-outlet>
-    <p-toast position="bottom-right" key="global"></p-toast>
+    </div>
+    <p-toast position="bottom-right"></p-toast>
   `,
   styles: []
 })
 export class AppComponent {
-  title = 'softclever-nfe';
 }

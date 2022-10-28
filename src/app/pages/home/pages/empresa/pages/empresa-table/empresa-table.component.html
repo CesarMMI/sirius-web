@@ -1,0 +1,11 @@
+<ng-container *ngIf="empresas$ | async as empresas">
+    <app-table
+        title="Empresas"
+        [cols]="cols"
+        [data]="empresas"
+ 
+        [showChooseButton]="true"
+        (chooseEvent)="onChooseEvent($event)"
+        (pageEvent)="onPageEvent($event)"
+    ></app-table>
+</ng-container>

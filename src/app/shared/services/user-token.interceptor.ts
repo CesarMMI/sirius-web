@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
 
 @Injectable()

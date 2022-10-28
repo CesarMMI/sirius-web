@@ -9,17 +9,11 @@ const routes: Routes = [
       import("./pages/auth/auth.module").then((m) => m.AuthModule),
   },
   {
-    path: "empresas",
-    loadChildren: () =>
-      import("./pages/empresa/empresa.module").then((m) => m.EmpresaModule),
-  },
-  {
     path: "home",
     loadChildren: () =>
       import("./pages/home/home.module").then((m) => m.HomeModule),
   },
-  { path: 'notas', loadChildren: () => import('./pages/notas/notas.module').then(m => m.NotasModule) },
-  { path: 'produtos', loadChildren: () => import('./pages/produtos/produtos.module').then(m => m.ProdutosModule) },
+  { path: 'produto', loadChildren: () => import('./pages/home/pages/produto/produto.module').then(m => m.ProdutoModule) },
 ];
 
 @NgModule({

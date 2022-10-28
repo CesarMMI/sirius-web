@@ -1,24 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-home",
   template: `
-    <div class="w-full h-full flex gap-2 p-2 surface-100">
-      <app-navbar></app-navbar>
-      <div
-        class="surface-0 h-full shadow-1 border-round-md overflow-hidden flex-1 flex flex-column"
-      >
-        <div class="flex-1">
+    <div class="w-full h-full flex p-2 gap-2">
+      <app-nav-bar></app-nav-bar>
+      <div class="flex-1 flex flex-column gap-2">
+        <app-home-wrapper [padding]="2">
+          <app-empresa-bar></app-empresa-bar>
+        </app-home-wrapper>
+        <app-home-wrapper class="flex-1">
           <router-outlet></router-outlet>
-        </div>
-        <app-empresa-bar></app-empresa-bar>
+        </app-home-wrapper>
       </div>
     </div>
   `,
   styles: [],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }

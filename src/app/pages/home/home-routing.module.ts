@@ -7,11 +7,16 @@ const routes: Routes = [
     path: "",
     component: HomeComponent,
     children: [
-      { path: "", redirectTo: "produtos", pathMatch: "full" },
+      { path: "", redirectTo: "empresas", pathMatch: "full" },
+      {
+        path: "empresas",
+        loadChildren: () =>
+          import("./pages/empresa/empresa.module").then((m) => m.EmpresaModule),
+      },
       {
         path: "produtos",
         loadChildren: () =>
-          import("./../produtos/produtos.module").then((m) => m.ProdutosModule),
+          import("./pages/produto/produto.module").then((m) => m.ProdutoModule),
       },
     ],
   },
