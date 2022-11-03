@@ -1,4 +1,4 @@
 export interface ITableData {
   data: any[];
-  totalPages: number;
+  pageTotal: number;
 }

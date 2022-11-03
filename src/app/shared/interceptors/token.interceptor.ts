@@ -17,13 +17,10 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem("token");
-    if (!token) {
-      this.router.navigate(["/empresas"]);
-      throw new Error("Token vazio");
-    }
+    
     request = request.clone({
       setParams: {
-        token,
+        token: token || '',
       },
     });
     return next.handle(request);

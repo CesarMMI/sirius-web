@@ -1,10 +1,24 @@
+<app-custom-table-wrapper
+  [headerButtons]="headerButtons"
+  title="Produtos"
+  [pageTotal]="pageTotal"
+  (onPagination)="onPagination($event)"
+>
+  <ng-container *ngIf="produtos$ | async as produtos; else loading">
+    <app-custom-table-body
+      [cols]="cols"
+      [data]="produtos"
+      (onSelection)="selectedProduto = $event"
+    ></app-custom-table-body>
+  </ng-container>
+  <ng-template #loading>
+    <app-custom-table-skeleton [cols]="cols"></app-custom-table-skeleton>
+  </ng-template>
+</app-custom-table-wrapper>
 
-<ng-container *ngIf="produtos$ | async as produtos">
-  <app-custom-table
-    [cols]="cols"
-    title="Produtos"
-    [data]="produtos.data"
-    [total]="produtos.totalPages"
-  ></app-custom-table>
-</ng-container>
-
+<ng-template #headerButtons>
+  <app-crud-buttonset
+    [targetId]="selectedProduto?.id"
+    message="Tem certeza que deseja excluir o produto selecionado?"
+  ></app-crud-buttonset>
+</ng-template>

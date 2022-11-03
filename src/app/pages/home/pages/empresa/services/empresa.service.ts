@@ -26,7 +26,7 @@ export class EmpresaService {
         map((response: any) => {
           return {
             data: response["empresas"],
-            totalPages: response["QtdPaginas"],
+            pageTotal: response["QtdPaginas"],
           };
         })
       );

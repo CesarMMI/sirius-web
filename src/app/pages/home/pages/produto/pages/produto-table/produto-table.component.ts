@@ -1,18 +1,21 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
+import { IProduto } from 'src/app/pages/home/pages/produto/models/Produto';
 import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produto.service';
 import { ICol } from 'src/app/shared/components/custom-table/models/Col';
 import { IPageEvent } from 'src/app/shared/components/custom-table/models/PageEvent';
-import { ITableData } from 'src/app/shared/components/custom-table/models/TableData';
+import { StatusPipe } from 'src/app/shared/pipes/status.pipe';
 
 @Component({
   templateUrl: "./produto-table.component.html",
   styles: [],
 })
 export class ProdutoTableComponent {
-  protected produtos$: Observable<ITableData>;
-  protected total: number = 0;
+  protected produtos$: Observable<IProduto[]>;
+  protected selectedProduto?: IProduto;
+
+  protected pageTotal: number = 0;
   protected cols: ICol[] = [
     { field: "id", header: "ID" },
     { field: "codProduto", header: "Cód. Interno" },
@@ -20,14 +23,22 @@ export class ProdutoTableComponent {
     { field: "vlrUnCom", header: "Valor", pipe: CurrencyPipe },
     { field: "unCom", header: "Unidade" },
     { field: "saldo", header: "Saldo" },
-    { field: "status", header: "Status" },
+    { field: "status", header: "Status", pipe: StatusPipe },
   ];
 
   constructor(private produtoService: ProdutoService) {
-    this.produtos$ = produtoService.getAll(1, 10);
+    this.produtos$ = this.get(1, 10);
+  }
+
+  private get(page: number, quantityPerPage: number): Observable<IProduto[]> {
+    return this.produtoService.getProdutos(page, quantityPerPage)
+    .pipe(
+      tap(response => this.pageTotal = response.pageTotal),
+      map(response => response.data)
+    );
   }
 
   protected onPagination(event: IPageEvent) {
-    this.produtos$ = this.produtoService.getAll(event.page + 1, event.rows);
+    this.produtos$ = this.get(event.page + 1, event.rows)
   }
 }

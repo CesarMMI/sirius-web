@@ -30,7 +30,7 @@ export class LoginComponent {
       .login(this.loginForm.value)
       .pipe(first())
       .subscribe({
-        error: (err: HttpErrorResponse) =>
+        error: (err) => 
           this.messageService.add({
             severity: "error",
             summary: err.error.erro || "Não foi possível realizar o login",

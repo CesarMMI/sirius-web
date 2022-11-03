@@ -24,7 +24,7 @@ import { ICol } from "src/app/shared/components/custom-table/models/Col";
       </ng-template>
     </p-table>
   `,
-  styles: [],
+  styleUrls: ['./custom-table-skeleton.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomTableSkeletonComponent {

@@ -20,17 +20,17 @@ import { ConfirmationService } from "primeng/api";
       <button
         pButton
         icon="pi pi-pencil"
-        [disabled]="!isSelected"
+        [disabled]="targetId ? false : true"
         [routerLink]="'edit/' + targetId"
-        [class]="isSelected ? 'p-button-info' : 'p-button-secondary'"
+        [class]="targetId ? 'p-button-info' : 'p-button-secondary'"
         class="p-button-text p-button-rounded"
       ></button>
       <button
         pButton
         icon="pi pi-trash"
-        [disabled]="!isSelected"
+        [disabled]="targetId ? false : true"
         (click)="confirm($event)"
-        [class]="isSelected ? 'p-button-danger' : 'p-button-secondary'"
+        [class]="targetId ? 'p-button-danger' : 'p-button-secondary'"
         class="p-button-text p-button-rounded"
       ></button>
     </div>
@@ -38,12 +38,11 @@ import { ConfirmationService } from "primeng/api";
     <p-confirmPopup></p-confirmPopup>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CrudButtonsetComponent {
   @Input() targetId?: number;
   @Input() message: string = "";
-  @Input() isSelected: boolean = false;
 
   @Output() deleteEvent = new EventEmitter();
 
