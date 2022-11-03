@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ITableData } from 'src/app/shared/components/custom-table/models/TableData';
 
 @Component({
   selector: 'app-custom-table-header',
   template: `
-  <ng-container *ngIf="title != ''">
-    <header class="surface-ground px-3 pt-3 flex justify-content-between align-items-center">
-      <span class="text-3xl text-color font-bold">{{ title }}</span>
-    </header>
-  </ng-container>  
+    <ng-container *ngIf="title != ''">
+  <div class="px-2 pt-2 surface-ground flex align-items-center">
+    <span class="text-3xl text-color font-bold">{{ title }}</span>
+    <div class="ml-auto"><ng-content></ng-content></div>
+  </div>
+</ng-container>
   `,
   styles: [
   ],
@@ -19,5 +18,4 @@ export class CustomTableHeaderComponent {
   @Input() title: string = '';
 
   constructor() { }
-
 }

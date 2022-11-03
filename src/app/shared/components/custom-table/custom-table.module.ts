@@ -1,31 +1,29 @@
-import { CommonModule, CurrencyPipe, DatePipe } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
-import { ConfirmationService } from "primeng/api";
-import { ButtonModule } from "primeng/button";
-import { ConfirmPopupModule } from "primeng/confirmpopup";
-import { PaginatorModule } from "primeng/paginator";
-import { SkeletonModule } from "primeng/skeleton";
-import { TableModule } from "primeng/table";
-import { CepPipe } from "src/app/shared/pipes/cep.pipe";
-import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
-import { PipesModule } from "src/app/shared/pipes/pipes.module";
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { PaginatorModule } from 'primeng/paginator';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule } from 'primeng/table';
+import { CustomTableComponent } from 'src/app/shared/components/custom-table/components/custom-table/custom-table.component';
+import { CepPipe } from 'src/app/shared/pipes/cep.pipe';
+import { CpfCnpjPipe } from 'src/app/shared/pipes/cpf-cnpj.pipe';
+import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 
-import { CrudButtonsetComponent } from "./components/crud-buttonset/crud-buttonset.component";
-import { TableComponent } from "./components/table/table.component";
-import { CustomTableComponent } from './custom-table.component';
-import { CustomTableHeaderComponent } from './components/custom-table-header/custom-table-header.component';
-import { CustomTableBodyComponent } from './components/custom-table-body/custom-table-body.component';
+import { CrudButtonsetComponent } from './components/crud-buttonset/crud-buttonset.component';
 import { CustomTableSkeletonComponent } from './components/custom-table-skeleton/custom-table-skeleton.component';
+import { CustomTablePaginatorComponent } from './components/custom-table-paginator/custom-table-paginator.component';
+import { CustomTableHeaderComponent } from './components/custom-table-header/custom-table-header.component';
 
 @NgModule({
   declarations: [
-    TableComponent,
-    CrudButtonsetComponent,
     CustomTableComponent,
+    CrudButtonsetComponent,
     CustomTableHeaderComponent,
-    CustomTableBodyComponent,
     CustomTableSkeletonComponent,
+    CustomTablePaginatorComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +35,13 @@ import { CustomTableSkeletonComponent } from './components/custom-table-skeleton
     SkeletonModule,
     ConfirmPopupModule,
   ],
-  exports: [CustomTableComponent],
+  exports: [
+    CustomTableComponent,
+    CrudButtonsetComponent,
+    CustomTableHeaderComponent,
+    CustomTableSkeletonComponent,
+    CustomTablePaginatorComponent,
+  ],
   providers: [ConfirmationService, CpfCnpjPipe, CepPipe, CurrencyPipe, DatePipe],
 })
-export class CustomTableModule {}
+export class CustomTableModule { }

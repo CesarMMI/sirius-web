@@ -20,7 +20,7 @@ export class ProdutoService {
         },
       })
       .pipe(
-        delay(2500),
+        delay(1000),
         map((response: any) => {
           return {
             data: response["Produtos"],
