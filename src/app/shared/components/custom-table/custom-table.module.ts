@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, CurrencyPipe, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { ConfirmationService } from "primeng/api";
@@ -12,14 +12,20 @@ import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
 import { PipesModule } from "src/app/shared/pipes/pipes.module";
 
 import { CrudButtonsetComponent } from "./components/crud-buttonset/crud-buttonset.component";
-import { SkeletonTableComponent } from "./components/skeleton-table/skeleton-table.component";
 import { TableComponent } from "./components/table/table.component";
+import { CustomTableComponent } from './custom-table.component';
+import { CustomTableHeaderComponent } from './components/custom-table-header/custom-table-header.component';
+import { CustomTableBodyComponent } from './components/custom-table-body/custom-table-body.component';
+import { CustomTableSkeletonComponent } from './components/custom-table-skeleton/custom-table-skeleton.component';
 
 @NgModule({
   declarations: [
     TableComponent,
     CrudButtonsetComponent,
-    SkeletonTableComponent,
+    CustomTableComponent,
+    CustomTableHeaderComponent,
+    CustomTableBodyComponent,
+    CustomTableSkeletonComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +37,7 @@ import { TableComponent } from "./components/table/table.component";
     SkeletonModule,
     ConfirmPopupModule,
   ],
-  exports: [TableComponent, CrudButtonsetComponent, SkeletonTableComponent],
-  providers: [ConfirmationService, CpfCnpjPipe, CepPipe],
+  exports: [CustomTableComponent],
+  providers: [ConfirmationService, CpfCnpjPipe, CepPipe, CurrencyPipe, DatePipe],
 })
 export class CustomTableModule {}

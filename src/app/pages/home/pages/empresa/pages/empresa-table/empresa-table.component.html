@@ -1,11 +1,39 @@
-<ng-container *ngIf="empresas$ | async as empresas">
-    <app-table
-        title="Empresas"
-        [cols]="cols"
-        [data]="empresas"
- 
-        [showChooseButton]="true"
-        (chooseEvent)="onChooseEvent($event)"
-        (pageEvent)="onPageEvent($event)"
-    ></app-table>
-</ng-container>
+<!-- <ng-container *ngIf="empresas$ | async as empresas">
+  <app-table
+    title="Empresas"
+    [cols]="cols"
+
+    [data]="empresas"
+    
+    [showChooseButton]="true"
+    (chooseEvent)="onChooseEvent($event)"
+    (pageEvent)="onPageEvent($event)"
+  ></app-table>
+</ng-container> -->
+<button
+  pButton
+  label="Entrar"
+  (click)="
+    onChooseEvent({
+      id: 1,
+      cnpj: '04876296000160',
+      xrazaoSocial: 'COLORMIX',
+      xfant: 'COLORMIX',
+      xlgr: 'Avenida Dracena',
+      nro: '523',
+      xcpl: '',
+      xbairro: 'Jaguaré',
+      cmun: '3550308',
+      xmun: 'São Paulo',
+      uf: 'SP',
+      cep: '05329000',
+      fone: '11912341234',
+      ie: '116305925117',
+      crt: '1',
+      token: 'ef384942-44bb-11ed-a6e4-8c89a5fa70e8',
+      banco: 'b04876296000160',
+      status: 'A',
+      grupoUsuario: 'Supervisor'
+    })
+  "
+></button>

@@ -17,4 +17,6 @@ export class SimpleWrapperComponent {
   @Input() padding: number = 0;
 
   constructor() {}
+
+  
 }

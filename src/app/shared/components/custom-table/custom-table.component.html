@@ -1,0 +1,18 @@
+<!-- Header -->
+<app-custom-table-header [title]="title"></app-custom-table-header>
+
+<!-- Body -->
+<ng-container ng-id ></ng-container>
+
+<app-custom-table-body
+  [data]="data | async"
+  [cols]="cols"
+></app-custom-table-body>
+
+<!-- Paginator -->
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [rows]="rows"
+  [totalRecords]="totalPages * rows"
+  [rowsPerPageOptions]="[10, 20, 30]"
+></p-paginator>

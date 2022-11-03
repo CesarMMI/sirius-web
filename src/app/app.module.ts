@@ -9,9 +9,10 @@ import { UserTokenInterceptor } from "src/app/shared/services/user-token.interce
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { MouseComponent } from './teste/mouse/mouse.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MouseComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

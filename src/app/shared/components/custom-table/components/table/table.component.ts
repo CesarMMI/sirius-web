@@ -18,6 +18,8 @@ export class TableComponent {
   // Data
   @Input() cols!: ICol[];
   @Input() data: ITableData = { data: [], totalPages: 0 };
+  protected quantity: number = 10;
+
   @Output() pageEvent = new EventEmitter<any>();
   // Header
   @Input() title: string = "";
@@ -27,6 +29,10 @@ export class TableComponent {
   // Select
   @Output() selectEvent = new EventEmitter<any>();
   protected selectedData: any;
+
+  protected onPageChange(event: any) {
+    this.pageEvent.emit(event)
+  }
 
   constructor() {}
 }
