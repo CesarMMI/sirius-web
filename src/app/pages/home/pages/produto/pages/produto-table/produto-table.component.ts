@@ -1,17 +1,17 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
-import { IProduto } from 'src/app/pages/home/pages/produto/models/Produto';
+import { Observable } from 'rxjs';
 import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produto.service';
 import { ICol } from 'src/app/shared/components/custom-table/models/Col';
 import { IPageEvent } from 'src/app/shared/components/custom-table/models/PageEvent';
+import { ITableData } from 'src/app/shared/components/custom-table/models/TableData';
 
 @Component({
   templateUrl: "./produto-table.component.html",
   styles: [],
 })
 export class ProdutoTableComponent {
-  protected produtos$: Observable<IProduto[]>;
+  protected produtos$: Observable<ITableData>;
   protected total: number = 0;
   protected cols: ICol[] = [
     { field: "id", header: "ID" },
@@ -24,18 +24,10 @@ export class ProdutoTableComponent {
   ];
 
   constructor(private produtoService: ProdutoService) {
-    this.produtos$ = produtoService.getAll(1, 10)
-      .pipe(
-        tap(response => this.total = response.totalPages),
-        map(response => response.data)
-      );
+    this.produtos$ = produtoService.getAll(1, 10);
   }
 
   protected onPagination(event: IPageEvent) {
-    this.produtos$ = this.produtoService.getAll(event.page + 1, event.rows)
-      .pipe(
-        tap(response => this.total = response.totalPages),
-        map(response => response.data)
-      );
+    this.produtos$ = this.produtoService.getAll(event.page + 1, event.rows);
   }
 }

@@ -1,12 +1,10 @@
-<app-custom-table-header title="Produtos"></app-custom-table-header>
-<ng-container *ngIf="produtos$ | async as produtos; else loading">
-  <app-custom-table [cols]="cols" [data]="produtos"></app-custom-table>
-</ng-container>
-<ng-template #loading>
-  <app-custom-table-skeleton [cols]="cols"></app-custom-table-skeleton>
-</ng-template>
 
-<app-custom-table-paginator
-  [total]="total"
-  (onPagination)="onPagination($event)"
-></app-custom-table-paginator>
+<ng-container *ngIf="produtos$ | async as produtos">
+  <app-custom-table
+    [cols]="cols"
+    title="Produtos"
+    [data]="produtos.data"
+    [total]="produtos.totalPages"
+  ></app-custom-table>
+</ng-container>
+

@@ -4,7 +4,7 @@ import { MenuItem } from "primeng/api";
 @Component({
   selector: "app-nav-bar",
   template: `
-    <app-simple-wrapper [padding]="2">
+    <app-simple-wrapper>
       <p-slideMenu [model]="items"></p-slideMenu>
     </app-simple-wrapper>
   `,
