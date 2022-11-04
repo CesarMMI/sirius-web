@@ -23,4 +23,16 @@ export class CrudService {
             }
         })
     }
+
+    getById(id: number) {
+        return this.http.get(`${this.API_URL}/${this.apiEndPoints.getById}/${id}`)
+    }
+
+    create(subject: any) {
+        return this.http.post(`${this.API_URL}/${this.apiEndPoints.post}`, subject)
+    }
+
+    update(subject: any) {
+        return this.http.put(`${this.API_URL}/${this.apiEndPoints.put}`, subject)
+    }
 }

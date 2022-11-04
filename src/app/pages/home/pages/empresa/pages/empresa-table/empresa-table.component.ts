@@ -12,7 +12,7 @@ import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
   styles: [],
 })
 export class EmpresaTableComponent {
-  protected empresas$: Observable<ITableData>;
+  protected empresas$?: Observable<ITableData>;
   protected cols: ICol[] = [
     { field: "id", header: "ID" },
     { field: "xrazaoSocial", header: "Razão Social" },
@@ -26,11 +26,11 @@ export class EmpresaTableComponent {
     private router: Router,
     private empresaService: EmpresaService
   ) {
-    this.empresas$ = this.empresaService.getAll(1, 10);
+    // this.empresas$ = this.empresaService.getAll(1, 10);
   }
 
   protected getAll(page: number, itemQuantity: number): void {
-    this.empresas$ = this.empresaService.getAll(page, itemQuantity);
+    // this.empresas$ = this.empresaService.getAll(page, itemQuantity);
   }
 
   protected onPageEvent(event: {

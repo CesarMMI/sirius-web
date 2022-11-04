@@ -18,6 +18,7 @@ import { InputCpfCnpjComponent } from "./inputs/input-cpf-cnpj/input-cpf-cnpj.co
 import { InputDropdownComponent } from "./inputs/input-dropdown/input-dropdown.component";
 import { DropdownModule } from "primeng/dropdown";
 import { InputCepComponent } from "./inputs/input-cep/input-cep.component";
+import { InputCurrencyComponent } from './inputs/input-currency/input-currency.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { InputCepComponent } from "./inputs/input-cep/input-cep.component";
     InputCpfCnpjComponent,
     InputDropdownComponent,
     InputCepComponent,
+    InputCurrencyComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import { InputCepComponent } from "./inputs/input-cep/input-cep.component";
     InputCpfCnpjComponent,
     InputDropdownComponent,
     InputCepComponent,
+    InputCurrencyComponent,
   ],
 })
-export class CustomFormModule {}
+export class CustomFormModule { }

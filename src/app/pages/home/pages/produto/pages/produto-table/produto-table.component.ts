@@ -29,16 +29,17 @@ export class ProdutoTableComponent {
   constructor(private produtoService: ProdutoService) {
     this.produtos$ = this.get(1, 10);
   }
+  
+  protected onPagination(event: IPageEvent) {
+    this.produtos$ = this.get(event.page + 1, event.rows)
+  }
 
   private get(page: number, quantityPerPage: number): Observable<IProduto[]> {
-    return this.produtoService.getProdutos(page, quantityPerPage)
+    return this.produtoService.get(page, quantityPerPage)
     .pipe(
       tap(response => this.pageTotal = response.pageTotal),
       map(response => response.data)
     );
   }
 
-  protected onPagination(event: IPageEvent) {
-    this.produtos$ = this.get(event.page + 1, event.rows)
-  }
 }

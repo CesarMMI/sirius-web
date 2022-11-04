@@ -1,0 +1,82 @@
+<app-form-wrapper title="Produtos">
+  <form [formGroup]="form"  (ngSubmit)="submit()" class="grid m-0">
+    <!-- ID -->
+    <app-input-numeric
+      class="col-2"
+      label="ID"
+      [control]="$any(form.controls['id'])"
+    ></app-input-numeric>
+    <!-- Cód. do Produto -->
+    <app-input-text
+      class="col-5"
+      label="Cód. do Produto"
+      [control]="$any(form.controls['codProduto'])"
+    ></app-input-text>
+    <!-- Descrição -->
+    <app-input-text
+      class="col-5"
+      label="Descrição"
+      [control]="$any(form.controls['descricao'])"
+    ></app-input-text>
+
+    <!-- Valor -->
+    <app-input-currency
+      class="col-4"
+      label="Valor"
+      [control]="$any(form.controls['vlrUnCom'])"
+    ></app-input-currency>
+    <!-- Unidade -->
+    <app-input-text
+      class="col-4"
+      label="Unidade"
+      [control]="$any(form.controls['unCom'])"
+    ></app-input-text>
+    <!-- Valor -->
+    <app-input-numeric
+      class="col-4"
+      label="Saldo"
+      [control]="$any(form.controls['saldo'])"
+    ></app-input-numeric>
+
+    <!-- NCM -->
+    <app-input-text
+      class="col-5"
+      label="NCM"
+      [control]="$any(form.controls['vlrUnCom'])"
+    ></app-input-text>
+    <!-- EAN -->
+    <app-input-text
+      class="col-5"
+      label="EAN"
+      [control]="$any(form.controls['unCom'])"
+    ></app-input-text>
+    <!-- Status -->
+    <app-input-dropdown
+      class="col-2"
+      label="Status"
+      [control]="$any(form.controls['saldo'])"
+      [options]="[
+        { label: 'Ativo', value: 'A' },
+        { label: 'Inativo', value: 'I' }
+      ]"
+    ></app-input-dropdown>
+
+    <!-- Button -->
+    <div class="col-12 p-buttonset flex">
+      <button
+        pButton
+        type="button"
+        icon="pi pi-times"
+        [disabled]="loading"
+        class="ml-auto p-button-secondary p-button-outlined"
+      ></button>
+      <button
+        pButton
+        [loading]="loading"
+        [disabled]="form.invalid"
+        type="submit"
+        label="Salvar"
+      ></button>
+    </div>
+  </form>
+</app-form-wrapper>

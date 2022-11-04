@@ -14,14 +14,16 @@ export class ProdutoService extends CrudService {
     super(
       http,
       `http://${environment.api_host}:8081/datasnap/rest/TSMProdutos`, {
-      getAll: 'GetProdutos'
+      getAll: 'GetProdutos',
+      getById: 'GetProdutoDetail',
+      post: 'Produto',
+      put: 'Produto',
     });
   }
 
-  public getProdutos(page: number, quantityPerPage: number): Observable<ITableData> {
+  public override get(page: number, quantityPerPage: number): Observable<ITableData> {
     return super.get(page, quantityPerPage)
       .pipe(
-        delay(1000),
         map((response: any) => {
           return {
             data: response["Produtos"],
