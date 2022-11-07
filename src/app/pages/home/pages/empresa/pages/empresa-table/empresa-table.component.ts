@@ -1,52 +1,51 @@
+import { CurrencyPipe } from "@angular/common";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/Empresa";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
+import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";
 import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
+import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 
 @Component({
   templateUrl: "./empresa-table.component.html",
   styles: [],
 })
 export class EmpresaTableComponent {
-  protected empresas$?: Observable<ITableData>;
+  protected empresas$: Observable<IEmpresa[]>;
+  protected selectedEmpresa?: IEmpresa;
+
+  protected pageTotal: number = 0;
   protected cols: ICol[] = [
-    { field: "id", header: "ID" },
-    { field: "xrazaoSocial", header: "Razão Social" },
-    { field: "xfant", header: "Fantasia" },
-    { field: "cnpj", header: "CNPJ", pipe: CpfCnpjPipe },
-    { field: "xbairro", header: "Bairro" },
-    { field: "uf", header: "UF" },
+    { field: 'id', header: 'ID' },
+    { field: 'cnpj', header: 'CNPJ', pipe: CpfCnpjPipe},
+    { field: 'xrazaoSocial', header: 'Razão Social' },
+    { field: 'xfant', header: 'Fantasia' },
+    { field: 'grupoUsuario', header: 'Grupo' },
+    { field: 'status', header: 'Status', pipe: StatusPipe },
   ];
 
-  constructor(
-    private router: Router,
-    private empresaService: EmpresaService
-  ) {
-    // this.empresas$ = this.empresaService.getAll(1, 10);
+  constructor(private empresaService: EmpresaService) {
+    this.empresas$ = this.get(1, 10);
+  }
+  
+  protected onPagination(event: IPageEvent) {
+    this.empresas$ = this.get(event.page + 1, event.rows)
   }
 
-  protected getAll(page: number, itemQuantity: number): void {
-    // this.empresas$ = this.empresaService.getAll(page, itemQuantity);
+  protected onChoose(event: IEmpresa) {
+    this.empresaService.chosenEmpresa$.next(event);
+    localStorage.setItem('token', event.token);
   }
 
-  protected onPageEvent(event: {
-    page: number;
-    first: number;
-    rows: number;
-    pageCount: number;
-  }) {
-    this.getAll(event.page + 1, event.rows);
-  }
-
-  protected onChooseEvent(event: IEmpresa) {
-    if (event) {
-      this.empresaService.selectedEmpresa$.next(event);
-      localStorage.setItem('token', event.token);
-      this.router.navigate(['/home/produtos'])
-    }
+  private get(page: number, quantityPerPage: number): Observable<IEmpresa[]> {
+    return this.empresaService.get(page, quantityPerPage)
+    .pipe(
+      tap(response => this.pageTotal = response.pageTotal),
+      map(response => response.data)
+    );
   }
 }

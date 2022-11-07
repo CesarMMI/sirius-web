@@ -20,7 +20,7 @@ export class ProdutoTableComponent {
     { field: "id", header: "ID" },
     { field: "codProduto", header: "Cód. Interno" },
     { field: "descricao", header: "Descrição" },
-    { field: "vlrUnCom", header: "Valor", pipe: CurrencyPipe },
+    { field: "vlrUnCom", header: "Valor", pipe: CurrencyPipe, pipeArgs: ["BRL"] },
     { field: "unCom", header: "Unidade" },
     { field: "saldo", header: "Saldo" },
     { field: "status", header: "Status", pipe: StatusPipe },
@@ -41,5 +41,4 @@ export class ProdutoTableComponent {
       map(response => response.data)
     );
   }
-
 }

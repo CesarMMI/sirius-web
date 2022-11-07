@@ -9,6 +9,12 @@ export class StatusPipe implements PipeTransform {
     switch(value.toLocaleUpperCase()){
       case 'A':
         return 'Ativo';
+      case 'I':
+        return 'Inativo';
+      case 'P':
+        return 'Pendente';
+      case 'R':
+        return 'Realizado';
       default:
         return value;
     }

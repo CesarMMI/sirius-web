@@ -15,7 +15,7 @@ export class EmpresaService extends CrudService {
   constructor(protected override http: HttpClient) {
     super(
       http,
-      `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa/`, {
+      `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa`, {
       getAll: 'GetEmpresas',
       getById: 'GetEmpresa',
       post: 'Empresa',
@@ -24,6 +24,7 @@ export class EmpresaService extends CrudService {
   }
 
   public selectedEmpresa$ = new BehaviorSubject<IEmpresa | null>(null);
+  public chosenEmpresa$ = new BehaviorSubject<IEmpresa | null>(null);
 
   public override get(page: number, quantityPerPage: number): Observable<ITableData> {
     return super.get(page, quantityPerPage)

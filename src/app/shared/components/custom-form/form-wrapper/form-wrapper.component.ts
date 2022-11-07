@@ -9,9 +9,9 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-form-wrapper",
   template: `
-    <div class="px-2 py-2">
+    <div class="px-2 py-2 surface-0 border-round-lg">
       <header class="flex justify-content-between align-items-center mb-3">
-        <span class="text-3xl text-color font-bold">{{ title }}</span>
+        <span class="text-3xl text-color font-bold">{{ (isEdit ? 'Editar ' : 'Adicionar ') + title }}</span>
         <button
           pButton
           [routerLink]="isEdit ? '../..' : '..'"

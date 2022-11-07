@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { delay } from "rxjs";
 
 export interface IApiEndPoints {
     getAll?: string
@@ -21,7 +22,7 @@ export class CrudService {
                 pag: page,
                 qtdItensPag: quantityPerPage
             }
-        })
+        }).pipe(delay(500))
     }
 
     getById(id: number) {

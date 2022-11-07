@@ -18,6 +18,11 @@ const routes: Routes = [
         loadChildren: () =>
           import("./pages/produto/produto.module").then((m) => m.ProdutoModule),
       },
+      {
+        path: "pedidos-venda",
+        loadChildren: () =>
+          import("./pages/pedido-venda/pedido-venda.module").then(m => m.PedidoVendaModule)
+      }
     ],
   },
 ];
@@ -26,4 +31,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomeRoutingModule {}
+export class HomeRoutingModule { }

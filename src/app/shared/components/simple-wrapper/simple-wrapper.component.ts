@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
   selector: "app-simple-wrapper",
   template: `
     <div
-      class="w-full h-full shadow-2 border-round-lg surface-0"
+      class="w-full h-full surface-0"
       [class]="'p-' + padding"
     >
       <ng-content></ng-content>

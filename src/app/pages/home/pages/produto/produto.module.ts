@@ -11,7 +11,18 @@ import { ButtonModule } from "primeng/button";
 import { ProdutoFormComponent } from "src/app/pages/home/pages/produto/pages/produto-form/produto-form.component";
 
 @NgModule({
-  declarations: [ProdutoTableComponent, ProdutoFormComponent],
-  imports: [CommonModule, ProdutoRoutingModule, ReactiveFormsModule, CustomTableModule, CustomFormModule, ButtonModule, CrudButtonsetModule],
+  declarations: [
+    ProdutoTableComponent,
+    ProdutoFormComponent
+  ],
+  imports: [
+    CommonModule,
+    ProdutoRoutingModule,
+    ReactiveFormsModule,
+    CustomTableModule,
+    CustomFormModule,
+    ButtonModule,
+    CrudButtonsetModule
+  ],
 })
 export class ProdutoModule { }

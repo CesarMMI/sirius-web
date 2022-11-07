@@ -13,7 +13,6 @@ import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produt
 })
 export class ProdutoFormComponent {
   protected form: FormGroup;
-
   protected loading: boolean = false;
 
   constructor(

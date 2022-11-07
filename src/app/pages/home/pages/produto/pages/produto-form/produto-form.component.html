@@ -1,4 +1,4 @@
-<app-form-wrapper title="Produtos">
+<app-form-wrapper title="Produto">
   <form [formGroup]="form"  (ngSubmit)="submit()" class="grid m-0">
     <!-- ID -->
     <app-input-numeric
@@ -42,19 +42,19 @@
     <app-input-text
       class="col-5"
       label="NCM"
-      [control]="$any(form.controls['vlrUnCom'])"
+      [control]="$any(form.controls['NCM'])"
     ></app-input-text>
     <!-- EAN -->
     <app-input-text
       class="col-5"
       label="EAN"
-      [control]="$any(form.controls['unCom'])"
+      [control]="$any(form.controls['codEAN'])"
     ></app-input-text>
     <!-- Status -->
     <app-input-dropdown
       class="col-2"
       label="Status"
-      [control]="$any(form.controls['saldo'])"
+      [control]="$any(form.controls['status'])"
       [options]="[
         { label: 'Ativo', value: 'A' },
         { label: 'Inativo', value: 'I' }

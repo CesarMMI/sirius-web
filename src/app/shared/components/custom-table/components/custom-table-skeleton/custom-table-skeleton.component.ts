@@ -15,11 +15,22 @@ import { ICol } from "src/app/shared/components/custom-table/models/Col";
           <th *ngFor="let col of cols">
             {{ col.header }}
           </th>
+          <th *ngIf="chooseMode" style="width: 4rem;"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData>
         <tr>
           <td *ngFor="let col of cols"><p-skeleton></p-skeleton></td>
+          <td *ngIf="chooseMode" class="w-min">
+            <button
+              pButton
+              [disabled]="true"
+              label="Selecionar"
+              iconPos="right"
+              icon="bi bi-chevron-double-right"
+              class="p-button-sm p-button-text p-button-secondary"
+            ></button>
+          </td>
         </tr>
       </ng-template>
     </p-table>
@@ -29,6 +40,7 @@ import { ICol } from "src/app/shared/components/custom-table/models/Col";
 })
 export class CustomTableSkeletonComponent {
   @Input() cols: ICol[] = [];
+  @Input() chooseMode: boolean = false
   protected numbers: number[];
 
   constructor() {

@@ -1,39 +1,27 @@
-<!-- <ng-container *ngIf="empresas$ | async as empresas">
-  <app-table
-    title="Empresas"
-    [cols]="cols"
+<app-custom-table-wrapper
+  [headerButtons]="headerButtons"
+  title="Empresas"
+  [pageTotal]="pageTotal"
+  (onPagination)="onPagination($event)"
+>
+  <ng-container *ngIf="empresas$ | async as empresas; else loading">
+    <app-custom-table-body
+      [cols]="cols"
+      [data]="empresas"
+      (onSelection)="selectedEmpresa = $event"
+      
+      [chooseMode]="true"
+      (onChoose)="onChoose($event)"
+    ></app-custom-table-body>
+  </ng-container>
+  <ng-template #loading>
+    <app-custom-table-skeleton [cols]="cols" [chooseMode]="true"></app-custom-table-skeleton>
+  </ng-template>
+</app-custom-table-wrapper>
 
-    [data]="empresas"
-    
-    [showChooseButton]="true"
-    (chooseEvent)="onChooseEvent($event)"
-    (pageEvent)="onPageEvent($event)"
-  ></app-table>
-</ng-container> -->
-<button
-  pButton
-  label="Entrar"
-  (click)="
-    onChooseEvent({
-      id: 2,
-      cnpj: '33089440000116',
-      xrazaoSocial: 'Empresa Teste',
-      xfant: 'Empresa Teste',
-      xlgr: 'Praça da Sé',
-      nro: '0',
-      xcpl: 'lado par',
-      xbairro: 'Sé',
-      cmun: '3550308',
-      xmun: 'São Paulo',
-      uf: 'SP',
-      cep: '01001001',
-      fone: '11912341234',
-      ie: '214326908047',
-      crt: '1',
-      token: '78bff7f3-5b6e-11ed-88ac-0200752e000a',
-      banco: 'b33089440000116',
-      status: 'A',
-      grupoUsuario: 'Supervisor'
-    })
-  "
-></button>
+<ng-template #headerButtons>
+  <app-crud-buttonset
+    [targetId]="selectedEmpresa?.id"
+    message="Tem certeza que deseja excluir o produto selecionado?"
+  ></app-crud-buttonset>
+</ng-template>
