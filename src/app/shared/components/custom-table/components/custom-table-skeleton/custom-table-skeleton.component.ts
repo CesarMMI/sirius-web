@@ -6,7 +6,7 @@ import { ICol } from "src/app/shared/components/custom-table/models/Col";
   template: `
     <p-table
       [value]="numbers"
-      responsiveLayout="scroll"
+      responsiveLayout="stack"
       class="flex-1"
       styleClass="p-datatable-sm"
     >

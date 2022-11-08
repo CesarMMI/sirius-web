@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { INavbarItem } from "src/app/pages/home/components/nav-bar/models/NavbarItem";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
+import { ResponsiveService } from "src/app/shared/services/responsive.service";
 import { TokensService } from "src/app/shared/services/tokens.service";
 
 @Component({
   selector: "app-nav-bar",
   template: `
     <div class="pt-3">
+      {{ screenWidth$ | async }}
+      {{ mediaBreakpoint$ | async }}
       <ng-container *ngIf="!(showChildren$ | async); else childrenView">
         <ng-container *ngFor="let item of items">
           <app-nav-bar-item
@@ -35,8 +38,15 @@ export class NavBarComponent {
   constructor(
     private router: Router,
     private tokensService: TokensService,
-    private empresaService: EmpresaService
-  ) {}
+    private empresaService: EmpresaService,
+    private responsiveService: ResponsiveService
+  ) {
+    this.mediaBreakpoint$ = responsiveService.mediaBreakpoint$;
+    this.screenWidth$ = responsiveService.screenWidth$;
+  }
+
+  protected screenWidth$: Observable<any>;
+  protected mediaBreakpoint$: Observable<any>;
 
   protected showChildren$ = new BehaviorSubject<boolean>(false);
   protected currentParent$ = new BehaviorSubject<INavbarItem | null>(null);
