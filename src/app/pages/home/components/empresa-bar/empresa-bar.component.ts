@@ -1,20 +1,35 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { map, Observable } from "rxjs";
-import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IEmpresa } from 'src/app/pages/home/pages/empresa/models/Empresa';
+import { EmpresaService } from 'src/app/pages/home/pages/empresa/services/empresa.service';
+import { TokensService } from 'src/app/shared/services/tokens.service';
 
 @Component({
   selector: "app-empresa-bar",
   template: `
     <div class="h-full flex justify-content-center align-items-center">
       <ng-container *ngIf="empresa$ | async as empresa; else loading">
-        <span class="text-color">{{ empresa }}</span>
-      </ng-container>
-      <ng-template #loading>
-        <div class="w-4 gap-2 flex">
-          <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
-          <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
-          <p-skeleton height="1.2rem" class="w-6"></p-skeleton>
-        </div>
+      <div class="gap-2 p-2 flex text-color font-bold opacity-80 border-round-xl surface-100">
+        <span>{{ empresa.xrazaoSocial }}</span>
+        <span> | </span>
+        <span>{{ empresa.xfant }}</span>
+        <span> | </span>
+        <span>{{ empresa.cnpj }}</span>
+        <span class="pl-3 cursor-pointer" (click)="refreshClick()">
+          <i class="bi bi-arrow-clockwise"></i>
+        </span>
+      </div>  
+    </ng-container>
+    <ng-template #loading>
+      <div class="w-3 gap-2 p-2 flex border-round-xl surface-100">
+        <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
+        <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
+        <p-skeleton height="1.2rem" class="w-6"></p-skeleton>
+        <span class="pl-3 opacity-20">
+          <i class="bi bi-arrow-clockwise"></i>
+        </span>
+      </div>
       </ng-template>
     </div>
   `,
@@ -22,24 +37,15 @@ import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empres
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmpresaBarComponent {
-  protected empresa$: Observable<String | null>;
+  protected empresa$: Observable<IEmpresa | null>;
 
-  constructor(empresaService: EmpresaService) {
-    this.empresa$ = empresaService.chosenEmpresa$.asObservable().pipe(
-      map((empresa) => {
-        if (!empresa) return null;
-
-        return `${empresa.xrazaoSocial} | ${empresa.xfant} | ${this.formatCnpj(
-          empresa.cnpj
-        )}`;
-      })
-    );
+  constructor(private empresaService: EmpresaService, private router: Router, private tokensService: TokensService) {
+    this.empresa$ = empresaService.chosenEmpresa$.asObservable();
   }
 
-  private formatCnpj(cnpj: String): String {
-    return `${cnpj.substring(0, 2)}.${cnpj.substring(2, 5)}.${cnpj.substring(
-      5,
-      8
-    )}/${cnpj.substring(8, 12)}-${cnpj.substring(12)}`;
+  protected refreshClick(): void {
+    this.empresaService.chosenEmpresa$.next(null)
+    this.tokensService.token = '';
+    this.router.navigate(['/home/empresas'])
   }
 }
