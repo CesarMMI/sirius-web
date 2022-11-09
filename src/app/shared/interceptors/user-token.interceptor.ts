@@ -2,20 +2,19 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TokensService } from 'src/app/shared/services/tokens.service';
 
 @Injectable()
 export class UserTokenInterceptor implements HttpInterceptor {
-  constructor(private router: Router) { }
+  constructor(private tokensService: TokensService) { }
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const userToken = localStorage.getItem("userToken");
-
     request = request.clone({
       setParams: {
-        userToken: userToken || '',
+        userToken: this.tokensService.userToken
       },
     });
     return next.handle(request);

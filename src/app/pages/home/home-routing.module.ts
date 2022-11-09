@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { TokenGuard } from "src/app/shared/guards/token.guard";
 import { HomeComponent } from "./home.component";
 
 const routes: Routes = [
@@ -17,15 +18,22 @@ const routes: Routes = [
         path: "produtos",
         loadChildren: () =>
           import("./pages/produto/produto.module").then((m) => m.ProdutoModule),
+        canActivate: [TokenGuard],
       },
       {
         path: "pedidos-venda",
-        loadChildren: () =>
-          import("./pages/pedido-venda/pedido-venda.module").then(m => m.PedidoVendaModule)
+        loadChildren: () => 
+          import("./pages/pedido-venda/pedido-venda.module").then(
+            (m) => m.PedidoVendaModule
+          ),
+        canActivate: [TokenGuard],
       },
-      { path: "clientes",
-      loadChildren: () =>
-        import("./pages/cliente/cliente.module").then(m => m.ClienteModule) },
+      {
+        path: "clientes",
+        loadChildren: () =>
+           import("./pages/cliente/cliente.module").then((m) => m.ClienteModule),
+        canActivate: [TokenGuard],
+      }
     ],
   },
 ];
@@ -34,4 +42,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

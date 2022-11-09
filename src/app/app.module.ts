@@ -9,6 +9,7 @@ import { UserTokenInterceptor } from "src/app/shared/interceptors/user-token.int
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { ResponsiveService } from "./shared/services/responsive.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AppComponent } from "./app.component";
   ],
   providers: [
     MessageService,
+    ResponsiveService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserTokenInterceptor,

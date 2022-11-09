@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { UserTokenGuard } from "src/app/shared/guards/user-token.guard";
 
 const routes: Routes = [
   { path: "", redirectTo: "auth", pathMatch: "full" },
@@ -12,6 +13,7 @@ const routes: Routes = [
     path: "home",
     loadChildren: () =>
       import("./pages/home/home.module").then((m) => m.HomeModule),
+    canActivate: [UserTokenGuard]
   },
 ];
 
