@@ -22,7 +22,10 @@ const routes: Routes = [
         path: "pedidos-venda",
         loadChildren: () =>
           import("./pages/pedido-venda/pedido-venda.module").then(m => m.PedidoVendaModule)
-      }
+      },
+      { path: "clientes",
+      loadChildren: () =>
+        import("./pages/cliente/cliente.module").then(m => m.ClienteModule) },
     ],
   },
 ];
