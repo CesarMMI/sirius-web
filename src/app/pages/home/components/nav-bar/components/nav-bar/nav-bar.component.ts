@@ -9,9 +9,7 @@ import { TokensService } from "src/app/shared/services/tokens.service";
 @Component({
   selector: "app-nav-bar",
   template: `
-    <div class="pt-3">
-      {{ screenWidth$ | async }}
-      {{ mediaBreakpoint$ | async }}
+    <div>
       <ng-container *ngIf="!(showChildren$ | async); else childrenView">
         <ng-container *ngFor="let item of items">
           <app-nav-bar-item
@@ -41,12 +39,7 @@ export class NavBarComponent {
     private empresaService: EmpresaService,
     private responsiveService: ResponsiveService
   ) {
-    this.mediaBreakpoint$ = responsiveService.mediaBreakpoint$;
-    this.screenWidth$ = responsiveService.screenWidth$;
   }
-
-  protected screenWidth$: Observable<any>;
-  protected mediaBreakpoint$: Observable<any>;
 
   protected showChildren$ = new BehaviorSubject<boolean>(false);
   protected currentParent$ = new BehaviorSubject<INavbarItem | null>(null);
@@ -92,7 +85,7 @@ export class NavBarComponent {
       children: [
         {
           icon: "bi bi-basket-fill",
-          router: "financeiro/pedidos-compra",
+          router: "pedidos-compra",
           label: "Pedidos de Compra",
         },
       ],
@@ -118,12 +111,12 @@ export class NavBarComponent {
         {
           label: "A Receber",
           icon: "bi bi-box-arrow-in-left",
-          router: "financeiro/recebimentos",
+          router: "recebimentos",
         },
         {
           label: "A Pagar",
           icon: "bi bi-box-arrow-right",
-          router: "financeiro/pagamentos",
+          router: "pagamentos",
         },
       ],
     },

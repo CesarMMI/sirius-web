@@ -21,7 +21,8 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
-      <td *ngFor="let col of columns">
+      <td *ngFor="let col of columns" class="font-medium">
+        <span class="p-column-title text-color font-normal opacity-70">{{col.header}}</span>
         {{
           col.pipe
           ? (rowData[col.field] | dynamic: col.pipe : col.pipeArgs || [] )

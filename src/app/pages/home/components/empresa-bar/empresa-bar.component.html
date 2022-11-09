@@ -1,0 +1,39 @@
+<div class="h-full flex justify-content-center align-items-center">
+  <ng-container *ngIf="responsiveObject$ | async as responsiveObject">
+    <ng-container *ngIf="empresa$ | async as empresa; else loading">
+      <div
+        [ngClass]="{
+          'w-full flex-wrap': responsiveObject.breakpoint == 'xs'
+        }"
+        class="gap-2 p-2 flex text-color font-bold opacity-80 border-round-xl surface-100 justify-content-center"
+      >
+        <span>{{ empresa.xrazaoSocial }}</span>
+        <span> | </span>
+        <ng-container *ngIf="responsiveObject.breakpoint != 'xs'">
+          <span>{{ empresa.xfant }}</span>
+          <span> | </span>
+        </ng-container>
+        <span>{{ formatCnpj(empresa.cnpj) }}</span>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <div
+        [ngClass]="{
+          'w-full': responsiveObject.breakpoint == 'xs',
+          'w-8': responsiveObject.breakpoint == 'sm'
+        }"
+        class="flex gap-2 p-2 border-round-xl surface-100"
+      >
+      <ng-container *ngIf="responsiveObject.breakpoint != 'xs'">
+        <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
+        <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
+        <p-skeleton height="1.2rem" class="w-6"></p-skeleton>
+      </ng-container>
+      <ng-container *ngIf="responsiveObject.breakpoint == 'xs'">
+        <p-skeleton height="1.2rem" class="w-5"></p-skeleton>
+        <p-skeleton height="1.2rem" class="w-7"></p-skeleton>
+      </ng-container>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

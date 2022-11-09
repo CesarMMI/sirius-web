@@ -1,22 +1,30 @@
-import {
-  Injectable,
-  OnDestroy,
-} from '@angular/core';
-import {
-  Subject,
-  BehaviorSubject,
-  fromEvent,
-} from 'rxjs';
-import {
-  takeUntil,
-  debounceTime,
-} from 'rxjs/operators';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Subject, BehaviorSubject, fromEvent, combineLatest, Observable } from 'rxjs';
+import { takeUntil, debounceTime, map } from 'rxjs/operators';
+
+export interface IResponsiveObject {
+  width: number | null,
+  breakpoint: string | null,
+}
 
 @Injectable()
 export class ResponsiveService implements OnDestroy {
   private _unsubscriber$: Subject<any> = new Subject();
-  public screenWidth$ = new BehaviorSubject<number | null>(null);
-  public mediaBreakpoint$ = new BehaviorSubject<string | null>(null);
+
+  private screenWidth$ = new BehaviorSubject<number | null>(null);
+  private mediaBreakpoint$ = new BehaviorSubject<string | null>(null);
+
+  public responsiveObject: Observable<IResponsiveObject> = combineLatest([
+    this.screenWidth$,
+    this.mediaBreakpoint$,
+  ]).pipe(
+    map(([screenWidth$, mediaBreakpoint$]) => {
+      return {
+        width: screenWidth$,
+        breakpoint: mediaBreakpoint$
+      }
+    })
+  )
 
   constructor() {
     this.init();
