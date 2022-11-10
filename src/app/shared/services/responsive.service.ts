@@ -14,7 +14,7 @@ export class ResponsiveService implements OnDestroy {
   private screenWidth$ = new BehaviorSubject<number | null>(null);
   private mediaBreakpoint$ = new BehaviorSubject<string | null>(null);
 
-  public responsiveObject: Observable<IResponsiveObject> = combineLatest([
+  public responsiveObject$: Observable<IResponsiveObject> = combineLatest([
     this.screenWidth$,
     this.mediaBreakpoint$,
   ]).pipe(

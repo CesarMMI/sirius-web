@@ -12,6 +12,7 @@ import { AuthService } from "src/app/pages/auth/services/auth.service";
 })
 export class LoginComponent {
   protected loginForm: FormGroup;
+  protected loading: boolean = false;
 
   constructor(
     formBuilder: FormBuilder,
@@ -26,17 +27,21 @@ export class LoginComponent {
   }
 
   submit(): void {
+    this.loading = true;
     this.authService
       .login(this.loginForm.value)
       .pipe(first())
       .subscribe({
-        error: (err) => 
+        error: (err) => {
+          this.loading = false;
           this.messageService.add({
             severity: "error",
             summary: err.error.erro || "Não foi possível realizar o login",
             detail: `${err.status} ${err.statusText}`,
-          }),
+          });
+        },
         complete: () => {
+          this.loading = false;
           this.router.navigate(["/home"]);
         },
       });

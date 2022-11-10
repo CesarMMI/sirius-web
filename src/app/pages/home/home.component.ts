@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import { combineLatest, map, Observable } from "rxjs";
-import { IResponsiveObject, ResponsiveService } from "src/app/shared/services/responsive.service";
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IResponsiveObject, ResponsiveService } from 'src/app/shared/services/responsive.service';
 
 @Component({
   selector: "app-home",
@@ -42,6 +42,6 @@ export class HomeComponent {
   protected responsiveObject$: Observable<IResponsiveObject>;
 
   constructor(private responsiveService: ResponsiveService) {
-    this.responsiveObject$ = responsiveService.responsiveObject;
+    this.responsiveObject$ = responsiveService.responsiveObject$;
   }
 }

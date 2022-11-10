@@ -30,7 +30,7 @@ export class AuthWrapperComponent {
   constructor(
     private responsiveService: ResponsiveService
   ) {
-    this.responsiveObject$ = responsiveService.responsiveObject;
+    this.responsiveObject$ = responsiveService.responsiveObject$;
   }
 
 }

@@ -24,7 +24,7 @@ export class EmpresaBarComponent {
     private empresaService: EmpresaService
   ) {
     this.empresa$ = empresaService.chosenEmpresa$.asObservable();
-    this.responsiveObject$ = responsiveService.responsiveObject;
+    this.responsiveObject$ = responsiveService.responsiveObject$;
   }
 
   protected refreshClick(): void {
