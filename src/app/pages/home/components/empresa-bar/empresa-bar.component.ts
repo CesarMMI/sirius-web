@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { map, Observable, switchMap, tap } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/Empresa";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
 import {
@@ -70,5 +70,12 @@ export class EmpresaBarComponent {
     this.empresaService.chosenEmpresa$.next(null);
     this.tokensService.token = "";
     this.router.navigate(["/home/empresas"]);
+  }
+
+  private formatCnpj(cnpj: string): string {
+    return `${cnpj.slice(0, 2)}.${cnpj.slice(2, 5)}.${cnpj.slice(
+      5,
+      8
+    )}/${cnpj.slice(8, 12)}-${cnpj.slice(12)}`;
   }
 }

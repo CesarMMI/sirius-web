@@ -84,7 +84,7 @@ export class NavBarComponent {
       children: [
         {
           icon: "bi bi-basket-fill",
-          router: "financeiro/pedidos-compra",
+          router: "pedidos-compra",
           label: "Pedidos de Compra",
         },
       ],
@@ -110,12 +110,12 @@ export class NavBarComponent {
         {
           label: "A Receber",
           icon: "bi bi-box-arrow-in-left",
-          router: "financeiro/recebimentos",
+          router: "recebimentos",
         },
         {
           label: "A Pagar",
           icon: "bi bi-box-arrow-right",
-          router: "financeiro/pagamentos",
+          router: "pagamentos",
         },
       ],
     },

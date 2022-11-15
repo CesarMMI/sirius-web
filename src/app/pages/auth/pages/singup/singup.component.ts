@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
-import { first } from "rxjs";
+import { first, Observable } from "rxjs";
 import { AuthService } from "src/app/pages/auth/services/auth.service";
 import { ResponsiveComponent } from "src/app/shared/components/responsive-component/responsive-component";
 import { ResponsiveService } from "src/app/shared/services/responsive.service";
@@ -14,15 +14,17 @@ import { ResponsiveService } from "src/app/shared/services/responsive.service";
 })
 export class SingupComponent extends ResponsiveComponent{
   protected signupForm: FormGroup;
+  protected loading: boolean = false;
+  protected responsiveObject$: Observable<IResponsiveObject>;
 
   constructor(
     formBuilder: FormBuilder,
     responsiveService: ResponsiveService,
     private router: Router,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private responsiveService: ResponsiveService
   ) {
-    super(responsiveService);
     this.signupForm = formBuilder.group({
       nome: ["", [Validators.required]],
       ultimoNome: [""],
@@ -30,20 +32,26 @@ export class SingupComponent extends ResponsiveComponent{
       celular: ["", [Validators.required]],
       senha: ["", [Validators.required]],
     });
+    // Responsive Object
+    this.responsiveObject$ = responsiveService.responsiveObject$;
   }
 
   submit(): void {
+    this.loading = true;
     this.authService
       .signup(this.signupForm.value)
       .pipe(first())
       .subscribe({
-        error: (err: HttpErrorResponse) =>
+        error: (err: HttpErrorResponse) => {
+          this.loading = false;
           this.messageService.add({
             severity: "error",
             summary: err.error.erro || "Não foi possível realizar o cadastro",
             detail: `${err.status} ${err.statusText}`,
-          }),
+          });
+        },
         complete: () => {
+          this.loading = false;
           this.messageService.add({
             severity: "success",
             summary: "Cadastro realizado com sucesso",
