@@ -1,4 +1,5 @@
 import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
 
 import { SimpleWrapperModule } from "src/app/shared/components/simple-wrapper/simple-wrapper.module";

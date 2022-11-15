@@ -15,7 +15,6 @@ import { ResponsiveService } from "src/app/shared/services/responsive.service";
 export class SingupComponent extends ResponsiveComponent{
   protected signupForm: FormGroup;
   protected loading: boolean = false;
-  protected responsiveObject$: Observable<IResponsiveObject>;
 
   constructor(
     formBuilder: FormBuilder,
@@ -23,8 +22,8 @@ export class SingupComponent extends ResponsiveComponent{
     private router: Router,
     private authService: AuthService,
     private messageService: MessageService,
-    private responsiveService: ResponsiveService
   ) {
+    super(responsiveService);
     this.signupForm = formBuilder.group({
       nome: ["", [Validators.required]],
       ultimoNome: [""],
@@ -32,8 +31,6 @@ export class SingupComponent extends ResponsiveComponent{
       celular: ["", [Validators.required]],
       senha: ["", [Validators.required]],
     });
-    // Responsive Object
-    this.responsiveObject$ = responsiveService.responsiveObject$;
   }
 
   submit(): void {

@@ -66,7 +66,6 @@ export class FormWrapperComponent implements OnDestroy, AfterContentInit {
       .subscribe((isLocked: boolean) => (this.isLocked = isLocked));
   }
   ngAfterContentInit(): void {
-    console.log(this.isEdit)
     if (this.isEdit) {
       // If edit mode
       if (!this.isChild) {
