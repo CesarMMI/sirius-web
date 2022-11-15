@@ -9,9 +9,7 @@ import { TokensService } from "src/app/shared/services/tokens.service";
 @Component({
   selector: "app-nav-bar",
   template: `
-    <div class="pt-3">
-      {{ screenWidth$ | async }}
-      {{ mediaBreakpoint$ | async }}
+    <div class="pt-3 h-full">
       <ng-container *ngIf="!(showChildren$ | async); else childrenView">
         <ng-container *ngFor="let item of items">
           <app-nav-bar-item
@@ -27,7 +25,7 @@ import { TokensService } from "src/app/shared/services/tokens.service";
             (clickEvent)="parentEvent($event)"
           ></app-nav-bar-item>
         </ng-container>
-        <app-nav-bar-item (clickEvent)="backEvent()"></app-nav-bar-item>
+        <app-nav-bar-item class="mt-auto" (clickEvent)="backEvent()"></app-nav-bar-item>
       </ng-template>
     </div>
   `,
@@ -39,14 +37,8 @@ export class NavBarComponent {
     private router: Router,
     private tokensService: TokensService,
     private empresaService: EmpresaService,
-    private responsiveService: ResponsiveService
   ) {
-    this.mediaBreakpoint$ = responsiveService.mediaBreakpoint$;
-    this.screenWidth$ = responsiveService.screenWidth$;
   }
-
-  protected screenWidth$: Observable<any>;
-  protected mediaBreakpoint$: Observable<any>;
 
   protected showChildren$ = new BehaviorSubject<boolean>(false);
   protected currentParent$ = new BehaviorSubject<INavbarItem | null>(null);

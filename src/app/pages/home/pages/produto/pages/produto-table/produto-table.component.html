@@ -4,10 +4,10 @@
   [pageTotal]="pageTotal"
   (onPagination)="onPagination($event)"
 >
-  <ng-container *ngIf="produtos$ | async as produtos; else loading">
+  <ng-container *ngIf="tableData$ | async as tableData; else loading">
     <app-custom-table-body
       [cols]="cols"
-      [data]="produtos"
+      [data]="tableData.data"
       (onSelection)="selectedProduto = $event"
     ></app-custom-table-body>
   </ng-container>

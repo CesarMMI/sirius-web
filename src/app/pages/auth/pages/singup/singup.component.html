@@ -1,42 +1,47 @@
-<app-auth-wrapper>
-  <header class="mb-4 flex justify-content-between align-items-center">
-    <span class="text-color text-2xl font-bold">Cadastro</span>
-    <button
-      pButton
-      icon="pi pi-arrow-left"
-      routerLink="/auth/login"
-      class="p-buttom-sm p-button-text p-button-secondary p-button-rounded"
-    ></button>
-  </header>
-  <form [formGroup]="signupForm" (ngSubmit)="submit()" class="grid">
-    <app-input-text
-      class="col-6"
-      label="Nome"
-      [control]="$any(signupForm.controls['nome'])"
-    ></app-input-text>
-    <app-input-text
-      class="col-6"
-      label="Sobrenome"
-      [control]="$any(signupForm.controls['ultimoNome'])"
-    ></app-input-text>
-    <app-input-text
-      class="col-12"
-      label="Email"
-      [control]="$any(signupForm.controls['email'])"
-    ></app-input-text>
-    <app-input-celular
-      class="col-12"
-      label="Celular"
-      [control]="$any(signupForm.controls['celular'])"
-    ></app-input-celular>
-    <app-input-password
-      hint="Deve ter no mínimo 11 caracteres."
-      class="col-12"
-      label="Senha"
-      [control]="$any(signupForm.controls['senha'])"
-    ></app-input-password>
-    <div class="col-12">
-      <button pButton class="w-full" label="Cadastrar" type="submit"></button>
-    </div>
-  </form>
-</app-auth-wrapper>
+<ng-container *ngIf="responsive$ | async as responsive">
+  <div
+    [class]="responsive.width < 768 ? 'w-11' : 'w-6'"
+    class="mx-auto p-4 shadow-1 border-round-xl"
+  >
+    <header class="mb-4 flex justify-content-between align-items-center">
+      <span class="text-color text-2xl font-bold">Cadastro</span>
+      <button
+        pButton
+        icon="pi pi-arrow-left"
+        routerLink="/auth/login"
+        class="p-buttom-sm p-button-text p-button-secondary p-button-rounded"
+      ></button>
+    </header>
+    <form [formGroup]="signupForm" (ngSubmit)="submit()" class="grid">
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-6'"
+        label="Nome"
+        [control]="$any(signupForm.controls['nome'])"
+      ></app-input-text>
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-6'"
+        label="Sobrenome"
+        [control]="$any(signupForm.controls['ultimoNome'])"
+      ></app-input-text>
+      <app-input-text
+        class="col-12"
+        label="Email"
+        [control]="$any(signupForm.controls['email'])"
+      ></app-input-text>
+      <app-input-celular
+        class="col-12"
+        label="Celular"
+        [control]="$any(signupForm.controls['celular'])"
+      ></app-input-celular>
+      <app-input-password
+        hint="Deve ter no mínimo 11 caracteres."
+        class="col-12"
+        label="Senha"
+        [control]="$any(signupForm.controls['senha'])"
+      ></app-input-password>
+      <div class="col-12">
+        <button pButton class="w-full" label="Cadastrar" type="submit"></button>
+      </div>
+    </form>
+  </div>
+</ng-container>

@@ -26,7 +26,7 @@ export class EmpresaService extends CrudService {
   public selectedEmpresa$ = new BehaviorSubject<IEmpresa | null>(null);
   public chosenEmpresa$ = new BehaviorSubject<IEmpresa | null>(null);
 
-  public override get(page: number, quantityPerPage: number): Observable<ITableData> {
+  public override get(page: number, quantityPerPage: number): Observable<ITableData<IEmpresa>> {
     return super.get(page, quantityPerPage)
     .pipe(
       map((response: any) => {

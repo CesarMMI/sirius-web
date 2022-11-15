@@ -5,20 +5,24 @@ import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { first } from "rxjs";
 import { AuthService } from "src/app/pages/auth/services/auth.service";
+import { ResponsiveComponent } from "src/app/shared/components/responsive-component/responsive-component";
+import { ResponsiveService } from "src/app/shared/services/responsive.service";
 
 @Component({
   templateUrl: "./login.component.html",
   styles: [],
 })
-export class LoginComponent {
+export class LoginComponent extends ResponsiveComponent {
   protected loginForm: FormGroup;
 
   constructor(
     formBuilder: FormBuilder,
+    responsiveService: ResponsiveService,
     private router: Router,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
+    super(responsiveService);
     this.loginForm = formBuilder.group({
       email: ["", [Validators.email, Validators.required]],
       senha: ["", [Validators.required]],

@@ -13,7 +13,9 @@ import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produt
 })
 export class ProdutoFormComponent {
   protected form: FormGroup;
+
   protected loading: boolean = false;
+  protected isLocked: boolean = true;
 
   constructor(
     formBuilder: FormBuilder,
@@ -39,7 +41,7 @@ export class ProdutoFormComponent {
       vlrUnTrib: null,
       saldo: [{ value: 0, disabled: true }],
       status: ['A'],
-    })
+    });
 
     activatedRoute.paramMap.pipe(first()).subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id'))
@@ -48,6 +50,17 @@ export class ProdutoFormComponent {
             next: response => this.form.patchValue(response)
           })
     });
+  }
+
+  protected lockEvent(isLocked: boolean): void {
+    this.isLocked = isLocked;
+    if(isLocked){
+      this.form.disable();
+    }else{
+      this.form.enable();
+      this.form.get('id')?.disable();
+      this.form.get('saldo')?.disable();
+    }
   }
 
   protected submit(): void {

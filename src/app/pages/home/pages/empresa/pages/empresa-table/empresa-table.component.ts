@@ -16,25 +16,28 @@ import { TokensService } from "src/app/shared/services/tokens.service";
   styles: [],
 })
 export class EmpresaTableComponent {
-  protected empresas$: Observable<IEmpresa[]>;
+  protected tableData$: Observable<ITableData<IEmpresa>>;
   protected selectedEmpresa?: IEmpresa;
 
   protected pageTotal: number = 0;
   protected cols: ICol[] = [
-    { field: 'id', header: 'ID' },
-    { field: 'cnpj', header: 'CNPJ', pipe: CpfCnpjPipe },
-    { field: 'xrazaoSocial', header: 'Razão Social' },
-    { field: 'xfant', header: 'Fantasia' },
-    { field: 'grupoUsuario', header: 'Grupo' },
-    { field: 'status', header: 'Status', pipe: StatusPipe },
+    { field: "id", header: "ID" },
+    { field: "cnpj", header: "CNPJ", pipe: CpfCnpjPipe },
+    { field: "xrazaoSocial", header: "Razão Social" },
+    { field: "xfant", header: "Fantasia" },
+    { field: "grupoUsuario", header: "Grupo" },
+    { field: "status", header: "Status", pipe: StatusPipe },
   ];
 
-  constructor(private empresaService: EmpresaService, private tokensService: TokensService) {
-    this.empresas$ = this.get(1, 10);
+  constructor(
+    private empresaService: EmpresaService,
+    private tokensService: TokensService
+  ) {
+    this.tableData$ = this.get(1, 10);
   }
 
   protected onPagination(event: IPageEvent) {
-    this.empresas$ = this.get(event.page + 1, event.rows)
+    this.tableData$ = this.get(event.page + 1, event.rows);
   }
 
   protected onChoose(event: IEmpresa) {
@@ -42,11 +45,7 @@ export class EmpresaTableComponent {
     this.tokensService.token = event.token;
   }
 
-  private get(page: number, quantityPerPage: number): Observable<IEmpresa[]> {
-    return this.empresaService.get(page, quantityPerPage)
-      .pipe(
-        tap(response => this.pageTotal = response.pageTotal),
-        map(response => response.data)
-      );
+  private get(page: number, quantityPerPage: number): Observable<ITableData<IEmpresa>> {
+    return this.empresaService.get(page, quantityPerPage);
   }
 }

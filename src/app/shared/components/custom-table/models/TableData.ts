@@ -1,4 +1,4 @@
-export interface ITableData {
-  data: any[];
+export interface ITableData<T> {
+  data: T[];
   pageTotal: number;
 }

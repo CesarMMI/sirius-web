@@ -5,6 +5,7 @@ import { IProduto } from 'src/app/pages/home/pages/produto/models/Produto';
 import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produto.service';
 import { ICol } from 'src/app/shared/components/custom-table/models/Col';
 import { IPageEvent } from 'src/app/shared/components/custom-table/models/PageEvent';
+import { ITableData } from 'src/app/shared/components/custom-table/models/TableData';
 import { StatusPipe } from 'src/app/shared/pipes/status.pipe';
 
 @Component({
@@ -12,7 +13,7 @@ import { StatusPipe } from 'src/app/shared/pipes/status.pipe';
   styles: [],
 })
 export class ProdutoTableComponent {
-  protected produtos$: Observable<IProduto[]>;
+  protected tableData$: Observable<ITableData<IProduto>>;
   protected selectedProduto?: IProduto;
 
   protected pageTotal: number = 0;
@@ -27,18 +28,14 @@ export class ProdutoTableComponent {
   ];
 
   constructor(private produtoService: ProdutoService) {
-    this.produtos$ = this.get(1, 10);
+    this.tableData$ = this.get(1, 10);
   }
   
   protected onPagination(event: IPageEvent) {
-    this.produtos$ = this.get(event.page + 1, event.rows)
+    this.tableData$ = this.get(event.page + 1, event.rows)
   }
 
-  private get(page: number, quantityPerPage: number): Observable<IProduto[]> {
-    return this.produtoService.get(page, quantityPerPage)
-    .pipe(
-      tap(response => this.pageTotal = response.pageTotal),
-      map(response => response.data)
-    );
+  private get(page: number, quantityPerPage: number): Observable<ITableData<IProduto>> {
+    return this.produtoService.get(page, quantityPerPage);
   }
 }

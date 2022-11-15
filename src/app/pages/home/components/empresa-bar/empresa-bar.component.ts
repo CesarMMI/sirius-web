@@ -3,24 +3,31 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/Empresa";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
-import { ResponsiveService } from "src/app/shared/services/responsive.service";
+import {
+  IResponsive,
+  ResponsiveService,
+} from "src/app/shared/services/responsive.service";
 import { TokensService } from "src/app/shared/services/tokens.service";
 
 @Component({
   selector: "app-empresa-bar",
   template: `
-    <div class="h-full flex justify-content-center align-items-center">
-      <ng-container *ngIf="mediaBreakpoint$ | async as mediaBreakpoint">
+    <ng-container *ngIf="responsive$ | async as responsive">
       <ng-container *ngIf="empresa$ | async as empresa; else loading">
         <div
-          class="gap-2 p-2 flex text-color font-bold opacity-80 border-round-xl surface-100"
+          [ngClass]="{
+            'mx-2': responsive.width < 768,
+            'w-4 mx-auto': responsive.width >= 768
+          }"
+          class="flex gap-2 p-2 surface-ground border-round-lg"
         >
-          <span>{{ empresa.xrazaoSocial }}</span>
-          <span> | </span>
-          <span>{{ empresa.xfant }}</span>
-          <span> | </span>
-          <span>{{ empresa.cnpj }}</span>
-          <span class="pl-3 cursor-pointer" (click)="refreshClick()">
+          <span class="text-center text-color font-medium flex-grow-0 w-4">{{
+            empresa.xrazaoSocial
+          }}</span>
+          <span class="text-center text-color font-medium flex-grow-1 w-7">{{
+            empresa.cnpj | cpfCnpj
+          }}</span>
+          <span class="w-1 text-right cursor-pointer" (click)="refreshClick()">
             <i class="bi bi-arrow-clockwise"></i>
           </span>
         </div>
@@ -28,40 +35,35 @@ import { TokensService } from "src/app/shared/services/tokens.service";
       <ng-template #loading>
         <div
           [ngClass]="{
-            'w-10':
-              mediaBreakpoint == 'xs',
-            'w-8':
-              mediaBreakpoint == 'sm'
+            'mx-2': responsive.width < 768,
+            'w-4 mx-auto': responsive.width >= 768
           }"
-          class="w-3 gap-2 p-2 flex border-round-xl surface-100">
-          <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
-          <p-skeleton height="1.2rem" class="w-3"></p-skeleton>
-          <p-skeleton height="1.2rem" class="w-6"></p-skeleton>
-          <span class="pl-3 opacity-20">
+          class="flex gap-2 p-2 surface-ground border-round-lg"
+        >
+          <p-skeleton height="1.2rem" class="flex-grow-0 w-4"></p-skeleton>
+          <p-skeleton height="1.2rem" class="flex-grow-1 w-7"></p-skeleton>
+          <span class="w-1 text-right opacity-20">
             <i class="bi bi-arrow-clockwise"></i>
           </span>
         </div>
       </ng-template>
-      </ng-container>
-      
-    </div>
+    </ng-container>
   `,
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmpresaBarComponent {
-
   protected empresa$: Observable<IEmpresa | null>;
-  protected mediaBreakpoint$: Observable<string | null>;
-  
+  protected responsive$: Observable<IResponsive>;
+
   constructor(
-    responsiveService: ResponsiveService,
     private router: Router,
+    responsiveService: ResponsiveService,
     private tokensService: TokensService,
-    private empresaService: EmpresaService,
-    ) {
-      this.empresa$ = empresaService.chosenEmpresa$.asObservable();
-      this.mediaBreakpoint$ = responsiveService.mediaBreakpoint$;
+    private empresaService: EmpresaService
+  ) {
+    this.empresa$ = empresaService.chosenEmpresa$.asObservable();
+    this.responsive$ = responsiveService.responsive$;
   }
 
   protected refreshClick(): void {

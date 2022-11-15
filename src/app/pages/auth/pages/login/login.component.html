@@ -1,31 +1,36 @@
-<app-auth-wrapper>
-  <header class="mb-4">
-    <span class="text-color text-2xl font-bold">Login</span>
-  </header>
-  <form [formGroup]="loginForm" (ngSubmit)="submit()" class="grid">
-    <app-input-text
-      class="col-12"
-      label="Email"
-      [control]="$any(loginForm.controls['email'])"
-    ></app-input-text>
-    <app-input-password
-      class="col-12"
-      label="Senha"
-      [control]="$any(loginForm.controls['senha'])"
-    ></app-input-password>
-    <div class="col-12">
-      <button pButton class="w-full" label="Login" type="submit"></button>
-      <p-divider align="center">
-        <span class="text-color-secondary font-semibold opacity-30">OU</span>
-      </p-divider>
-      <div class="text-center">
-        <span class="text-sm text-color"
-          >Não tem uma conta?
-          <a class="text-primary no-underline" routerLink="/auth/signup"
-            >Cadastre-se aqui</a
-          ></span
-        >
+<ng-container *ngIf="responsive$ | async as responsive">
+  <div
+    [class]="responsive.width < 768 ? 'w-11' : 'w-6'"
+    class="mx-auto p-4 shadow-1 border-round-xl"
+  >
+    <header class="mb-4">
+      <span class="text-color text-2xl font-bold">Login</span>
+    </header>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()" class="grid">
+      <app-input-text
+        class="col-12"
+        label="Email"
+        [control]="$any(loginForm.controls['email'])"
+      ></app-input-text>
+      <app-input-password
+        class="col-12"
+        label="Senha"
+        [control]="$any(loginForm.controls['senha'])"
+      ></app-input-password>
+      <div class="col-12">
+        <button pButton class="w-full" label="Login" type="submit"></button>
+        <p-divider align="center">
+          <span class="text-color-secondary font-semibold opacity-30">OU</span>
+        </p-divider>
+        <div class="text-center">
+          <span class="text-sm text-color"
+            >Não tem uma conta?
+            <a class="text-primary no-underline" routerLink="/auth/signup"
+              >Cadastre-se aqui</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-  </form>
-</app-auth-wrapper>
+    </form>
+  </div>
+</ng-container>
