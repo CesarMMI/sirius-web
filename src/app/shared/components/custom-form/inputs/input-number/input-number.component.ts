@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
 @Component({
-  selector: "app-input-numeric",
+  selector: "app-input-number",
   template: `
     <div class="field">
       <span class="p-float-label">
@@ -20,7 +20,7 @@ import { FormControl } from "@angular/forms";
   styles: [],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputNumericComponent {
+export class InputNumberComponent {
   @Input() label: string = "";
   @Input() control!: FormControl;
 

@@ -10,31 +10,39 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class EmpresaService extends CrudService {
-  private baseUrl = ``;
-  
   constructor(protected override http: HttpClient) {
     super(
       http,
-      `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa`, {
-      getAll: 'GetEmpresas',
-      getById: 'GetEmpresa',
-      post: 'Empresa',
-      put: 'Empresa'
-    });
+      `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa`,
+      {
+        getAll: "GetEmpresas",
+        getById: "GetEmpresa",
+        post: "Empresa",
+        put: "Empresa",
+      }
+    );
   }
 
   public selectedEmpresa$ = new BehaviorSubject<IEmpresa | null>(null);
   public chosenEmpresa$ = new BehaviorSubject<IEmpresa | null>(null);
 
-  public override get(page: number, quantityPerPage: number): Observable<ITableData<IEmpresa>> {
-    return super.get(page, quantityPerPage)
-    .pipe(
+  public override get(
+    page: number,
+    quantityPerPage: number
+  ): Observable<ITableData<IEmpresa>> {
+    return super.get(page, quantityPerPage).pipe(
       map((response: any) => {
         return {
           data: response["empresas"],
           pageTotal: response["QtdPaginas"],
         };
       })
+    );
+  }
+
+  public override getById(id: number): Observable<Object> {
+    return this.http.get(
+      `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa/GetEmpresa`
     );
   }
 }

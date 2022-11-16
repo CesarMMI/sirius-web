@@ -7,7 +7,7 @@ import {
 import { FormControl } from "@angular/forms";
 
 @Component({
-  selector: "app-input-celular",
+  selector: "app-input-phone",
   template: `
     <div class="field">
       <span class="p-float-label">
@@ -15,7 +15,7 @@ import { FormControl } from "@angular/forms";
           [unmask]="true"
           [inputId]="inputId"
           styleClass="w-full"
-          [mask]="isFixo ? '(99) 9999-9999' : '(99) 99999-9999'"
+          [mask]="landline ? '(99) 9999-9999' : '(99) 99999-9999'"
           [formControl]="control"
         ></p-inputMask>
         <label [for]="inputId">{{ label }}</label>
@@ -25,11 +25,11 @@ import { FormControl } from "@angular/forms";
   styles: [],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputCelularComponent {
+export class InputPhoneComponent {
   @Input() label: string = "";
   @Input() control!: FormControl;
 
-  @Input() isFixo: boolean = false;
+  @Input() landline: boolean = false;
 
   protected inputId: string;
 

@@ -8,11 +8,11 @@ import { CommonModule } from "@angular/common";
 import { InputTextComponent } from "./inputs/input-text/input-text.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { InputPasswordComponent } from "./inputs/input-password/input-password.component";
-import { InputCelularComponent } from "./inputs/input-celular/input-celular.component";
+import { InputPhoneComponent } from "./inputs/input-phone/input-phone.component";
 import { FormWrapperComponent } from "./form-wrapper/form-wrapper.component";
 import { ButtonModule } from "primeng/button";
 import { RouterModule } from "@angular/router";
-import { InputNumericComponent } from "./inputs/input-numeric/input-numeric.component";
+import { InputNumberComponent } from "./inputs/input-number/input-number.component";
 import { InputNumberModule } from "primeng/inputnumber";
 import { InputCpfCnpjComponent } from "./inputs/input-cpf-cnpj/input-cpf-cnpj.component";
 import { InputDropdownComponent } from "./inputs/input-dropdown/input-dropdown.component";
@@ -24,9 +24,9 @@ import { InputCurrencyComponent } from './inputs/input-currency/input-currency.c
   declarations: [
     InputTextComponent,
     InputPasswordComponent,
-    InputCelularComponent,
+    InputPhoneComponent,
     FormWrapperComponent,
-    InputNumericComponent,
+    InputNumberComponent,
     InputCpfCnpjComponent,
     InputDropdownComponent,
     InputCepComponent,
@@ -46,9 +46,9 @@ import { InputCurrencyComponent } from './inputs/input-currency/input-currency.c
   exports: [
     InputTextComponent,
     InputPasswordComponent,
-    InputCelularComponent,
+    InputPhoneComponent,
     FormWrapperComponent,
-    InputNumericComponent,
+    InputNumberComponent,
     InputCpfCnpjComponent,
     InputDropdownComponent,
     InputCepComponent,

@@ -1,0 +1,125 @@
+<app-form-wrapper title="Empresa" (lockEvent)="lockEvent($event)">
+  <ng-container *ngIf="responsive$ | async as responsive">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+      <!-- ID -->
+      <app-input-number
+        [class]="responsive.width < 768 ? 'col-12' : 'col-2'"
+        label="ID"
+        [control]="$any(form.controls['id'])"
+      ></app-input-number>
+      <!-- Cód. do Regime Tributário -->
+      <app-input-dropdown
+        [class]="responsive.width < 768 ? 'col-12' : 'col-6'"
+        label="Cód. do Regime Tributário"
+        [control]="$any(form.controls['crt'])"
+        [options]="[{ label: 'Simples Nacional', value: '1' }]"
+      ></app-input-dropdown>
+      <!-- Status -->
+      <app-input-dropdown
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="Status"
+        [control]="$any(form.controls['status'])"
+        [options]="[
+          { label: 'Ativo', value: 'A' },
+          { label: 'Inativo', value: 'I' }
+        ]"
+      ></app-input-dropdown>
+
+      <!-- CNPJ -->
+      <app-input-cpf-cnpj
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="CNPJ"
+        [isCnpj]="true"
+        [control]="$any(form.controls['cnpj'])"
+      ></app-input-cpf-cnpj>
+      <!-- Razão Social -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="Razão Social"
+        [control]="$any(form.controls['xrazaoSocial'])"
+      ></app-input-text>
+      <!-- Nome Fantasia -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="Nome Fantasia"
+        [control]="$any(form.controls['xfant'])"
+      ></app-input-text>
+
+      <!-- CEP -->
+      <app-input-cep
+        [class]="responsive.width < 768 ? 'col-12' : 'col-3'"
+        label="CEP"
+        [control]="$any(form.controls['cep'])"
+      ></app-input-cep>
+      <!-- Logradouro -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="Logradouro"
+        [control]="$any(form.controls['xlgr'])"
+      ></app-input-text>
+      <!-- Número -->
+      <app-input-number
+        [class]="responsive.width < 768 ? 'col-12' : 'col-2'"
+        label="Número"
+        [control]="$any(form.controls['nro'])"
+      ></app-input-number>
+      <!-- Complemento -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-3'"
+        label="Complemento"
+        [control]="$any(form.controls['xcpl'])"
+      ></app-input-text>
+
+      <!-- Bairro -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="Bairro"
+        [control]="$any(form.controls['xbairro'])"
+      ></app-input-text>
+      <!-- Município -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-4'"
+        label="Município"
+        [control]="$any(form.controls['xmun'])"
+      ></app-input-text>
+      <!-- Cód. Município -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-2'"
+        label="Cód. Município"
+        [control]="$any(form.controls['cmun'])"
+      ></app-input-text>
+      <!-- UF -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-2'"
+        label="UF"
+        [control]="$any(form.controls['uf'])"
+      ></app-input-text>
+
+      <!-- Telefone -->
+      <app-input-phone
+        [class]="responsive.width < 768 ? 'col-12' : 'col-6'"
+        label="Telefone"
+        [landline]="true"
+        [control]="$any(form.controls['fone'])"
+      ></app-input-phone>
+      <!-- Insc. Estadual -->
+      <app-input-text
+        [class]="responsive.width < 768 ? 'col-12' : 'col-6'"
+        label="Insc. Estadual"
+        [control]="$any(form.controls['ie'])"
+      ></app-input-text>
+
+      <!-- Button -->
+      <div class="flex col-12">
+        <button
+          pButton
+          [loading]="loading"
+          [disabled]="form.invalid || isLocked"
+          [class]="responsive.width < 768 ? 'w-full' : 'ml-auto'"
+          type="submit"
+          label="Salvar"
+        ></button>
+      </div>
+    </form>
+  </ng-container>
+</app-form-wrapper>
