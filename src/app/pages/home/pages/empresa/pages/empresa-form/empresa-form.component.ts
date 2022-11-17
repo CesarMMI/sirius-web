@@ -2,7 +2,17 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { MessageService } from "primeng/api";
-import { first, Subscription, switchMap, tap } from "rxjs";
+import {
+  debounceTime,
+  EMPTY,
+  filter,
+  first,
+  iif,
+  shareReplay,
+  Subscription,
+  switchMap,
+  tap,
+} from "rxjs";
 import { ResponsiveComponent } from "src/app/shared/components/responsive-component/responsive-component";
 import { EnderecoService } from "src/app/shared/services/endereco.service";
 import { ResponsiveService } from "src/app/shared/services/responsive.service";
@@ -13,13 +23,16 @@ import { EmpresaService } from "../../services/empresa.service";
   templateUrl: "./empresa-form.component.html",
   styles: [],
 })
-export class EmpresaFormComponent extends ResponsiveComponent implements OnDestroy {
+export class EmpresaFormComponent
+  extends ResponsiveComponent
+  implements OnDestroy
+{
   protected form: FormGroup;
 
   protected loading: boolean = false;
   protected isLocked: boolean = true;
 
-  private cepSub: Subscription;
+  private cepSub: Subscription | undefined;
 
   constructor(
     formBuilder: FormBuilder,
@@ -56,26 +69,40 @@ export class EmpresaFormComponent extends ResponsiveComponent implements OnDestr
       if (paramMap.has("id"))
         empresaService
           .getById(parseInt(paramMap.get("id") || "0"))
-          .pipe(
-            first(),
-            tap((response) => console.log(response))
-          )
+          .pipe(first())
           .subscribe({
             next: (response) => this.form.patchValue(response),
           });
     });
     // CEP input observable
-    this.cepSub = this.form.controls['cep'].valueChanges.pipe(
-      switchMap((cep: string) => {
-        return enderecoService.searchByCep(cep)
-      })
-    ).subscribe(value => {
-      
-    });
+    this.cepSub = this.form
+      .get("cep")
+      ?.valueChanges.pipe(
+        switchMap((cep) => {
+          return iif(
+            () =>
+              cep != null &&
+              cep.length === 8 &&
+              (this.form.get("cep")?.touched || false),
+            enderecoService.searchByCep(cep).pipe(first()),
+            EMPTY
+          );
+        }),
+        debounceTime(500)
+      )
+      .subscribe((response: any) =>
+        this.form.patchValue({
+          xlgr: response["logradouro"],
+          xbairro: response["bairro"],
+          cmun: response["ibge"],
+          xmun: response["localidade"],
+          uf: response["uf"],
+        })
+      );
   }
 
   ngOnDestroy(): void {
-   this.cepSub.unsubscribe
+    if (this.cepSub) this.cepSub.unsubscribe;
   }
 
   protected lockEvent(isLocked: boolean): void {
@@ -85,7 +112,7 @@ export class EmpresaFormComponent extends ResponsiveComponent implements OnDestr
     } else {
       this.form.enable();
       this.form.get("id")?.disable();
-      this.form.get("saldo")?.disable();
+      this.form.get("crt")?.disable();
     }
   }
 
@@ -93,7 +120,7 @@ export class EmpresaFormComponent extends ResponsiveComponent implements OnDestr
     this.loading = true;
     const mode = this.form.get("id")?.value ? "update" : "create";
 
-    this.empresaService[mode](this.genProdutoObj())
+    this.empresaService[mode](this.form.getRawValue())
       .pipe(first())
       .subscribe({
         next: (response) => {
@@ -115,22 +142,5 @@ export class EmpresaFormComponent extends ResponsiveComponent implements OnDestr
         },
         complete: () => this.router.navigate(["/home/produtos"]),
       });
-  }
-
-  private genProdutoObj() {
-    return <IProduto>{
-      // Total
-      ...this.form.getRawValue(),
-      vlrProd: this.form.get("vlrUnCom")?.value * 1,
-      // Tibutário
-      unTrib: this.form.get("unCom")?.value,
-      qtdTrib: 1,
-      vlrUnTrib: this.form.get("vlrUnCom")?.value,
-      // Comercial
-      unCom: this.form.get("unCom")?.value,
-      qtdCom: 1,
-      vlrUnCom: this.form.get("vlrUnCom")?.value,
-      codEANTrib: this.form.get("codEAN")?.value,
-    };
   }
 }
