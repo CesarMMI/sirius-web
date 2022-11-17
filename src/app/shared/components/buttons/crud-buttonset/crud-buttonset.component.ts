@@ -55,6 +55,8 @@ export class CrudButtonsetComponent {
       icon: "pi pi-exclamation-triangle",
       acceptLabel: "Sim",
       rejectLabel: "Não",
+      acceptButtonStyleClass: "p-button-outlined p-button-danger",
+      rejectButtonStyleClass: "p-button-text p-button-secondary",
       accept: () => this.deleteEvent.emit()
     });
   }

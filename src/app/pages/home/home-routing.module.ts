@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path: "pedidos-venda",
-        loadChildren: () => 
+        loadChildren: () =>
           import("./pages/pedido-venda/pedido-venda.module").then(
             (m) => m.PedidoVendaModule
           ),
@@ -31,9 +31,15 @@ const routes: Routes = [
       {
         path: "clientes",
         loadChildren: () =>
-           import("./pages/cliente/cliente.module").then((m) => m.ClienteModule),
+          import("./pages/cliente/cliente.module").then((m) => m.ClienteModule),
         canActivate: [TokenGuard],
-      }
+      },
+      {
+        path: "usuarios",
+        loadChildren: () =>
+          import("./pages/usuario/usuario.module").then((m) => m.UsuarioModule),
+        canActivate: [TokenGuard],
+      },
     ],
   },
 ];

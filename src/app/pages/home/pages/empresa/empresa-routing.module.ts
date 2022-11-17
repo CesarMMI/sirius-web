@@ -7,7 +7,11 @@ import { TokenGuard } from "src/app/shared/guards/token.guard";
 const routes: Routes = [
   { path: "", component: EmpresaTableComponent },
   { path: "add", component: EmpresaFormComponent },
-  { path: "edit/:id", component: EmpresaFormComponent, canActivate: [TokenGuard], },
+  {
+    path: "edit/:id",
+    component: EmpresaFormComponent,
+    canActivate: [TokenGuard],
+  },
 ];
 
 @NgModule({

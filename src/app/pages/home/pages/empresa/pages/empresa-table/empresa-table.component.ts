@@ -2,7 +2,7 @@ import { CurrencyPipe } from "@angular/common";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { map, Observable, tap } from "rxjs";
-import { IEmpresa } from "src/app/pages/home/pages/empresa/models/Empresa";
+import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
 import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";

@@ -55,7 +55,7 @@ export class NavBarComponent {
         {
           label: "Usuários",
           icon: "bi bi-person-lines-fill",
-          router: "usuarios",
+          router: "/usuarios",
         },
         {
           label: "Clientes",

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { map, Observable, switchMap, tap } from "rxjs";
-import { IEmpresa } from "src/app/pages/home/pages/empresa/models/Empresa";
+import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
 import {
   IResponsive,

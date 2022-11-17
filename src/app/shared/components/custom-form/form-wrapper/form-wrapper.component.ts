@@ -1,7 +1,9 @@
 import {
   AfterContentInit,
+  AfterViewChecked,
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -46,7 +48,7 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormWrapperComponent implements OnDestroy, AfterContentInit {
+export class FormWrapperComponent implements OnDestroy, AfterViewChecked {
   @Input() title: string = "";
   protected isEdit: boolean;
 
@@ -58,14 +60,15 @@ export class FormWrapperComponent implements OnDestroy, AfterContentInit {
 
   constructor(
     activatedRoute: ActivatedRoute,
-    private formLockService: FormLockService
+    private formLockService: FormLockService,
   ) {
     this.isEdit = activatedRoute.snapshot.url[0].toString() === "edit";
     // Form Lock
     this.lockSub = formLockService.isLocked$()
       .subscribe((isLocked: boolean) => (this.isLocked = isLocked));
   }
-  ngAfterContentInit(): void {
+
+  ngAfterViewChecked(): void {
     if (this.isEdit) {
       // If edit mode
       if (!this.isChild) {

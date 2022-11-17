@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { MessageService } from "primeng/api";
@@ -25,7 +25,7 @@ import { EmpresaService } from "../../services/empresa.service";
 })
 export class EmpresaFormComponent
   extends ResponsiveComponent
-  implements OnDestroy
+  implements OnDestroy, OnInit
 {
   protected form: FormGroup;
 
@@ -40,6 +40,7 @@ export class EmpresaFormComponent
     enderecoService: EnderecoService,
     responsiveService: ResponsiveService,
     private router: Router,
+    private ref: ChangeDetectorRef,
     private empresaService: EmpresaService,
     private messageService: MessageService
   ) {
@@ -66,13 +67,14 @@ export class EmpresaFormComponent
     });
     // Get edit data
     activatedRoute.paramMap.pipe(first()).subscribe((paramMap: ParamMap) => {
-      if (paramMap.has("id"))
+      if (paramMap.has("id")){
         empresaService
-          .getById(parseInt(paramMap.get("id") || "0"))
-          .pipe(first())
-          .subscribe({
-            next: (response) => this.form.patchValue(response),
-          });
+        .getById(parseInt(paramMap.get("id") || "0"))
+        .pipe(first())
+        .subscribe({
+          next: (response) => this.form.patchValue(response),
+        });
+      }
     });
     // CEP input observable
     this.cepSub = this.form
@@ -99,6 +101,10 @@ export class EmpresaFormComponent
           uf: response["uf"],
         })
       );
+  }
+
+  ngOnInit(): void {
+    this.ref.detectChanges();
   }
 
   ngOnDestroy(): void {
