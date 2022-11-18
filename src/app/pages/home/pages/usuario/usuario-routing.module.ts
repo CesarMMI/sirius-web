@@ -5,10 +5,19 @@ import { UsuarioTableComponent } from "./pages/usuario-table/usuario-table.compo
 
 const routes: Routes = [
   { path: "", component: UsuarioTableComponent },
-  { path: "add", component: UsuarioFormComponent },
+  {
+    path: "add",
+    loadChildren: () =>
+      import("./pages/usuario-form/usuario-form.module").then(
+        (m) => m.UsuarioFormModule
+      ),
+  },
   {
     path: "edit/:id",
-    component: UsuarioFormComponent,
+    loadChildren: () =>
+      import("./pages/usuario-form/usuario-form.module").then(
+        (m) => m.UsuarioFormModule
+      ),
   },
 ];
 

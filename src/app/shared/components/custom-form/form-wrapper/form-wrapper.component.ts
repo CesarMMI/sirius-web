@@ -25,7 +25,7 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
         }}</span>
         <button
           pButton
-          *ngIf="isEdit"
+          *ngIf="isEdit && showLock"
           [icon]="isLocked ? 'bi bi-lock' : 'bi bi-unlock'"
           (click)="switchLock()"
           class="p-button-sm p-button-text p-button-rounded"
@@ -50,11 +50,13 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
 })
 export class FormWrapperComponent implements OnDestroy, AfterViewChecked {
   @Input() title: string = "";
-  protected isEdit: boolean;
+  protected isEdit?: boolean;
 
   @Input() isChild: boolean = false;
   @Output() lockEvent = new EventEmitter<boolean>();
   protected isLocked: boolean = true;
+
+  @Input() showLock: boolean = true
 
   private lockSub: Subscription;
 
@@ -62,7 +64,12 @@ export class FormWrapperComponent implements OnDestroy, AfterViewChecked {
     activatedRoute: ActivatedRoute,
     private formLockService: FormLockService,
   ) {
-    this.isEdit = activatedRoute.snapshot.url[0].toString() === "edit";
+    if(activatedRoute.snapshot.url.length > 0){
+      this.isEdit = activatedRoute.snapshot.url[0].toString() === "edit";
+    }else{
+      if(activatedRoute.parent)
+        this.isEdit = activatedRoute.parent.snapshot.url[0].toString() === "edit";
+    }
     // Form Lock
     this.lockSub = formLockService.isLocked$()
       .subscribe((isLocked: boolean) => (this.isLocked = isLocked));

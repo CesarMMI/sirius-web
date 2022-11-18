@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { MenuItem } from "primeng/api";
 
 @Component({
+  selector: "app-usuario-form",
   template: `
-    <p>
-      usuario-form works!
-    </p>
+    <app-form-wrapper title="Usuário" [showLock]="false">
+      <p-tabMenu [model]="items"></p-tabMenu>
+      <router-outlet></router-outlet>
+    </app-form-wrapper>
   `,
-  styles: [
-  ]
+  styles: [],
 })
-export class UsuarioFormComponent implements OnInit {
+export class UsuarioFormComponent {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  items: MenuItem[] = [
+    { label: "Geral", icon: "bi bi-person-vcard", routerLink: "geral" },
+    { label: "Endereços", icon: "bi bi-houses", routerLink: "enderecos" },
+  ];
 }
