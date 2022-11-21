@@ -1,0 +1,33 @@
+export interface IVendedor {
+  id: number;
+  nome: string;
+  apelido: string;
+  status: string;
+  cpf: string;
+  cnpj: string;
+  inscEstadual: string;
+  rg: string;
+  telefone: string;
+  celular: string;
+  email: string;
+  fax: string;
+  pessoaContato: string;
+  cep: string;
+  logradouro: string;
+  numero: number;
+  complemento: string;
+  bairro: string;
+  regiao: string;
+  cidade: string;
+  uf: string;
+  departamento: string;
+  porcComissao: number;
+  porcDescMax: number;
+  nomeBanco: string;
+  numeroBanco: string;
+  agencia: string;
+  digitoAgencia: string;
+  conta: string;
+  digitoConta: string;
+  observacoes: string;
+}

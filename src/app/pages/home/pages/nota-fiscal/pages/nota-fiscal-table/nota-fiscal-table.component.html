@@ -1,0 +1,24 @@
+<app-custom-table-wrapper
+[headerButtons]="headerButtons"
+title="Notas Fiscais"
+[pageTotal]="pageTotal"
+(onPagination)="onPagination($event)"
+>
+<ng-container *ngIf="tableData$ | async as tableData; else loading">
+  <app-custom-table-body
+    [cols]="cols"
+    [data]="tableData.data"
+    (onSelection)="selectedNotaFiscal = $event"
+  ></app-custom-table-body>
+</ng-container>
+<ng-template #loading>
+  <app-custom-table-skeleton [cols]="cols" [chooseMode]="true"></app-custom-table-skeleton>
+</ng-template>
+</app-custom-table-wrapper>
+
+<ng-template #headerButtons>
+<app-crud-buttonset
+  [targetId]="selectedNotaFiscal?.id"
+  message="Tem certeza que deseja excluir a nota fiscal selecionada?"
+></app-crud-buttonset>
+</ng-template>

@@ -40,6 +40,38 @@ const routes: Routes = [
           import("./pages/usuario/usuario.module").then((m) => m.UsuarioModule),
         canActivate: [TokenGuard],
       },
+      {
+        path: "vendedores",
+        loadChildren: () =>
+          import("./pages/vendedor/vendedor.module").then(
+            (m) => m.VendedorModule
+          ),
+        canActivate: [TokenGuard],
+      },
+      {
+        path: "fornecedores",
+        loadChildren: () =>
+          import("./pages/fornecedor/fornecedor.module").then(
+            (m) => m.FornecedorModule
+          ),
+        canActivate: [TokenGuard],
+      },
+      {
+        path: "pedidos-compra",
+        loadChildren: () =>
+          import("./pages/pedido-compra/pedido-compra.module").then(
+            (m) => m.PedidoCompraModule
+          ),
+        canActivate: [TokenGuard],
+      },
+      {
+        path: "notas-fiscais",
+        loadChildren: () =>
+          import("./pages/nota-fiscal/nota-fiscal.module").then(
+            (m) => m.NotaFiscalModule
+          ),
+        canActivate: [TokenGuard],
+      },
     ],
   },
 ];

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-cliente',
   template: `
     <p>
-      cliente works!
+      fornecedor-form works!
     </p>
   `,
   styles: [
   ]
 })
-export class ClienteComponent implements OnInit {
+export class FornecedorFormComponent implements OnInit {
 
   constructor() { }
 

@@ -6,15 +6,15 @@ import { CrudButtonsetModule } from 'src/app/shared/components/buttons/crud-butt
 import { CustomFormModule } from 'src/app/shared/components/custom-form/custom-form.module';
 import { CustomTableModule } from 'src/app/shared/components/custom-table/custom-table.module';
 
-import { ClienteRoutingModule } from './cliente-routing.module';
-import { ClienteFormComponent } from './pages/cliente-form/cliente-form.component';
-import { ClienteTableComponent } from './pages/cliente-table/cliente-table.component';
+import { PedidoCompraFormComponent } from './pages/pedido-compra-form/pedido-compra-form.component';
+import { PedidoCompraTableComponent } from './pages/pedido-compra-table/pedido-compra-table.component';
+import { PedidoCompraRoutingModule } from './pedido-compra-routing.module';
 
 @NgModule({
-  declarations: [ClienteTableComponent, ClienteFormComponent],
+  declarations: [PedidoCompraTableComponent, PedidoCompraFormComponent],
   imports: [
     CommonModule,
-    ClienteRoutingModule,
+    PedidoCompraRoutingModule,
     ReactiveFormsModule,
     CustomTableModule,
     CustomFormModule,
@@ -22,4 +22,4 @@ import { ClienteTableComponent } from './pages/cliente-table/cliente-table.compo
     ButtonModule,
   ],
 })
-export class ClienteModule {}
+export class PedidoCompraModule {}

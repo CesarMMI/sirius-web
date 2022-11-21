@@ -11,6 +11,7 @@ import { CepPipe } from 'src/app/shared/pipes/cep.pipe';
 import { CpfCnpjPipe } from 'src/app/shared/pipes/cpf-cnpj.pipe';
 import { PipesModule } from 'src/app/shared/pipes/pipes.module';
 import { StatusPipe } from 'src/app/shared/pipes/status.pipe';
+import { PhonePipe } from '../../pipes/phone.pipe';
 
 
 import { CustomTableBodyComponent } from './components/custom-table-body/custom-table-body.component';
@@ -42,6 +43,6 @@ import { CustomTableWrapperComponent } from './components/custom-table-wrapper/c
     CustomTableBodyComponent,
     CustomTableSkeletonComponent
   ],
-  providers: [ConfirmationService, CpfCnpjPipe, CepPipe, StatusPipe, CurrencyPipe, DatePipe],
+  providers: [ConfirmationService, CpfCnpjPipe, CepPipe, StatusPipe, CurrencyPipe, DatePipe, PhonePipe],
 })
 export class CustomTableModule { }
