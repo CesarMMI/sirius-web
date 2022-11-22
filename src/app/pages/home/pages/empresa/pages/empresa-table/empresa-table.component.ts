@@ -16,7 +16,8 @@ import { TokensService } from "src/app/shared/services/tokens.service";
   styles: [],
 })
 export class EmpresaTableComponent {
-  protected tableData$: Observable<ITableData<IEmpresa>>;
+  protected tableData$: Observable<any>;
+  protected selectedId: number | undefined;
   protected selectedEmpresa?: IEmpresa;
 
   protected pageTotal: number = 0;
@@ -33,11 +34,18 @@ export class EmpresaTableComponent {
     private empresaService: EmpresaService,
     private tokensService: TokensService
   ) {
-    this.tableData$ = this.get(1, 10);
+    this.tableData$ = this.empresaService.data$;
   }
 
   protected onPagination(event: IPageEvent) {
-    this.tableData$ = this.get(event.page + 1, event.rows);
+    // this.tableData$ = this.get(event.page + 1, event.rows);
+  }
+
+
+  protected onSelect(event: IEmpresa) {
+    this.empresaService.setSelectedData(event);
+    if(event) this.selectedId = event.id
+    else this.selectedId = undefined
   }
 
   protected onChoose(event: IEmpresa) {
@@ -45,7 +53,7 @@ export class EmpresaTableComponent {
     this.tokensService.token = event.token;
   }
 
-  private get(page: number, quantityPerPage: number): Observable<ITableData<IEmpresa>> {
-    return this.empresaService.get(page, quantityPerPage);
-  }
+  // private get(page: number, quantityPerPage: number): Observable<ITableData<IEmpresa>> {
+  //   return this.empresaService.get(page, quantityPerPage);
+  // }
 }

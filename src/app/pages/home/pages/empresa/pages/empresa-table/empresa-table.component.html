@@ -1,27 +1,29 @@
 <app-custom-table-wrapper
-  [headerButtons]="headerButtons"
-  title="Empresas"
-  [pageTotal]="pageTotal"
-  (onPagination)="onPagination($event)"
+    [headerButtons]="headerButtons"
+    title="Empresas"
+    [pageTotal]="pageTotal"
+    (onPagination)="onPagination($event)"
 >
-  <ng-container *ngIf="tableData$ | async as tableData; else loading">
-    <app-custom-table-body
-      [cols]="cols"
-      [data]="tableData.data"
-      (onSelection)="selectedEmpresa = $event"
-      
-      [chooseMode]="true"
-      (onChoose)="onChoose($event)"
-    ></app-custom-table-body>
-  </ng-container>
-  <ng-template #loading>
-    <app-custom-table-skeleton [cols]="cols" [chooseMode]="true"></app-custom-table-skeleton>
-  </ng-template>
+    <ng-container *ngIf="tableData$ | async as tableData; else loading">
+        <app-custom-table-body
+            [cols]="cols"
+            [data]="tableData.data"
+            (onSelection)="onSelect($event)"
+            [chooseMode]="true"
+            (onChoose)="onChoose($event)"
+        ></app-custom-table-body>
+    </ng-container>
+    <ng-template #loading>
+        <app-custom-table-skeleton
+            [cols]="cols"
+            [chooseMode]="true"
+        ></app-custom-table-skeleton>
+    </ng-template>
 </app-custom-table-wrapper>
 
 <ng-template #headerButtons>
-  <app-crud-buttonset
-    [targetId]="selectedEmpresa?.id"
-    message="Tem certeza que deseja excluir o produto selecionado?"
-  ></app-crud-buttonset>
+    <app-crud-buttonset
+        [targetId]="selectedId"
+        message="Tem certeza que deseja excluir o produto selecionado?"
+    ></app-crud-buttonset>
 </ng-template>

@@ -40,7 +40,7 @@ import { ConfirmationService } from "primeng/api";
   styles: [],
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CrudButtonsetComponent {
+export class  CrudButtonsetComponent {
   @Input() targetId?: number;
   @Input() message: string = "";
 

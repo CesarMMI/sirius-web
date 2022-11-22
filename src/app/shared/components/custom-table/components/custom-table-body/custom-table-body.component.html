@@ -6,7 +6,7 @@
     selectionMode="single"
     [(selection)]="selectedData"
     (onRowSelect)="onSelection.emit($event.data)"
-    (onRowUnselect)="onSelection.emit(undefined)"
+    (onRowUnselect)="onSelection.emit(null)"
     responsiveLayout="stack"
     styleClass="p-datatable-sm"
   >
