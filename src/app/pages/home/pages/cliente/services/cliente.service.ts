@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { MessageService } from "primeng/api";
 import { Observable, map } from "rxjs";
 import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
 import { CrudService } from "src/app/shared/services/crud-service";
@@ -13,11 +14,13 @@ import { ICliente } from "../models/cliente";
 export class ClienteService extends CrudService<ICliente> {
     constructor(
         protected override http: HttpClient,
-        protected override pagination: PaginationService
+        protected override pagination: PaginationService,
+        protected override message: MessageService
     ) {
         super(
             http,
             pagination,
+            message,
             `http://${environment.api_host}:8080/datasnap/rest/TSMClientes`,
             {
                 getAll: {
@@ -32,20 +35,6 @@ export class ClienteService extends CrudService<ICliente> {
                 put: "Cliente",
                 delete: "Cliente",
             }
-        );
-    }
-
-    public override get(
-        page: number,
-        quantityPerPage: number
-    ): Observable<ITableData<ICliente>> {
-        return super.get(page, quantityPerPage).pipe(
-            map((response: any) => {
-                return {
-                    data: response["Clientes"],
-                    pageTotal: response["QuantidadePaginas"],
-                };
-            })
         );
     }
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
+import { MessageService } from "primeng/api";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { PaginationService } from "src/app/shared/services/pagination.service";
 import { environment } from "src/environments/environment";
@@ -19,39 +18,27 @@ export class PedidoCompraService extends CrudService<any> {
 
     constructor(
         protected override http: HttpClient,
-        protected override pagination: PaginationService
+        protected override pagination: PaginationService,
+        protected override message: MessageService
     ) {
         super(
             http,
             pagination,
+            message,
             `http://${environment.api_host}:8088/datasnap/rest/TSMPedidoCompra`,
             {
                 getAll: {
-                  endPoint: "PedidosCompra",
-                  response: {
-                    payload: "vendedores",
-                    pageCount: "QuantidadePaginas"
-                  }
+                    endPoint: "PedidosCompra",
+                    response: {
+                        payload: "vendedores",
+                        pageCount: "QuantidadePaginas",
+                    },
                 },
                 getById: "PedidoCompra",
                 post: "PedidoCompra",
                 put: "PedidoCompra",
                 delete: "PedidoCompra",
             }
-        );
-    }
-
-    public override get(
-        page: number,
-        quantityPerPage: number
-    ): Observable<ITableData<any>> {
-        return super.get(page, quantityPerPage).pipe(
-            map((response: any) => {
-                return {
-                    data: response["vendedores"],
-                    pageTotal: response["QuantidadePaginas"],
-                };
-            })
         );
     }
 }

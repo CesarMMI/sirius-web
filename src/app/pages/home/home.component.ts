@@ -49,13 +49,13 @@ import {
           ></app-nav-bar>
           <div
             [ngClass]="{
-              'w-12 border-round-top-xl p-2': responsive.width < 768,
-              'w-10 p-4': responsive.width >= 768
+              'w-12 border-round-top-xl': responsive.width < 768,
+              'w-10': responsive.width >= 768
             }"
             [style]="
               responsive.width >= 768 ? 'border-top-left-radius: 0.5rem;' : ''
             "
-            class="surface-ground"
+            class="surface-ground p-2"
           >
             <router-outlet></router-outlet>
           </div>

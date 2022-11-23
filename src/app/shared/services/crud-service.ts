@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, combineLatest, delay, switchMap, take } from "rxjs";
-import { ITableData } from "../components/custom-table/models/TableData";
+import { MessageService } from "primeng/api";
+import { catchError, delay, map, Observable, throwError } from "rxjs";
 
+import { ITableData } from "../components/custom-table/models/TableData";
 import { PaginationService } from "./pagination.service";
 
 export interface IApiEndPoints {
@@ -22,58 +23,51 @@ export class CrudService<T> {
     constructor(
         protected http: HttpClient,
         protected pagination: PaginationService,
+        protected message: MessageService,
         private API_URL: string,
         private apiEndPoints: IApiEndPoints
-    ) {
-        pagination.setPage(1);
-        this.refresh();
-    }
+    ) {}
 
-    private dataSub$ = new BehaviorSubject<ITableData<T>>({
-        data: [],
-        pageTotal: 0,
-    });
-    public get data$() {
-        return this.dataSub$.asObservable();
-    }
-
-    private selectedDataSub$ = new BehaviorSubject<T | null>(null);
-    public get selectedData$() {
-        return this.selectedDataSub$.asObservable();
-    }
-    public setSelectedData(data: T) {
-        this.selectedDataSub$.next(data);
-    }
-
-    refresh(): void {
-        combineLatest([this.pagination.page$, this.pagination.quantity$])
-            .pipe(
-                switchMap((value) => {
-                    return this.get(1, 10).pipe(take(1));
-                })
-            )
-            .subscribe((value: any) => {
-                this.dataSub$.next({
-                    data: value[this.apiEndPoints.getAll.response.payload],
-                    pageTotal:
-                        value[this.apiEndPoints.getAll.response.pageCount],
-                });
-            });
-    }
-
-    get(page: number, quantityPerPage: number) {
+    get(page: number, quantityPerPage: number): Observable<ITableData<T>> {
         return this.http
-            .get(`${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`, {
-                params: {
-                    pag: page,
-                    qtdItensPag: quantityPerPage,
-                },
-            })
-            .pipe(delay(500));
+            .get<ITableData<T>>(
+                `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,
+                {
+                    params: {
+                        pag: page,
+                        qtdItensPag: quantityPerPage,
+                    },
+                }
+            )
+            .pipe(
+                delay(500),
+                catchError((err) => {
+                    this.message.add({
+                        severity: "error",
+                        summary:
+                            err.error.erro ||
+                            err.error.error ||
+                            err.error ||
+                            "Erro Desconhecido. Caso persista, entre em contato.",
+                        detail: `${err.statusText || 'Erro'} ${err.status}`
+                    });
+                    return throwError(() => new Error(err));
+                }),
+                map((response: any) => {
+                    return {
+                        payload:
+                            response[this.apiEndPoints.getAll.response.payload],
+                        pageCount:
+                            response[
+                                this.apiEndPoints.getAll.response.pageCount
+                            ],
+                    };
+                })
+            );
     }
 
-    getById(id: number) {
-        return this.http.get(
+    getById(id: number): Observable<T> {
+        return this.http.get<T>(
             `${this.API_URL}/${this.apiEndPoints.getById}/${id}`
         );
     }

@@ -5,7 +5,9 @@ import { IPageEvent } from 'src/app/shared/components/custom-table/models/PageEv
   selector: 'app-custom-table-wrapper',
   template: `
     <app-custom-table-header [title]="title">
+      <div class="flex gap-2">
       <ng-container *ngTemplateOutlet="headerButtons ? headerButtons : null"></ng-container>
+      </div>
     </app-custom-table-header>
     <ng-content></ng-content>
     <app-custom-table-paginator [pageTotal]="pageTotal" (onPagination)="onPagination.emit($event)"></app-custom-table-paginator>

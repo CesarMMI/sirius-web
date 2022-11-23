@@ -1,13 +1,13 @@
 <app-custom-table-wrapper
     [headerButtons]="headerButtons"
     title="Empresas"
-    [pageTotal]="pageTotal"
+    [pageTotal]="pageCount"
     (onPagination)="onPagination($event)"
 >
-    <ng-container *ngIf="tableData$ | async as tableData; else loading">
+    <ng-container *ngIf="data$ | async as data; else loading">
         <app-custom-table-body
             [cols]="cols"
-            [data]="tableData.data"
+            [data]="data.payload"
             (onSelection)="onSelect($event)"
             [chooseMode]="true"
             (onChoose)="onChoose($event)"
@@ -22,6 +22,10 @@
 </app-custom-table-wrapper>
 
 <ng-template #headerButtons>
+    <app-filtros-popup
+        (onFilter)="onFilter($event)"
+        [orderOptions]="cols"
+    ></app-filtros-popup>
     <app-crud-buttonset
         [targetId]="selectedId"
         message="Tem certeza que deseja excluir o produto selecionado?"

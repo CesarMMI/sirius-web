@@ -1,0 +1,9 @@
+:host ::ng-deep .p-dropdown {
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+}
+
+:host ::ng-deep .p-button {
+    border-radius: 0 6px 6px 0;
+    border-color: #ced4da !important;
+}

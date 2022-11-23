@@ -1,0 +1,8 @@
+:host ::ng-deep .p-dropdown {
+    border-radius: 6px 0 0 6px;
+}
+
+:host ::ng-deep .p-inputtext {
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+}

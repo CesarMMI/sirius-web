@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map, Observable } from "rxjs";
+import { MessageService } from "primeng/api";
+import { BehaviorSubject, Observable } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { PaginationService } from "src/app/shared/services/pagination.service";
 import { environment } from "src/environments/environment";
@@ -13,11 +13,13 @@ import { environment } from "src/environments/environment";
 export class EmpresaService extends CrudService<IEmpresa> {
     constructor(
         protected override http: HttpClient,
-        protected override pagination: PaginationService
+        protected override pagination: PaginationService,
+        protected override message: MessageService
     ) {
         super(
             http,
             pagination,
+            message,
             `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa`,
             {
                 getAll: {
@@ -30,7 +32,7 @@ export class EmpresaService extends CrudService<IEmpresa> {
                 getById: "GetEmpresa",
                 post: "Empresa",
                 put: "Empresa",
-                delete: "Empresa"
+                delete: "Empresa",
             }
         );
     }
@@ -52,8 +54,8 @@ export class EmpresaService extends CrudService<IEmpresa> {
     //     );
     // }
 
-    public override getById(id: number): Observable<Object> {
-        return this.http.get(
+    public override getById(id: number): Observable<IEmpresa> {
+        return this.http.get<IEmpresa>(
             `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa/GetEmpresa`
         );
     }

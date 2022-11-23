@@ -9,6 +9,8 @@ import { CustomFormModule } from "src/app/shared/components/custom-form/custom-f
 import { ReactiveFormsModule } from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { ProdutoFormComponent } from "src/app/pages/home/pages/produto/pages/produto-form/produto-form.component";
+import { RotinasPopupModule } from '../../../../shared/components/buttons/rotinas-popup/rotinas-popup.module';
+import { FiltrosPopupModule } from '../../../../shared/components/buttons/filtros-popup/filtros-popup.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ProdutoFormComponent } from "src/app/pages/home/pages/produto/pages/pro
     CustomTableModule,
     CustomFormModule,
     ButtonModule,
-    CrudButtonsetModule
+    CrudButtonsetModule,
+    RotinasPopupModule,
+    FiltrosPopupModule
   ],
 })
 export class ProdutoModule { }

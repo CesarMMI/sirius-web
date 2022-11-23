@@ -1,4 +1,4 @@
 export interface ITableData<T> {
-  data: T[];
-  pageTotal: number;
+  payload: T[];
+  pageCount: number;
 }

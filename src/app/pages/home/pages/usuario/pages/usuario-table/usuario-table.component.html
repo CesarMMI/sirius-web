@@ -7,7 +7,7 @@
   <ng-container *ngIf="tableData$ | async as tableData; else loading">
     <app-custom-table-body
       [cols]="cols"
-      [data]="tableData.data"
+      [data]="tableData.payload"
       (onSelection)="selectedUsuario = $event"
     ></app-custom-table-body>
   </ng-container>

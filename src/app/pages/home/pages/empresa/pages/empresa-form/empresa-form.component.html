@@ -1,4 +1,4 @@
-<app-form-wrapper title="Empresa" (lockEvent)="lockEvent($event)">
+<app-form-wrapper title="Empresa">
   <ng-container *ngIf="responsive$ | async as responsive">
     <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
       <!-- ID -->
@@ -113,13 +113,13 @@
       <div class="flex col-12">
         <button
           pButton
-          [loading]="loading"
-          [disabled]="form.invalid || isLocked"
           [class]="responsive.width < 768 ? 'w-full' : 'ml-auto'"
           type="submit"
           label="Salvar"
-        ></button>
-      </div>
-    </form>
-  </ng-container>
-</app-form-wrapper>
+          ></button>
+        </div>
+      </form>
+    </ng-container>
+  </app-form-wrapper>
+  <!-- [loading]="loading"
+  [disabled]="form.invalid || isLocked" -->

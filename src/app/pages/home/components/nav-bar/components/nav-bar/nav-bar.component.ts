@@ -120,6 +120,11 @@ export class NavBarComponent {
       ],
     },
     {
+      label: "Configurações",
+      icon: "bi bi-gear",
+      router: "configuracoes",
+    },
+    {
       label: "Sair",
       icon: "bi bi-power",
       action: () => this.onExit(),

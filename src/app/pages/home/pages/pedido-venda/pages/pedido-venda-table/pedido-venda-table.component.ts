@@ -37,8 +37,8 @@ export class PedidoVendaTableComponent {
   private get(page: number, quantityPerPage: number): Observable<IPedidoVenda[]> {
     return this.pedidoVendaService.get(page, quantityPerPage)
       .pipe(
-        tap(response => this.pageTotal = response.pageTotal),
-        map(response => response.data)
+        tap(response => this.pageTotal = response.pageCount),
+        map(response => response.payload)
       );
   }
 }
