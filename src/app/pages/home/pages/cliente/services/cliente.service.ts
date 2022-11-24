@@ -1,12 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { MessageService } from "primeng/api";
-import { Observable, map } from "rxjs";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
-import { CrudService } from "src/app/shared/services/crud-service";
-import { PaginationService } from "src/app/shared/services/pagination.service";
-import { environment } from "src/environments/environment";
-import { ICliente } from "../models/cliente";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { CrudService } from 'src/app/shared/services/crud-service';
+import { PaginationService } from 'src/app/shared/services/http-params/pagination.service';
+import { environment } from 'src/environments/environment';
+
+import { ICliente } from '../models/cliente';
 
 @Injectable({
     providedIn: "root",

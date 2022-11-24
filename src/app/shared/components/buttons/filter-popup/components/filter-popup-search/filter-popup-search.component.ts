@@ -4,9 +4,10 @@ import {
     Input,
     OnInit,
 } from "@angular/core";
+import { ICol } from "src/app/shared/components/custom-table/models/Col";
 
 @Component({
-    selector: "app-filtros-popup-search",
+    selector: "app-filter-popup-search",
     template: `
         <small class="text-color-secondary">Pesquisar</small>
         <div class="flex">
@@ -24,15 +25,15 @@ import {
             />
         </div>
     `,
-    styleUrls: ["./filtros-popup-search.component.scss"],
+    styleUrls: ["./filter-popup-search.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltrosPopupSearchComponent {
+export class FilterPopupSearchComponent {
     @Input() object!: {
         field: string;
         value: string;
     };
-    @Input() options: any;
+    @Input() options: ICol[] = [];
 
     constructor() {}
 }

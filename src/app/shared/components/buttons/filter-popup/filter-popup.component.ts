@@ -10,20 +10,22 @@ import {
 import { OverlayPanel } from "primeng/overlaypanel";
 import { BehaviorSubject } from "rxjs";
 import { ICol } from "../../custom-table/models/Col";
+import { IFilterEvent } from "./models/filter-event";
 
 @Component({
-    selector: "app-filtros-popup",
+    selector: "app-filter-popup",
     template: `
         <p-overlayPanel #filtroOp>
             <ng-template pTemplate>
                 <div class="gap-3 p-2 flex align-items-center">
-                    <app-filtros-popup-search
+                    <app-filter-popup-search
+                        [options]="orderOptions"
                         [object]="filterObj.search"
-                    ></app-filtros-popup-search>
-                    <app-filtros-popup-order
+                    ></app-filter-popup-search>
+                    <app-filter-popup-order
                         [options]="orderOptions"
                         [object]="filterObj.order"
-                    ></app-filtros-popup-order>
+                    ></app-filter-popup-order>
                     <button
                         pButton
                         (click)="click()"
@@ -37,20 +39,24 @@ import { ICol } from "../../custom-table/models/Col";
         <button
             pButton
             type="text"
-            icon="bi bi-funnel-fill"
+            [icon]="isFiltered ? 'pi pi-filter-slash' : 'pi pi-filter'"
             [class]="isFiltered ? '' : 'p-button-plain'"
             class="p-button-sm p-button-text p-button-rounded"
-            (click)="isFiltered ? isFiltered = false : filtroOp.toggle($event)"
+            (click)="
+                isFiltered ? (isFiltered = false) : filtroOp.toggle($event)
+            "
         ></button>
     `,
     styles: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltrosPopupComponent {
+export class FilterPopupComponent {
     @ViewChild("filtroOp", { static: true }) filtroOp!: OverlayPanel;
 
-    @Output() onFilter = new EventEmitter();
+    @Output() onFilter = new EventEmitter<IFilterEvent>();
+    
     @Input() orderOptions: ICol[] = [];
+    @Input() filterOptions: ICol[] = [];
 
     protected isFiltered: boolean = false;
 
@@ -63,8 +69,8 @@ export class FiltrosPopupComponent {
         },
         search: {
             field: "",
-            value: ""
-        }
+            value: "",
+        },
     };
 
     protected click(): void {

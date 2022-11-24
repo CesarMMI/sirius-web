@@ -6,7 +6,7 @@ import {
 } from "@angular/core";
 
 @Component({
-    selector: "app-filtros-popup-order",
+    selector: "app-filter-popup-order",
     template: `
         <small class="text-color-secondary">Ordenar</small>
         <div class="flex">
@@ -26,10 +26,10 @@ import {
             ></button>
         </div>
     `,
-    styleUrls: ["./filtros-popup-order.component.scss"],
+    styleUrls: ["./filter-popup-order.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltrosPopupOrderComponent {
+export class FilterPopupOrderComponent {
     @Input() object: { orderBy: string; desc: boolean } = {
         orderBy: "id",
         desc: false,

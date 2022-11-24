@@ -4,7 +4,7 @@ import { MessageService } from "primeng/api";
 import { BehaviorSubject, Observable } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
 import { CrudService } from "src/app/shared/services/crud-service";
-import { PaginationService } from "src/app/shared/services/pagination.service";
+import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 import { environment } from "src/environments/environment";
 
 @Injectable({

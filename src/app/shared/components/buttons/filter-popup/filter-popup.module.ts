@@ -4,18 +4,18 @@ import { ButtonModule } from "primeng/button";
 import { OverlayPanelModule } from "primeng/overlaypanel";
 
 import { CustomFormModule } from "../../custom-form/custom-form.module";
-import { FiltrosPopupComponent } from "./filtros-popup.component";
-import { FiltrosPopupSearchComponent } from "./components/filtros-popup-search/filtros-popup-search.component";
-import { FiltrosPopupOrderComponent } from "./components/filtros-popup-order/filtros-popup-order.component";
+import { FilterPopupComponent } from "./filter-popup.component";
+import { FilterPopupSearchComponent } from "./components/filter-popup-search/filter-popup-search.component";
+import { FilterPopupOrderComponent } from "./components/filter-popup-order/filter-popup-order.component";
 import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
-        FiltrosPopupComponent,
-        FiltrosPopupSearchComponent,
-        FiltrosPopupOrderComponent,
+        FilterPopupComponent,
+        FilterPopupSearchComponent,
+        FilterPopupOrderComponent,
     ],
     imports: [
         CommonModule,
@@ -26,6 +26,6 @@ import { FormsModule } from "@angular/forms";
         InputTextModule,
         ButtonModule,
     ],
-    exports: [FiltrosPopupComponent],
+    exports: [FilterPopupComponent],
 })
-export class FiltrosPopupModule {}
+export class FilterPopupModule {}

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_host: "177.131.142.231"
+  // api_host: "177.131.142.231"
+  api_host: "localhost"
 };
 
 /*

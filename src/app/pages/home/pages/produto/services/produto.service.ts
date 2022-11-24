@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { CrudService } from "src/app/shared/services/crud-service";
-import { PaginationService } from "src/app/shared/services/pagination.service";
+import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 import { environment } from "src/environments/environment";
 
 import { IProduto } from "../models/Produto";

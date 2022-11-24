@@ -14,6 +14,8 @@ import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produt
 export class ProdutoFormComponent {
   protected form: FormGroup;
 
+  private rNum: number = Math.floor(Math.random() * 100);
+
   protected loading: boolean = false;
   protected isLocked: boolean = true;
 
@@ -26,19 +28,19 @@ export class ProdutoFormComponent {
   ) {
     this.form = formBuilder.group({
       id: { value: null, disabled: true },
-      codProduto: null,
-      descricao: [null, [Validators.required]],
-      codEAN: [null, [Validators.minLength(8), Validators.maxLength(14)]],
-      NCM: [null, [Validators.maxLength(8)]],
-      CFOP: null,
-      unCom: null,
-      qtdCom: null,
-      vlrUnCom: null,
-      vlrProd: null,
-      codEANTrib: null,
-      unTrib: null,
-      qtdTrib: null,
-      vlrUnTrib: null,
+      codProduto: `prod-${this.rNum}`,
+      descricao: [`Produto ${this.rNum}`, [Validators.required]],
+      codEAN: ['123456789', [Validators.minLength(8), Validators.maxLength(14)]],
+      NCM: ['123456', [Validators.maxLength(8)]],
+      CFOP: '123456',
+      unCom: 'cm',
+      qtdCom: 1,
+      vlrUnCom: 1,
+      vlrProd: 1,
+      codEANTrib: '123456789',
+      unTrib: 'cm',
+      qtdTrib: 1,
+      vlrUnTrib: 1,
       saldo: [{ value: 0, disabled: true }],
       status: ['A'],
     });

@@ -22,10 +22,10 @@
 </app-custom-table-wrapper>
 
 <ng-template #headerButtons>
-    <app-filtros-popup
+    <app-filter-popup
         (onFilter)="onFilter($event)"
         [orderOptions]="cols"
-    ></app-filtros-popup>
+    ></app-filter-popup>
     <app-crud-buttonset
         [targetId]="selectedId"
         message="Tem certeza que deseja excluir o produto selecionado?"
