@@ -1,10 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, combineLatest } from "rxjs";
-
-export interface IPagination {
-    page: number;
-    quantityPerPage: number;
-}
+import { IPagination } from "./models/pagination";
 
 @Injectable({
     providedIn: "root",

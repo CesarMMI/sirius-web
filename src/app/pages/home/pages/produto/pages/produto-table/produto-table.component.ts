@@ -1,13 +1,13 @@
 import { CurrencyPipe } from "@angular/common";
 import { Component } from "@angular/core";
-import { map, Observable, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { IProduto } from "src/app/pages/home/pages/produto/models/Produto";
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
-import { IFilterEvent } from "src/app/shared/components/buttons/filter-popup/models/filter-event";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
 import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";
 import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
+import { IFilter } from "src/app/shared/services/http-params/models/filter";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 
 @Component({
@@ -51,14 +51,14 @@ export class ProdutoTableComponent {
         });
     }
 
-    protected onFilter(event: IFilterEvent) {
+    protected onFilter(event: IFilter) {
         this.tableData$ = this.get(this.currPage, this.currQuantity, event);
     }
 
     private get(
         page: number,
         quantityPerPage: number,
-        filter?: IFilterEvent
+        filter?: IFilter
     ): Observable<ITableData<IProduto>> {
         return this.produtoService.get(page, quantityPerPage, filter).pipe(
             tap((response) => {

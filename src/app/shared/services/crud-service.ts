@@ -9,9 +9,10 @@ import {
     switchMap,
     throwError,
 } from "rxjs";
-import { IFilterEvent } from "../components/buttons/filter-popup/models/filter-event";
 
 import { ITableData } from "../components/custom-table/models/TableData";
+import { FilterService } from "./http-params/filter.service";
+import { IFilter } from "./http-params/models/filter";
 import { PaginationService } from "./http-params/pagination.service";
 
 export interface IApiEndPoints {
@@ -32,6 +33,7 @@ export class CrudService<T> {
     constructor(
         protected http: HttpClient,
         protected pagination: PaginationService,
+        protected filter: FilterService,
         protected message: MessageService,
         private API_URL: string,
         private apiEndPoints: IApiEndPoints
@@ -42,10 +44,15 @@ export class CrudService<T> {
     get(
         page?: number,
         quantityPerPage?: number,
-        filter?: IFilterEvent
-    ): Observable<ITableData<T>> {
-        return this.pagination.pagination$.pipe(
-            switchMap((pagination) => {
+        filter?: IFilter
+    ): Observable<any> {
+        return combineLatest([
+            this.pagination.pagination$,
+            this.filter.filter$,
+        ]).pipe(
+            switchMap(([pagination, filter]) => {
+                console.log('pagination', pagination)
+                console.log('filter', filter)
                 return this.http
                     .get<ITableData<T>>(
                         `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,
@@ -91,6 +98,7 @@ export class CrudService<T> {
                     );
             })
         );
+        return this.pagination.pagination$.pipe();
         // return this.http
         //     .get<ITableData<T>>(
         //         `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,

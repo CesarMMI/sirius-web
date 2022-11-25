@@ -18,7 +18,7 @@
         [control]="$any(loginForm.controls['senha'])"
       ></app-input-password>
       <div class="col-12">
-        <button pButton class="w-full" label="Login" type="submit"></button>
+        <button pButton class="w-full" label="Login" type="submit" [loading]="loading"></button>
         <p-divider align="center">
           <span class="text-color-secondary font-semibold opacity-30">OU</span>
         </p-divider>

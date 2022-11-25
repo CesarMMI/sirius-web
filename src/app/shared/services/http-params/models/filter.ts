@@ -1,9 +1,9 @@
-export interface IFilterEvent {
+export interface IFilter {
     order: {
         orderBy: string;
         desc: boolean;
     };
-    search: {
+    search?: {
         field: string;
         value: string;
     };

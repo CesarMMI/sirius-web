@@ -4,6 +4,7 @@ import { MessageService } from "primeng/api";
 import { BehaviorSubject, Observable } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
 import { CrudService } from "src/app/shared/services/crud-service";
+import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 import { environment } from "src/environments/environment";
 
@@ -14,11 +15,13 @@ export class EmpresaService extends CrudService<IEmpresa> {
     constructor(
         protected override http: HttpClient,
         protected override pagination: PaginationService,
+        protected override filter: FilterService,
         protected override message: MessageService
     ) {
         super(
             http,
             pagination,
+            filter,
             message,
             `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa`,
             {

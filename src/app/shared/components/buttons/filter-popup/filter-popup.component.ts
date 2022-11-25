@@ -9,8 +9,8 @@ import {
 } from "@angular/core";
 import { OverlayPanel } from "primeng/overlaypanel";
 import { BehaviorSubject } from "rxjs";
+import { IFilter } from "src/app/shared/services/http-params/models/filter";
 import { ICol } from "../../custom-table/models/Col";
-import { IFilterEvent } from "./models/filter-event";
 
 @Component({
     selector: "app-filter-popup",
@@ -53,7 +53,7 @@ import { IFilterEvent } from "./models/filter-event";
 export class FilterPopupComponent {
     @ViewChild("filtroOp", { static: true }) filtroOp!: OverlayPanel;
 
-    @Output() onFilter = new EventEmitter<IFilterEvent>();
+    @Output() onFilter = new EventEmitter<IFilter>();
     
     @Input() orderOptions: ICol[] = [];
     @Input() filterOptions: ICol[] = [];
