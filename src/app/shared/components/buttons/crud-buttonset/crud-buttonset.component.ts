@@ -44,7 +44,7 @@ export class  CrudButtonsetComponent {
   @Input() targetId?: number;
   @Input() message: string = "";
 
-  @Output() deleteEvent = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
 
   constructor(private confirmationService: ConfirmationService) {}
 
@@ -57,7 +57,7 @@ export class  CrudButtonsetComponent {
       rejectLabel: "Não",
       acceptButtonStyleClass: "p-button-outlined p-button-danger",
       rejectButtonStyleClass: "p-button-text p-button-secondary",
-      accept: () => this.deleteEvent.emit()
+      accept: () => this.onDelete.emit(this.targetId)
     });
   }
 }

@@ -38,6 +38,6 @@ export class PedidoCompraTableComponent {
     page: number,
     quantityPerPage: number
   ): Observable<ITableData<any>> {
-    return this.pedidoCompraService.get(page, quantityPerPage);
+    return this.pedidoCompraService.get();
   }
 }

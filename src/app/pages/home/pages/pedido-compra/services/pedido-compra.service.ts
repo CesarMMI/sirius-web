@@ -10,13 +10,6 @@ import { environment } from "src/environments/environment";
     providedIn: "root",
 })
 export class PedidoCompraService extends CrudService<any> {
-    private headers = new HttpHeaders({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
-    });
-
     constructor(
         protected override http: HttpClient,
         protected override pagination: PaginationService,

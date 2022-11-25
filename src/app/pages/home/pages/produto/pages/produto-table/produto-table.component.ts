@@ -1,70 +1,39 @@
 import { CurrencyPipe } from "@angular/common";
 import { Component } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { MessageService } from "primeng/api";
 import { IProduto } from "src/app/pages/home/pages/produto/models/Produto";
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
-import { ICol } from "src/app/shared/components/custom-table/models/Col";
-import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
+import { TableComponent } from "src/app/shared/components/table-component/table-component";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
-import { IFilter } from "src/app/shared/services/http-params/models/filter";
+import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 
 @Component({
     templateUrl: "./produto-table.component.html",
     styles: [],
 })
-export class ProdutoTableComponent {
-    protected tableData$: Observable<ITableData<IProduto>>;
-    protected selectedProduto?: IProduto;
-
-    protected pageTotal: number = 0;
-    protected cols: ICol[] = [
-        { field: "id", header: "ID" },
-        { field: "codProduto", header: "Cód. Interno" },
-        { field: "descricao", header: "Descrição" },
-        {
-            field: "vlrUnCom",
-            header: "Valor",
-            pipe: CurrencyPipe,
-            pipeArgs: ["BRL"],
-        },
-        { field: "unCom", header: "Unidade" },
-        { field: "saldo", header: "Saldo" },
-        { field: "status", header: "Status", pipe: StatusPipe },
-    ];
-
-    private currPage: number = 1;
-    private currQuantity: number = 10;
-
+export class ProdutoTableComponent extends TableComponent<IProduto> {
     constructor(
-        private produtoService: ProdutoService,
-        private paginationService: PaginationService
+        produtoService: ProdutoService,
+        protected override filterService: FilterService,
+        protected override paginationService: PaginationService,
+        protected override messageService: MessageService
     ) {
-        this.tableData$ = this.get(1, 10);
-    }
-
-    protected onPagination(event: IPageEvent) {
-        this.paginationService.setPagination({
-            page: event.page + 1,
-            quantityPerPage: event.rows,
-        });
-    }
-
-    protected onFilter(event: IFilter) {
-        this.tableData$ = this.get(this.currPage, this.currQuantity, event);
-    }
-
-    private get(
-        page: number,
-        quantityPerPage: number,
-        filter?: IFilter
-    ): Observable<ITableData<IProduto>> {
-        return this.produtoService.get(page, quantityPerPage, filter).pipe(
-            tap((response) => {
-                console.log(response);
-                this.pageTotal = response.pageCount;
-            })
+        super(
+            [
+                { field: "id", header: "ID" },
+                { field: "codProduto", header: "Cód. Interno" },
+                { field: "descricao", header: "Descrição" },
+                { field: "vlrUnCom", header: "Valor", pipe: CurrencyPipe, pipeArgs: ["BRL"] },
+                { field: "unCom", header: "Unidade" },
+                { field: "saldo", header: "Saldo" },
+                { field: "status", header: "Status", pipe: StatusPipe },
+            ],
+            "Produto removido com sucesso!",
+            produtoService,
+            filterService,
+            paginationService,
+            messageService
         );
     }
 }

@@ -1,11 +1,14 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MessageService } from "primeng/api";
 import {
+    BehaviorSubject,
     catchError,
     combineLatest,
     delay,
+    first,
     map,
     Observable,
+    shareReplay,
     switchMap,
     throwError,
 } from "rxjs";
@@ -13,6 +16,7 @@ import {
 import { ITableData } from "../components/custom-table/models/TableData";
 import { FilterService } from "./http-params/filter.service";
 import { IFilter } from "./http-params/models/filter";
+import { IPagination } from "./http-params/models/pagination";
 import { PaginationService } from "./http-params/pagination.service";
 
 export interface IApiEndPoints {
@@ -30,6 +34,13 @@ export interface IApiEndPoints {
 }
 
 export class CrudService<T> {
+    private headers = new HttpHeaders({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
+    });
+
     constructor(
         protected http: HttpClient,
         protected pagination: PaginationService,
@@ -41,29 +52,34 @@ export class CrudService<T> {
         pagination.setPagination({ page: 1 });
     }
 
-    get(
-        page?: number,
-        quantityPerPage?: number,
-        filter?: IFilter
-    ): Observable<any> {
+    private genParams(pagination: IPagination, filter: IFilter) {
+        let params: any = {
+            pag: pagination.page,
+            qtdItensPag: pagination.quantityPerPage,
+            orderby: filter.order.orderBy,
+            desc: filter.order.desc,
+        };
+
+        if (filter.search)
+            Object.defineProperty(params, filter.search.field, {
+                value: filter.search.value,
+                writable: true,
+                enumerable: true,
+            });
+
+        return params;
+    }
+
+    get(): Observable<ITableData<T>> {
         return combineLatest([
             this.pagination.pagination$,
             this.filter.filter$,
         ]).pipe(
             switchMap(([pagination, filter]) => {
-                console.log('pagination', pagination)
-                console.log('filter', filter)
                 return this.http
                     .get<ITableData<T>>(
                         `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,
-                        {
-                            params: {
-                                pag: pagination.page,
-                                qtdItensPag: pagination.quantityPerPage,
-                                orderby: "id",
-                                desc: false,
-                            },
-                        }
+                        { params: this.genParams(pagination, filter) }
                     )
                     .pipe(
                         // delay(500),
@@ -98,44 +114,6 @@ export class CrudService<T> {
                     );
             })
         );
-        return this.pagination.pagination$.pipe();
-        // return this.http
-        //     .get<ITableData<T>>(
-        //         `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,
-        //         {
-        //             params: {
-        //                 pag: this.pagination.page$,
-        //                 qtdItensPag: this.pagination.quantity$,
-        //                 orderby: "id",
-        //                 desc: false,
-        //             }
-        //         }
-        //     )
-        //     .pipe(
-        //         // delay(500),
-        //         catchError((err) => {
-        //             this.message.add({
-        //                 severity: "error",
-        //                 summary:
-        //                     err.error.erro ||
-        //                     err.error.error ||
-        //                     err.error ||
-        //                     "Erro Desconhecido. Caso persista, entre em contato.",
-        //                 detail: `${err.statusText || "Erro"} ${err.status}`,
-        //             });
-        //             return throwError(() => new Error(err));
-        //         }),
-        //         map((response: any) => {
-        //             return {
-        //                 payload:
-        //                     response[this.apiEndPoints.getAll.response.payload],
-        //                 pageCount:
-        //                     response[
-        //                         this.apiEndPoints.getAll.response.pageCount
-        //                     ],
-        //             };
-        //         })
-        //     );
     }
 
     getById(id: number): Observable<T> {
@@ -155,6 +133,12 @@ export class CrudService<T> {
         return this.http.put(
             `${this.API_URL}/${this.apiEndPoints.put}`,
             subject
+        );
+    }
+    delete(id: number) {
+        return this.http.delete(
+            `${this.API_URL}/${this.apiEndPoints.delete}/${id}`,
+            { headers: this.headers }
         );
     }
 }

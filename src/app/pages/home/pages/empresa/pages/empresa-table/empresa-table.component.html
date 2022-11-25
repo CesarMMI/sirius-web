@@ -1,7 +1,7 @@
 <app-custom-table-wrapper
     [headerButtons]="headerButtons"
     title="Empresas"
-    [pageTotal]="pageCount"
+    [pageTotal]="(data$ | async)?.pageCount || 0"
     (onPagination)="onPagination($event)"
 >
     <ng-container *ngIf="data$ | async as data; else loading">
@@ -23,11 +23,13 @@
 
 <ng-template #headerButtons>
     <app-filter-popup
-        (onFilter)="onFilter($event)"
+        [filterOptions]="cols.slice(0, -1)"
         [orderOptions]="cols"
+        (onFilter)="onFilter($event)"
     ></app-filter-popup>
     <app-crud-buttonset
-        [targetId]="selectedId"
-        message="Tem certeza que deseja excluir o produto selecionado?"
+        (onDelete)="onDelete($event)"
+        [targetId]="selectedData?.id"
+        message="Tem certeza que deseja desativar a empresa selecionada?"
     ></app-crud-buttonset>
 </ng-template>

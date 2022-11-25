@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { TabMenuModule } from "primeng/tabmenu";
 import { CrudButtonsetModule } from "src/app/shared/components/buttons/crud-buttonset/crud-buttonset.module";
+import { FilterPopupModule } from "src/app/shared/components/buttons/filter-popup/filter-popup.module";
 import { CustomFormModule } from "src/app/shared/components/custom-form/custom-form.module";
 import { CustomTableModule } from "src/app/shared/components/custom-table/custom-table.module";
 
@@ -20,6 +21,7 @@ import { UsuarioRoutingModule } from "./usuario-routing.module";
     CustomFormModule,
     CrudButtonsetModule,
     ButtonModule,
+    FilterPopupModule
   ],
 })
 export class UsuarioModule {}

@@ -1,47 +1,37 @@
-import { CurrencyPipe, DatePipe } from "@angular/common";
-import { Component } from "@angular/core";
-import { Observable } from "rxjs";
-import { ICol } from "src/app/shared/components/custom-table/models/Col";
-import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
-import { StatusPipe } from "src/app/shared/pipes/status.pipe";
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { TableComponent } from 'src/app/shared/components/table-component/table-component';
+import { StatusPipe } from 'src/app/shared/pipes/status.pipe';
+import { FilterService } from 'src/app/shared/services/http-params/filter.service';
+import { PaginationService } from 'src/app/shared/services/http-params/pagination.service';
 
-import { RecebimentoService } from "../../services/recebimento.service";
+import { RecebimentoService } from '../../services/recebimento.service';
 
 @Component({
     templateUrl: "./recebimento-table.component.html",
     styles: [],
 })
-export class RecebimentoTableComponent {
-    protected tableData$: Observable<ITableData<any>>;
-    protected selectedRecebimento?: any;
-
-    protected pageTotal: number = 0;
-    protected cols: ICol[] = [
-        { header: "ID", field: "id" },
-        { header: "Status", field: "status", pipe: StatusPipe},
-        { header: "Forma de Pagamento", field: "formaPagamento" },
-        { header: "Valor Bruto", field: "valorBruto", pipe: CurrencyPipe },
-        {
-            header: "Data de Vencimento",
-            field: "dataVencimento",
-            pipe: DatePipe,
-            pipeArgs: ["dd/MM/yy"],
-        },
-    ];
-
-    constructor(private recebimentoService: RecebimentoService) {
-        this.tableData$ = this.get(1, 10);
-    }
-
-    protected onPagination(event: IPageEvent) {
-        this.tableData$ = this.get(event.page + 1, event.rows);
-    }
-
-    private get(
-        page: number,
-        quantityPerPage: number
-    ): Observable<ITableData<any>> {
-        return this.recebimentoService.get(page, quantityPerPage);
+export class RecebimentoTableComponent extends TableComponent<any> {
+    constructor(
+        recebimentoService: RecebimentoService,
+        protected override filterService: FilterService,
+        protected override paginationService: PaginationService,
+        protected override messageService: MessageService
+    ) {
+        super(
+            [
+                { header: "ID", field: "id" },
+                { header: "Status", field: "status", pipe: StatusPipe},
+                { header: "Forma de Pagamento", field: "formaPagamento" },
+                { header: "Valor Bruto", field: "valorBruto", pipe: CurrencyPipe },
+                { header: "Data de Vencimento", field: "dataVencimento", pipe: DatePipe, pipeArgs: ["dd/MM/yy"] }
+            ],
+            "Recebimento removido com sucesso!",
+            recebimentoService,
+            filterService,
+            paginationService,
+            messageService
+        );
     }
 }

@@ -1,24 +1,30 @@
 <app-custom-table-wrapper
-[headerButtons]="headerButtons"
-title="Fornecedores"
-[pageTotal]="pageTotal"
-(onPagination)="onPagination($event)"
+  [headerButtons]="headerButtons"
+  title="Fornecedores"
+  [pageTotal]="(data$ | async)?.pageCount || 0"
+  (onPagination)="onPagination($event)"
 >
-<ng-container *ngIf="tableData$ | async as tableData; else loading">
-  <app-custom-table-body
-    [cols]="cols"
-    [data]="tableData.payload"
-    (onSelection)="selectedFornecedor = $event"
-  ></app-custom-table-body>
-</ng-container>
-<ng-template #loading>
-  <app-custom-table-skeleton [cols]="cols" [chooseMode]="true"></app-custom-table-skeleton>
-</ng-template>
+  <ng-container *ngIf="data$ | async as data; else loading">
+    <app-custom-table-body
+      [cols]="cols"
+      [data]="data.payload"
+      (onSelection)="onSelect($event)"
+    ></app-custom-table-body>
+  </ng-container>
+  <ng-template #loading>
+    <app-custom-table-skeleton [cols]="cols"></app-custom-table-skeleton>
+  </ng-template>
 </app-custom-table-wrapper>
 
 <ng-template #headerButtons>
-<app-crud-buttonset
-  [targetId]="selectedFornecedor?.id"
-  message="Tem certeza que deseja excluir o produto selecionado?"
-></app-crud-buttonset>
+  <app-filter-popup
+    [filterOptions]="cols"
+    [orderOptions]="cols"
+    (onFilter)="onFilter($event)"
+  ></app-filter-popup>
+  <app-crud-buttonset
+    (onDelete)="onDelete($event)"
+    [targetId]="selectedData?.id"
+    message="Tem certeza que deseja excluir o fornecedor selecionado?"
+  ></app-crud-buttonset>
 </ng-template>

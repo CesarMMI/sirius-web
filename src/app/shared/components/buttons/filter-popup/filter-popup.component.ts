@@ -19,7 +19,7 @@ import { ICol } from "../../custom-table/models/Col";
             <ng-template pTemplate>
                 <div class="gap-3 p-2 flex align-items-center">
                     <app-filter-popup-search
-                        [options]="orderOptions"
+                        [options]="filterOptions"
                         [object]="filterObj.search"
                     ></app-filter-popup-search>
                     <app-filter-popup-order
@@ -43,7 +43,7 @@ import { ICol } from "../../custom-table/models/Col";
             [class]="isFiltered ? '' : 'p-button-plain'"
             class="p-button-sm p-button-text p-button-rounded"
             (click)="
-                isFiltered ? (isFiltered = false) : filtroOp.toggle($event)
+                isFiltered ? clean() : filtroOp.toggle($event)
             "
         ></button>
     `,
@@ -54,7 +54,7 @@ export class FilterPopupComponent {
     @ViewChild("filtroOp", { static: true }) filtroOp!: OverlayPanel;
 
     @Output() onFilter = new EventEmitter<IFilter>();
-    
+
     @Input() orderOptions: ICol[] = [];
     @Input() filterOptions: ICol[] = [];
 
@@ -72,6 +72,11 @@ export class FilterPopupComponent {
             value: "",
         },
     };
+
+    protected clean(): void {
+        this.isFiltered = false;
+        this.onFilter.emit({ order: { desc: false, orderBy: "id" } });
+    }
 
     protected click(): void {
         this.filtroOp.hide();

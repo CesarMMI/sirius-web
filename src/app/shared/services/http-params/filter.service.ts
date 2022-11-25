@@ -23,4 +23,7 @@ export class FilterService {
   public setFilter(filter: IFilter) {
       this.filterSub$.next(filter);
   }
+  public clearFilter() {
+    this.filterSub$.next(filterInitialValue);
+  }
 }
