@@ -1,14 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MessageService } from "primeng/api";
 import {
-    BehaviorSubject,
     catchError,
     combineLatest,
-    delay,
-    first,
     map,
     Observable,
-    shareReplay,
     switchMap,
     throwError,
 } from "rxjs";
@@ -135,6 +131,7 @@ export class CrudService<T> {
             subject
         );
     }
+
     delete(id: number) {
         return this.http.delete(
             `${this.API_URL}/${this.apiEndPoints.delete}/${id}`,

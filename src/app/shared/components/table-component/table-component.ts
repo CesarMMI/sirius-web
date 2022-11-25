@@ -1,5 +1,5 @@
 import { MessageService } from "primeng/api";
-import { first, Observable } from "rxjs";
+import { first, Observable, shareReplay } from "rxjs";
 import { CrudService } from "../../services/crud-service";
 import { FilterService } from "../../services/http-params/filter.service";
 import { IFilter } from "../../services/http-params/models/filter";
@@ -20,7 +20,10 @@ export class TableComponent<T> {
         protected paginationService: PaginationService,
         protected messageService: MessageService
     ) {
-        this.data$ = this.crudService.get();
+        this.data$ = this.crudService.get().pipe(
+            first(),
+            shareReplay()
+        );
     }
 
     onSelect(event: T | undefined) {
@@ -49,7 +52,7 @@ export class TableComponent<T> {
                         summary: this.deleteMessage,
                     });
                     this.filterService.clearFilter();
-                }
+                },
             });
     }
 }
