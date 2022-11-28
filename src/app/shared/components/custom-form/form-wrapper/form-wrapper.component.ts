@@ -48,7 +48,7 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
             </header>
             <div
                 [ngClass]="{
-                    'mt-3': title === ''
+                    'mt-4': title === ''
                 }"
             >
                 <ng-content></ng-content>

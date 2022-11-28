@@ -47,4 +47,6 @@ export class ClienteService extends CrudService<ICliente> {
             map((response: any) => response['Cliente'])
         )
     }
+
+    public selectedCliente?: ICliente;
 }

@@ -17,7 +17,6 @@ import { PaginationService } from "./http-params/pagination.service";
 
 export interface IApiEndPoints {
     getAll: {
-        needId?: boolean;
         endPoint: string;
         response: {
             payload: string;
@@ -49,16 +48,6 @@ export class CrudService<T> {
         pagination.setPagination({ page: 1 });
     }
 
-    private parentId: number | undefined;
-    public setParentId(parentId: number) {
-        if (!this.apiEndPoints.getAll.needId)
-            throw new Error(
-                "Tentando definir parentId, mas EndPoint está configurado como false"
-            );
-
-        this.parentId = parentId;
-    }
-
     private genParams(pagination: IPagination, filter: IFilter) {
         let params: any = {
             pag: pagination.page,
@@ -85,11 +74,7 @@ export class CrudService<T> {
             switchMap(([pagination, filter]) => {
                 return this.http
                     .get<ITableData<T>>(
-                        `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}${
-                            this.apiEndPoints.getAll.needId
-                                ? `/${this.parentId}`
-                                : ""
-                        }`,
+                        `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,
                         { params: this.genParams(pagination, filter) }
                     )
                     .pipe(

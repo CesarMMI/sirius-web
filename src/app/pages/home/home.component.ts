@@ -40,6 +40,7 @@ import {
               'w-12': responsive.width < 768,
               'w-10': responsive.width >= 768
             }"
+            class="flex align-items-center justify-content-center"
           ></app-empresa-bar>
         </div>
         <div class="flex flex-wrap flex-1">

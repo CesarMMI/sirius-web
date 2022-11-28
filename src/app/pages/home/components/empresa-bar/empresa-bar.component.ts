@@ -19,7 +19,7 @@ import { TokensService } from "src/app/shared/services/tokens.service";
             'mx-2': responsive.width < 768,
             'w-4 mx-auto': responsive.width >= 768
           }"
-          class="flex gap-2 p-2 surface-ground border-round-lg"
+          class="flex gap-2 p-2 surface-ground border-round-left-lg border-round-right-2xl"
         >
           <span class="text-center text-color font-medium flex-grow-0 w-4">{{
             empresa.xrazaoSocial
@@ -38,7 +38,7 @@ import { TokensService } from "src/app/shared/services/tokens.service";
             'mx-2': responsive.width < 768,
             'w-4 mx-auto': responsive.width >= 768
           }"
-          class="flex gap-2 p-2 surface-ground border-round-lg"
+          class="flex gap-2 p-2 surface-ground border-round-left-lg border-round-right-2xl"
         >
           <p-skeleton height="1.2rem" class="flex-grow-0 w-4"></p-skeleton>
           <p-skeleton height="1.2rem" class="flex-grow-1 w-7"></p-skeleton>

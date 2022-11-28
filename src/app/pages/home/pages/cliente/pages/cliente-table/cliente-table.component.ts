@@ -15,7 +15,7 @@ import { ClienteService } from '../../services/cliente.service';
 })
 export class ClienteTableComponent extends TableComponent<ICliente> {
     constructor(
-        clienteService: ClienteService,
+        protected clienteService: ClienteService,
         protected override filterService: FilterService,
         protected override paginationService: PaginationService,
         protected override messageService: MessageService
@@ -35,5 +35,10 @@ export class ClienteTableComponent extends TableComponent<ICliente> {
             paginationService,
             messageService
         );
+    }
+
+    override onSelect(event: ICliente | undefined): void {
+        this.clienteService.selectedCliente = event;
+        super.onSelect(event)
     }
 }

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { INavbarItem } from "src/app/pages/home/components/nav-bar/models/NavbarItem";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
 import { ResponsiveService } from "src/app/shared/services/responsive.service";
@@ -32,14 +32,16 @@ import { TokensService } from "src/app/shared/services/tokens.service";
   styleUrls: ["./nav-bar.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnDestroy{
   constructor(
     private router: Router,
     private tokensService: TokensService,
     private empresaService: EmpresaService,
   ) {
+    this.routerSub = router.events.subscribe(() => this.backEvent());
   }
 
+  private routerSub: Subscription;
   protected showChildren$ = new BehaviorSubject<boolean>(false);
   protected currentParent$ = new BehaviorSubject<INavbarItem | null>(null);
 
@@ -130,6 +132,10 @@ export class NavBarComponent {
       action: () => this.onExit(),
     },
   ];
+
+  ngOnDestroy(): void {
+    this.routerSub.unsubscribe();
+  }
 
   protected parentEvent(event: INavbarItem): void {
     this.currentParent$.next(event);

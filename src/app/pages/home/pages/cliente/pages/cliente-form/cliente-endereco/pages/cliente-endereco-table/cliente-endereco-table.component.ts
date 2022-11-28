@@ -36,12 +36,5 @@ export class ClienteEnderecoTableComponent extends TableComponent<any> {
             paginationService,
             messageService
         );
-        // Get Cliente ID and set it on service
-        clienteEnderecoService.setParentId(
-            parseInt(
-                activatedRoute.parent?.parent?.snapshot.paramMap.get("id") ||
-                    "0"
-            )
-        );
     }
 }

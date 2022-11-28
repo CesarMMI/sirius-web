@@ -8,12 +8,14 @@ import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 import { environment } from "src/environments/environment";
+import { ClienteService } from "../../../../services/cliente.service";
 
 @Injectable({
     providedIn: "root",
 })
 export class ClienteEnderecoService extends CrudService<any> {
     constructor(
+        clienteService: ClienteService,
         protected override http: HttpClient,
         protected override pagination: PaginationService,
         protected override filter: FilterService,
@@ -27,8 +29,7 @@ export class ClienteEnderecoService extends CrudService<any> {
             `http://${environment.api_host}:8080/datasnap/rest/TSMEnderecos`,
             {
                 getAll: {
-                    endPoint: "GetEnderecos",
-                    needId: true,
+                    endPoint: `GetEnderecos/${clienteService.selectedCliente?.id}`,
                     response: {
                         payload: "Enderecos",
                         pageCount: "QuantidadePaginas",
