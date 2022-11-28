@@ -1,21 +1,42 @@
-import { Component, OnInit } from "@angular/core";
-import { MenuItem } from "primeng/api";
+import { Component } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MessageService } from "primeng/api";
+import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormLockService } from "src/app/shared/services/form-lock.service";
+import { IUsuario } from "../../models/usuario";
+import { UsuarioService } from "../../services/usuario.service";
 
 @Component({
-  selector: "app-usuario-form",
-  template: `
-    <app-form-wrapper title="Usuário" [showLock]="false">
-      <p-tabMenu [model]="items"></p-tabMenu>
-      <router-outlet></router-outlet>
-    </app-form-wrapper>
-  `,
-  styles: [],
+    templateUrl: "./Usuario-form.component.html",
+    styles: [],
 })
-export class UsuarioFormComponent {
-  constructor() {}
-
-  items: MenuItem[] = [
-    { label: "Geral", icon: "bi bi-person-vcard", routerLink: "geral" },
-    { label: "Endereços", icon: "bi bi-houses", routerLink: "enderecos" },
-  ];
+export class UsuarioFormComponent extends FormComponent<IUsuario> {
+    constructor(
+        formBuilder: FormBuilder,
+        private usuarioService: UsuarioService,
+        protected override router: Router,
+        protected override messageService: MessageService,
+        protected override activatedRoute: ActivatedRoute,
+        protected override formLockService: FormLockService
+    ) {
+        super(
+            router,
+            messageService,
+            activatedRoute,
+            formLockService,
+            "Usuario",
+            "/home/usuarios",
+            usuarioService,
+            ["id"],
+            formBuilder.group({
+                id: { value: null, disabled: true },
+                nome: null,
+                ultimoNome: null,
+                email: null,
+                celular: null,
+                vendedorId: null,
+            })
+        );
+    }
 }

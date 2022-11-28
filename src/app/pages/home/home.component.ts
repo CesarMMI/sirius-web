@@ -16,7 +16,7 @@ import {
             'flex-column-reverse gap-2': responsive.width < 768,
             'flex-row': responsive.width >= 768
           }"
-          class="flex flex-wrap py-2"
+          class="flex flex-wrap py-1"
         >
           <div
             [ngClass]="{

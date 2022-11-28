@@ -8,11 +8,10 @@ import { CustomFormModule } from 'src/app/shared/components/custom-form/custom-f
 import { CustomTableModule } from 'src/app/shared/components/custom-table/custom-table.module';
 
 import { ClienteRoutingModule } from './cliente-routing.module';
-import { ClienteFormComponent } from './pages/cliente-form/cliente-form.component';
 import { ClienteTableComponent } from './pages/cliente-table/cliente-table.component';
 
 @NgModule({
-  declarations: [ClienteTableComponent, ClienteFormComponent],
+  declarations: [ClienteTableComponent],
   imports: [
     CommonModule,
     ClienteRoutingModule,

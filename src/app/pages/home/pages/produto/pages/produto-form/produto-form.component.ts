@@ -1,111 +1,77 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { first } from 'rxjs';
-import { IProduto } from 'src/app/pages/home/pages/produto/models/Produto';
-import { ProdutoService } from 'src/app/pages/home/pages/produto/services/produto.service';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MessageService } from "primeng/api";
+import { IProduto } from "src/app/pages/home/pages/produto/models/Produto";
+import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
+import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormLockService } from "src/app/shared/services/form-lock.service";
 
 @Component({
-  templateUrl: './produto-form.component.html',
-  styles: [
-  ]
+    templateUrl: "./produto-form.component.html",
+    styles: [],
 })
-export class ProdutoFormComponent {
-  protected form: FormGroup;
-
-  private rNum: number = Math.floor(Math.random() * 100);
-
-  protected loading: boolean = false;
-  protected isLocked: boolean = true;
-
-  constructor(
-    formBuilder: FormBuilder,
-    activatedRoute: ActivatedRoute,
-    private router: Router,
-    private produtoService: ProdutoService,
-    private messageService: MessageService
-  ) {
-    this.form = formBuilder.group({
-      id: { value: null, disabled: true },
-      codProduto: `prod-${this.rNum}`,
-      descricao: [`Produto ${this.rNum}`, [Validators.required]],
-      codEAN: ['123456789', [Validators.minLength(8), Validators.maxLength(14)]],
-      NCM: ['123456', [Validators.maxLength(8)]],
-      CFOP: '123456',
-      unCom: 'cm',
-      qtdCom: 1,
-      vlrUnCom: 1,
-      vlrProd: 1,
-      codEANTrib: '123456789',
-      unTrib: 'cm',
-      qtdTrib: 1,
-      vlrUnTrib: 1,
-      saldo: [{ value: 0, disabled: true }],
-      status: ['A'],
-    });
-
-    activatedRoute.paramMap.pipe(first()).subscribe((paramMap: ParamMap) => {
-      if (paramMap.has('id'))
-        produtoService.getById(parseInt(paramMap.get('id') || '0'))
-          .pipe(first()).subscribe({
-            next: response => this.form.patchValue(response)
-          })
-    });
-  }
-
-  protected lockEvent(isLocked: boolean): void {
-    this.isLocked = isLocked;
-    if(isLocked){
-      this.form.disable();
-    }else{
-      this.form.enable();
-      this.form.get('id')?.disable();
-      this.form.get('saldo')?.disable();
+export class ProdutoFormComponent extends FormComponent<IProduto> {
+    constructor(
+        formBuilder: FormBuilder,
+        private produtoService: ProdutoService,
+        protected override router: Router,
+        protected override messageService: MessageService,
+        protected override activatedRoute: ActivatedRoute,
+        protected override formLockService: FormLockService
+    ) {
+        super(
+            router,
+            messageService,
+            activatedRoute,
+            formLockService,
+            "Produto",
+            "/home/produtos",
+            produtoService,
+            ["id", "saldo"],
+            formBuilder.group({
+                id: { value: null, disabled: true },
+                codProduto: null,
+                descricao: [null, [Validators.required]],
+                codEAN: [
+                    null,
+                    [Validators.minLength(8), Validators.maxLength(14)],
+                ],
+                NCM: [null, [Validators.maxLength(8)]],
+                CFOP: null,
+                unCom: null,
+                qtdCom: null,
+                vlrUnCom: null,
+                vlrProd: null,
+                codEANTrib: null,
+                unTrib: null,
+                qtdTrib: null,
+                vlrUnTrib: null,
+                saldo: [{ value: 0, disabled: true }],
+                status: ["A"],
+            })
+        );
     }
-  }
 
-  protected submit(): void {
-    this.loading = true;
-    const mode = this.form.get('id')?.value ? 'update' : 'create'
+    protected override submit(submitObj?: Object | IProduto | undefined): void {
+        super.submit(this.genProdutoObj());
+    }
 
-    this.produtoService[mode](this.genProdutoObj())
-      .pipe(first()).subscribe({
-        next: (response) => {
-          this.loading = false;
-          this.messageService.add({
-            severity: 'success',
-            summary: `Produto ${mode === 'update' ? 'alterado' : 'criado'} com sucesso!`
-          })
-        },
-        error: (err) => {
-          this.loading = false;
-          this.messageService.add({
-            severity: 'error',
-            summary: err.error?.erro || 'Erro Desconhecido',
-            detail: `${err.statusText || 'Erro'} ${err.status}`
-          })
-        },
-        complete: () => this.router.navigate(['/home/produtos'])
-      })
-
-  }
-
-  private genProdutoObj() {
-    return <IProduto>{
-      // Total
-      ...this.form.getRawValue(),
-      vlrProd: this.form.get('vlrUnCom')?.value * 1,
-      // Tibutário
-      unTrib: this.form.get('unCom')?.value,
-      qtdTrib: 1,
-      vlrUnTrib: this.form.get('vlrUnCom')?.value,
-      // Comercial
-      unCom: this.form.get('unCom')?.value,
-      qtdCom: 1,
-      vlrUnCom: this.form.get('vlrUnCom')?.value,
-      codEANTrib: this.form.get('codEAN')?.value,
-    };
-  }
-
+    private genProdutoObj() {
+        alert("genProdutoObj");
+        return <IProduto>{
+            // Total
+            ...this.form.getRawValue(),
+            vlrProd: this.form.get("vlrUnCom")?.value * 1,
+            // Tibutário
+            unTrib: this.form.get("unCom")?.value,
+            qtdTrib: 1,
+            vlrUnTrib: this.form.get("vlrUnCom")?.value,
+            // Comercial
+            unCom: this.form.get("unCom")?.value,
+            qtdCom: 1,
+            vlrUnCom: this.form.get("vlrUnCom")?.value,
+            codEANTrib: this.form.get("codEAN")?.value,
+        };
+    }
 }

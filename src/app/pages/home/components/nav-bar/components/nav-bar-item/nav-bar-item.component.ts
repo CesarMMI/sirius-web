@@ -13,7 +13,7 @@ import { INavbarItem } from 'src/app/pages/home/components/nav-bar/models/Navbar
       (click)="click(item)"
       iconPos="right"
       [icon]="item.icon ? item.icon : 'bi bi-chevron-right'"
-      class="w-full p-button-text p-button-secondary"
+      class="w-full p-button-text p-button-secondary p-button-sm"
       ></button>
       `,
   styleUrls: ['./nav-bar-item.component.scss'],

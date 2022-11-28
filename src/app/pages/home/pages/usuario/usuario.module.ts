@@ -10,9 +10,10 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 
 import { UsuarioTableComponent } from "./pages/usuario-table/usuario-table.component";
 import { UsuarioRoutingModule } from "./usuario-routing.module";
+import { UsuarioFormComponent } from './pages/usuario-form/usuario-form.component';
 
 @NgModule({
-  declarations: [UsuarioTableComponent],
+  declarations: [UsuarioTableComponent, UsuarioFormComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,

@@ -1,4 +1,4 @@
-<app-form-wrapper title="Produto" (lockEvent)="lockEvent($event)">
+<app-form-wrapper title="Produto">
   <form [formGroup]="form"  (ngSubmit)="submit()" class="grid m-0">
     <!-- ID -->
     <app-input-number
@@ -66,7 +66,7 @@
         <button
         pButton
         [loading]="loading"
-        [disabled]="form.invalid"
+        [disabled]="form.invalid || form.disabled"
         class="ml-auto"
         type="submit"
         label="Salvar"

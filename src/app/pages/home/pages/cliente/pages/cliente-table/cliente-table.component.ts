@@ -1,17 +1,13 @@
-import { DatePipe } from "@angular/common";
-import { Component } from "@angular/core";
-import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
-import { ICol } from "src/app/shared/components/custom-table/models/Col";
-import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
-import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
-import { FilterService } from "src/app/shared/services/http-params/filter.service";
-import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
+import { DatePipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { TableComponent } from 'src/app/shared/components/table-component/table-component';
+import { CpfCnpjPipe } from 'src/app/shared/pipes/cpf-cnpj.pipe';
+import { FilterService } from 'src/app/shared/services/http-params/filter.service';
+import { PaginationService } from 'src/app/shared/services/http-params/pagination.service';
 
-import { ICliente } from "../../models/cliente";
-import { ClienteService } from "../../services/cliente.service";
+import { ICliente } from '../../models/cliente';
+import { ClienteService } from '../../services/cliente.service';
 
 @Component({
     templateUrl: "./cliente-table.component.html",

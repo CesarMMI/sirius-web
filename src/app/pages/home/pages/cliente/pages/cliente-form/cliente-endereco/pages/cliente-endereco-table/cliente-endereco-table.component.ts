@@ -1,21 +1,22 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, ParamMap } from "@angular/router";
 import { MessageService } from "primeng/api";
+import { first, shareReplay, switchMap } from "rxjs";
 import { TableComponent } from "src/app/shared/components/table-component/table-component";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
-
-import { IUsuario } from "../../models/usuario";
-import { UsuarioService } from "../../services/usuario.service";
+import { ClienteEnderecoService } from "../../services/cliente-endereco.service";
 
 @Component({
-    templateUrl: "./usuario-table.component.html",
+    templateUrl: "./cliente-endereco-table.component.html",
     styles: [],
 })
-export class UsuarioTableComponent extends TableComponent<IUsuario> {
+export class ClienteEnderecoTableComponent extends TableComponent<any> {
     constructor(
-        usuarioService: UsuarioService,
+        activatedRoute: ActivatedRoute,
+        protected clienteEnderecoService: ClienteEnderecoService,
         protected override filterService: FilterService,
         protected override paginationService: PaginationService,
         protected override messageService: MessageService
@@ -30,10 +31,17 @@ export class UsuarioTableComponent extends TableComponent<IUsuario> {
                 { field: "status", header: "Status", pipe: StatusPipe },
             ],
             "Usuário removido com sucesso!",
-            usuarioService,
+            clienteEnderecoService,
             filterService,
             paginationService,
             messageService
+        );
+        // Get Cliente ID and set it on service
+        clienteEnderecoService.setParentId(
+            parseInt(
+                activatedRoute.parent?.parent?.snapshot.paramMap.get("id") ||
+                    "0"
+            )
         );
     }
 }

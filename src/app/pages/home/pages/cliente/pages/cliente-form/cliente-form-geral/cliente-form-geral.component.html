@@ -1,0 +1,78 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-12 md:col-3"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Tipo -->
+        <app-input-dropdown
+            label="Tipo de Cliente"
+            class="col-12 md:col-5"
+            [options]="[
+                { label: 'Pessoa Física', value: 'F' },
+                { label: 'Pessoa Jurídica', value: 'J' }
+            ]"
+            [control]="$any(form.controls['tipoCliente'])"
+        ></app-input-dropdown>
+        <!-- Status -->
+        <app-input-dropdown
+            label="Tipo de Cliente"
+            class="col-12 md:col-4"
+            [options]="[
+                { label: 'Ativo', value: 'A' },
+                { label: 'Inativo', value: 'I' }
+            ]"
+            [control]="$any(form.controls['status'])"
+        ></app-input-dropdown>
+
+        <!-- Razão Social -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Razão Social"
+            [control]="$any(form.controls['razaoSocial'])"
+        ></app-input-text>
+        <!-- CPF/CNPJ -->
+        <app-input-cpf-cnpj
+            class="col-12 md:col-6"
+            [label]="tipoCliente === 'F' ? 'CPF' : 'CNPJ'"
+            [isCnpj]="tipoCliente != 'F'"
+            [control]="$any(form.controls['cpfCnpj'])"
+        ></app-input-cpf-cnpj>
+
+        <!-- Fantasia -->
+        <app-input-text
+            *ngIf="tipoCliente != 'F'"
+            class="col-12 md:col-4"
+            label="Fantasia"
+            [control]="$any(form.controls['fantasia'])"
+        ></app-input-text>
+        <!-- Insc. Municipal -->
+        <app-input-text
+            *ngIf="tipoCliente != 'F'"
+            class="col-12 md:col-4"
+            label="Insc. Municipal"
+            [control]="$any(form.controls['inscMunicipal'])"
+        ></app-input-text>
+        <!-- Insc. Estadual -->
+        <app-input-text
+            *ngIf="tipoCliente != 'F'"
+            class="col-12 md:col-4"
+            label="Insc. Estadual"
+            [control]="$any(form.controls['inscEstadual'])"
+        ></app-input-text>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

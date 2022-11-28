@@ -9,7 +9,7 @@ import { IPageEvent } from "../custom-table/models/PageEvent";
 import { ITableData } from "../custom-table/models/TableData";
 
 export class TableComponent<T> {
-    protected data$: Observable<ITableData<T>>;
+    protected data$!: Observable<ITableData<T>>;
     protected selectedData?: T;
 
     constructor(
@@ -20,10 +20,11 @@ export class TableComponent<T> {
         protected paginationService: PaginationService,
         protected messageService: MessageService
     ) {
-        this.data$ = this.crudService.get().pipe(
-            first(),
-            shareReplay()
-        );
+        this.get();
+    }
+
+    get() {
+        this.data$ = this.crudService.get().pipe(first(), shareReplay());
     }
 
     onSelect(event: T | undefined) {
@@ -35,6 +36,7 @@ export class TableComponent<T> {
             page: event.page + 1,
             quantityPerPage: event.rows,
         });
+        this.get();
     }
 
     onFilter(event: IFilter) {

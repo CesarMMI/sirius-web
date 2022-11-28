@@ -13,8 +13,19 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
 @Component({
     selector: "app-form-wrapper",
     template: `
-        <div class="px-2 py-2 surface-0 border-round-lg">
-            <header class="flex align-items-center mb-3">
+        <div
+            [ngClass]="{
+                'px-1 py-1': padding
+            }"
+            class="surface-0 border-round-lg"
+        >
+            <header
+                *ngIf="title != ''" 
+                [ngClass]="{
+                    'mb-3': margin,
+                    'px-1': !padding 
+                }"    
+                class="flex align-items-center">
                 <span class="text-3xl text-color font-bold">{{
                     (isEdit ? "Editar " : "Adicionar ") + title
                 }}</span>
@@ -35,7 +46,11 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
                     class="ml-auto p-button-sm p-button-secondary p-button-text p-button-rounded"
                 ></button>
             </header>
-            <div>
+            <div
+                [ngClass]="{
+                    'mt-3': title === ''
+                }"
+            >
                 <ng-content></ng-content>
             </div>
         </div>
@@ -46,6 +61,8 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
 export class FormWrapperComponent implements OnInit, OnDestroy {
     @Input() title: string = "";
 
+    @Input() margin: boolean = true;
+    @Input() padding: boolean = true;
 
     protected isEdit?: boolean;
 
@@ -76,17 +93,9 @@ export class FormWrapperComponent implements OnInit, OnDestroy {
         this.isLocked$ = formLockService.isLocked$();
     }
 
-    ngOnInit(): void {
-        if(this.isEdit){
-            this.setLock(true);
-        }else{
-            this.setLock(false);
-        }
-    }
+    ngOnInit(): void {}
 
-    ngOnDestroy(): void {
-        // this.lockSub.unsubscribe();
-    }
+    ngOnDestroy(): void {}
 
     protected setLock(isLocked: boolean) {
         this.formLockService.setLock(isLocked);

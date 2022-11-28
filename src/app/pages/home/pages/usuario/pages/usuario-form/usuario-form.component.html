@@ -1,0 +1,47 @@
+<app-form-wrapper title="Usuário">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-12 md:col-2"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Nome -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Nome"
+            [control]="$any(form.controls['nome'])"
+        ></app-input-text>
+        <!-- Sobrenome -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Sobrenome"
+            [control]="$any(form.controls['ultimoNome'])"
+        ></app-input-text>
+
+        <!-- Telefone -->
+        <app-input-phone
+            class="col-12 md:col-6"
+            label="Telefone"
+            [control]="$any(form.controls['celular'])"
+        ></app-input-phone>
+        <!-- Email -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Email"
+            [control]="$any(form.controls['email'])"
+        ></app-input-text>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>
