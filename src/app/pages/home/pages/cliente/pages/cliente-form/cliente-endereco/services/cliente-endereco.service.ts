@@ -35,10 +35,10 @@ export class ClienteEnderecoService extends CrudService<any> {
                         pageCount: "QuantidadePaginas",
                     },
                 },
-                getById: "GetClientesDetail",
-                post: "Cliente",
-                put: "Cliente",
-                delete: "Cliente",
+                getById: "GetEndereco",
+                post: "Endereco",
+                put: "Endereco",
+                delete: "Endereco",
             }
         );
     }

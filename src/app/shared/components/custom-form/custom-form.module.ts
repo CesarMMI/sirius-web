@@ -1,58 +1,68 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-
-import { InputTextModule } from "primeng/inputtext";
+import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { ButtonModule } from "primeng/button";
+import { DropdownModule } from "primeng/dropdown";
 import { InputMaskModule } from "primeng/inputmask";
+import { InputNumberModule } from "primeng/inputnumber";
+import { InputTextModule } from "primeng/inputtext";
+import { InputTextareaModule } from "primeng/inputtextarea";
 import { PasswordModule } from "primeng/password";
 
-import { CommonModule } from "@angular/common";
-import { InputTextComponent } from "./inputs/input-text/input-text.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { InputPasswordComponent } from "./inputs/input-password/input-password.component";
-import { InputPhoneComponent } from "./inputs/input-phone/input-phone.component";
 import { FormWrapperComponent } from "./form-wrapper/form-wrapper.component";
-import { ButtonModule } from "primeng/button";
-import { RouterModule } from "@angular/router";
-import { InputNumberComponent } from "./inputs/input-number/input-number.component";
-import { InputNumberModule } from "primeng/inputnumber";
-import { InputCpfCnpjComponent } from "./inputs/input-cpf-cnpj/input-cpf-cnpj.component";
-import { InputDropdownComponent } from "./inputs/input-dropdown/input-dropdown.component";
-import { DropdownModule } from "primeng/dropdown";
 import { InputCepComponent } from "./inputs/input-cep/input-cep.component";
-import { InputCurrencyComponent } from './inputs/input-currency/input-currency.component';
+import { InputCpfCnpjComponent } from "./inputs/input-cpf-cnpj/input-cpf-cnpj.component";
+import { InputCurrencyComponent } from "./inputs/input-currency/input-currency.component";
+import { InputDropdownComponent } from "./inputs/input-dropdown/input-dropdown.component";
+import { InputMaskComponent } from "./inputs/input-mask/input-mask.component";
+import { InputNumberComponent } from "./inputs/input-number/input-number.component";
+import { InputPasswordComponent } from "./inputs/input-password/input-password.component";
+import { InputPercentageComponent } from "./inputs/input-percentage/input-percentage.component";
+import { InputPhoneComponent } from "./inputs/input-phone/input-phone.component";
+import { InputTextAreaComponent } from "./inputs/input-text-area/input-text-area.component";
+import { InputTextComponent } from "./inputs/input-text/input-text.component";
 
 @NgModule({
-  declarations: [
-    InputTextComponent,
-    InputPasswordComponent,
-    InputPhoneComponent,
-    FormWrapperComponent,
-    InputNumberComponent,
-    InputCpfCnpjComponent,
-    InputDropdownComponent,
-    InputCepComponent,
-    InputCurrencyComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-    InputMaskModule,
-    InputNumberModule,
-    DropdownModule,
-    ReactiveFormsModule,
-  ],
-  exports: [
-    InputTextComponent,
-    InputPasswordComponent,
-    InputPhoneComponent,
-    FormWrapperComponent,
-    InputNumberComponent,
-    InputCpfCnpjComponent,
-    InputDropdownComponent,
-    InputCepComponent,
-    InputCurrencyComponent,
-  ],
+    declarations: [
+        InputTextComponent,
+        InputPasswordComponent,
+        InputPhoneComponent,
+        FormWrapperComponent,
+        InputNumberComponent,
+        InputCpfCnpjComponent,
+        InputDropdownComponent,
+        InputCepComponent,
+        InputCurrencyComponent,
+        InputMaskComponent,
+        InputTextAreaComponent,
+        InputPercentageComponent,
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        ButtonModule,
+        InputTextModule,
+        PasswordModule,
+        InputMaskModule,
+        InputNumberModule,
+        DropdownModule,
+        InputTextareaModule,
+        ReactiveFormsModule,
+    ],
+    exports: [
+        InputTextComponent,
+        InputPasswordComponent,
+        InputPhoneComponent,
+        FormWrapperComponent,
+        InputNumberComponent,
+        InputCpfCnpjComponent,
+        InputDropdownComponent,
+        InputCepComponent,
+        InputCurrencyComponent,
+        InputMaskComponent,
+        InputTextAreaComponent,
+        InputPercentageComponent,
+    ],
 })
-export class CustomFormModule { }
+export class CustomFormModule {}

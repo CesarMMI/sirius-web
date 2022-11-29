@@ -1,0 +1,147 @@
+<app-form-wrapper title="Fornecedor">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-12 md:col-6"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Status -->
+        <app-input-dropdown
+            class="col-12 md:col-6"
+            label="Status"
+            [control]="$any(form.controls['status'])"
+            [options]="[
+                { label: 'Ativo', value: 'A' },
+                { label: 'Inativo', value: 'I' }
+            ]"
+        ></app-input-dropdown>
+
+        <!-- Razão Social -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Razão Social"
+            [control]="$any(form.controls['razaoSocial'])"
+        ></app-input-text>
+        <!-- Fantasia -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Fantasia"
+            [control]="$any(form.controls['fantasia'])"
+        ></app-input-text>
+
+        <!-- Tipo do Fornecedor -->
+        <app-input-dropdown
+            class="col-12 md:col-3"
+            label="Tipo do Fornecedor"
+            [control]="tipoFornecedor"
+            [options]="[
+                { label: 'Pessoa Física', value: 'F' },
+                { label: 'Pessoa Jurídica', value: 'J' }
+            ]"
+        ></app-input-dropdown>
+        <!-- CPF/CNPJ -->
+        <app-input-cpf-cnpj
+            class="col-12"
+            [ngClass]="{
+                'md:col-9': tipoFornecedor.value === 'F',
+                'md:col-5': tipoFornecedor.value === 'J'
+            }"
+            [label]="tipoFornecedor.value === 'F' ? 'CPF' : 'CNPJ'"
+            [isCnpj]="tipoFornecedor.value != 'F'"
+            [control]="$any(form.controls['cpfCnpj'])"
+        ></app-input-cpf-cnpj>
+        <!-- Inscrição Estadual -->
+        <app-input-mask
+            *ngIf="tipoFornecedor.value === 'J'"
+            class="col-12 md:col-4"
+            label="Inscrição Estadual"
+            mask="999.999.999.999"
+            [control]="$any(form.controls['inscEstadual'])"
+        ></app-input-mask>
+
+        <!-- Telefone -->
+        <app-input-phone
+            class="col-12 md:col-4"
+            label="Telefone"
+            [isLandline]="true"
+            [control]="$any(form.controls['telefone'])"
+        ></app-input-phone>
+        <!-- Celular -->
+        <app-input-phone
+            class="col-12 md:col-4"
+            label="Celular"
+            [isLandline]="false"
+            [control]="$any(form.controls['celular'])"
+        ></app-input-phone>
+        <!-- Email -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Email"
+            [control]="$any(form.controls['email'])"
+        ></app-input-text>
+
+        <!-- CEP -->
+        <app-input-cep
+            class="col-12 md:col-3"
+            label="CEP"
+            [control]="$any(form.controls['cep'])"
+        ></app-input-cep>
+        <!-- Logradouro -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Logradouro"
+            [control]="$any(form.controls['logradouro'])"
+        ></app-input-text>
+        <!-- Número -->
+        <app-input-number
+            class="col-12 md:col-2"
+            label="Número"
+            [control]="$any(form.controls['numero'])"
+        ></app-input-number>
+        <!-- Complemento -->
+        <app-input-text
+            class="col-12 md:col-3"
+            label="Complemento"
+            [control]="$any(form.controls['complemento'])"
+        ></app-input-text>
+
+        <!-- Bairro -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Bairro"
+            [control]="$any(form.controls['bairro'])"
+        ></app-input-text>
+        <!-- Cidade -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Cidade"
+            [control]="$any(form.controls['cidade'])"
+        ></app-input-text>
+        <!-- UF -->
+        <app-input-text
+            class="col-12 md:col-2"
+            label="UF"
+            [control]="$any(form.controls['uf'])"
+        ></app-input-text>
+
+        <!-- Observações -->
+        <app-input-text-area
+            class="col-12"
+            label="Observações"
+            [control]="$any(form.controls['observacoes'])"
+        ></app-input-text-area>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

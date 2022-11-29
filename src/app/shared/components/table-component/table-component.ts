@@ -55,6 +55,9 @@ export class TableComponent<T> {
                     });
                     this.filterService.clearFilter();
                 },
+                complete: () => {
+                    this.get();
+                },
             });
     }
 }

@@ -1,0 +1,203 @@
+<app-form-wrapper title="Vendedor">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-12 md:col-6"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Status -->
+        <app-input-dropdown
+            class="col-12 md:col-6"
+            label="Status"
+            [control]="$any(form.controls['status'])"
+            [options]="[
+                { label: 'Ativo', value: 'A' },
+                { label: 'Inativo', value: 'I' }
+            ]"
+        ></app-input-dropdown>
+
+        <!-- Nome -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Nome"
+            [control]="$any(form.controls['nome'])"
+        ></app-input-text>
+        <!-- Apelido -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Apelido"
+            [control]="$any(form.controls['apelido'])"
+        ></app-input-text>
+
+        <!-- CPF -->
+        <app-input-cpf-cnpj
+            class="col-12 md:col-3"
+            label="CPF"
+            [isCnpj]="false"
+            [control]="$any(form.controls['cpf'])"
+        ></app-input-cpf-cnpj>
+        <!-- CNPJ -->
+        <app-input-cpf-cnpj
+            class="col-12 md:col-3"
+            label="CNPJ"
+            [isCnpj]="true"
+            [control]="$any(form.controls['cnpj'])"
+        ></app-input-cpf-cnpj>
+        <!-- RG -->
+        <app-input-mask
+            class="col-12 md:col-3"
+            label="RG"
+            mask="99.999.999-9"
+            [control]="$any(form.controls['rg'])"
+        ></app-input-mask>
+        <!-- Inscrição Estadual -->
+        <app-input-mask
+            class="col-12 md:col-3"
+            label="Inscrição Estadual"
+            mask="999.999.999.999"
+            [control]="$any(form.controls['inscEstadual'])"
+        ></app-input-mask>
+
+        <!-- Telefone -->
+        <app-input-phone
+            class="col-12 md:col-4"
+            label="Telefone"
+            [isLandline]="true"
+            [control]="$any(form.controls['telefone'])"
+        ></app-input-phone>
+        <!-- Celular -->
+        <app-input-phone
+            class="col-12 md:col-4"
+            label="Celular"
+            [isLandline]="false"
+            [control]="$any(form.controls['celular'])"
+        ></app-input-phone>
+        <!-- Email -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Email"
+            [control]="$any(form.controls['email'])"
+        ></app-input-text>
+
+        <!-- CEP -->
+        <app-input-cep
+            class="col-12 md:col-3"
+            label="CEP"
+            [control]="$any(form.controls['cep'])"
+        ></app-input-cep>
+        <!-- Logradouro -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Logradouro"
+            [control]="$any(form.controls['logradouro'])"
+        ></app-input-text>
+        <!-- Número -->
+        <app-input-number
+            class="col-12 md:col-2"
+            label="Número"
+            [control]="$any(form.controls['numero'])"
+        ></app-input-number>
+        <!-- Complemento -->
+        <app-input-text
+            class="col-12 md:col-3"
+            label="Complemento"
+            [control]="$any(form.controls['complemento'])"
+        ></app-input-text>
+        
+        <!-- Bairro -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Bairro"
+            [control]="$any(form.controls['bairro'])"
+        ></app-input-text>
+        <!-- Cidade -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Cidade"
+            [control]="$any(form.controls['cidade'])"
+        ></app-input-text>
+        <!-- UF -->
+        <app-input-text
+            class="col-12 md:col-2"
+            label="UF"
+            [control]="$any(form.controls['uf'])"
+        ></app-input-text>
+
+        <!-- Departamento -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Departamento"
+            [control]="$any(form.controls['departamento'])"
+        ></app-input-text>
+        <!-- % Comissão -->
+        <app-input-percentage
+            class="col-12 md:col-3"
+            label="% Comissão"
+            [control]="$any(form.controls['porcComissao'])"
+        ></app-input-percentage>
+        <!-- % Desc. Max Permitido -->
+        <app-input-percentage
+            class="col-12 md:col-3"
+            label="% Desc. Max Permitido"
+            [control]="$any(form.controls['porcDescMax'])"
+        ></app-input-percentage>
+        
+        <!-- Nome Banco -->
+        <app-input-text
+            class="col-12 md:col-9"
+            label="Nome Banco"
+            [control]="$any(form.controls['nomeBanco'])"
+        ></app-input-text>
+        <!-- Número do Banco -->
+        <app-input-number
+            class="col-12 md:col-3"
+            label="Número do Banco"
+            [control]="$any(form.controls['numeroBanco'])"
+        ></app-input-number>
+
+        <!-- Agência -->
+        <app-input-number
+            class="col-12 md:col-4"
+            label="Agência"
+            [control]="$any(form.controls['agencia'])"
+        ></app-input-number>
+        <!-- Digito Agência -->
+        <app-input-number
+            class="col-12 md:col-2"
+            label="Digito Agência"
+            [control]="$any(form.controls['digitoAgencia'])"
+        ></app-input-number>
+        <!-- Conta -->
+        <app-input-number
+            class="col-12 md:col-4"
+            label="Conta"
+            [control]="$any(form.controls['conta'])"
+        ></app-input-number>
+        <!-- Digito Conta -->
+        <app-input-number
+            class="col-12 md:col-2"
+            label="Digito Conta"
+            [control]="$any(form.controls['digitoConta'])"
+        ></app-input-number>
+
+        <!-- Observações -->
+        <app-input-text-area
+            class="col-12"
+            label="Observações"
+            [control]="$any(form.controls['observacoes'])"
+        ></app-input-text-area>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

@@ -15,7 +15,7 @@ import { FormControl } from "@angular/forms";
           [unmask]="true"
           [inputId]="inputId"
           styleClass="w-full"
-          [mask]="landline ? '(99) 9999-9999' : '(99) 99999-9999'"
+          [mask]="isLandline ? '(99) 9999-9999' : '(99) 99999-9999'"
           [formControl]="control"
         ></p-inputMask>
         <label [for]="inputId">{{ label }}</label>
@@ -29,7 +29,7 @@ export class InputPhoneComponent {
   @Input() label: string = "";
   @Input() control!: FormControl;
 
-  @Input() landline: boolean = false;
+  @Input() isLandline: boolean = false;
 
   protected inputId: string;
 

@@ -53,7 +53,7 @@ export class ProdutoFormComponent extends FormComponent<IProduto> {
         );
     }
 
-    protected override submit(submitObj?: Object | IProduto | undefined): void {
+    override submit(submitObj?: Object | IProduto | undefined): void {
         super.submit(this.genProdutoObj());
     }
 

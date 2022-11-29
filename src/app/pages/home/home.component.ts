@@ -10,7 +10,7 @@ import {
   selector: "app-home",
   template: `
     <ng-container *ngIf="responsive$ | async as responsive">
-      <div class="w-screen h-screen flex flex-column">
+      <div class="w-full h-screen flex flex-column">
         <div
           [ngClass]="{
             'flex-column-reverse gap-2': responsive.width < 768,

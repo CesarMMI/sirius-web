@@ -26,7 +26,7 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
                     'px-1': !padding 
                 }"    
                 class="flex align-items-center">
-                <span class="text-3xl text-color font-bold">{{
+                <span class="text-2xl text-color font-bold">{{
                     (isEdit ? "Editar " : "Adicionar ") + title
                 }}</span>
                 <button

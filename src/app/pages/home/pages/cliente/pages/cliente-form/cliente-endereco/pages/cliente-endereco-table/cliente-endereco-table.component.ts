@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { first, shareReplay, switchMap } from "rxjs";
 import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { CepPipe } from "src/app/shared/pipes/cep.pipe";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
@@ -24,13 +25,15 @@ export class ClienteEnderecoTableComponent extends TableComponent<any> {
         super(
             [
                 { field: "id", header: "ID" },
-                { field: "nome", header: "Nome" },
-                { field: "email", header: "Email" },
-                { field: "celular", header: "Celular", pipe: CpfCnpjPipe },
-                { field: "grupoNome", header: "Grupo" },
-                { field: "status", header: "Status", pipe: StatusPipe },
+                { field: "logradouro", header: "Rua" },
+                { field: "numero", header: "Número" },
+                { field: "complemento", header: "Complemento" },
+                { field: "bairro", header: "Bairro" },
+                { field: "cep", header: "CEP", pipe: CepPipe },
+                { field: "cidade", header: "Cidade" },
+                { field: "uf", header: "UF" },
             ],
-            "Usuário removido com sucesso!",
+            "Endereço removido com sucesso!",
             clienteEnderecoService,
             filterService,
             paginationService,

@@ -3,9 +3,12 @@ import { MessageService } from "primeng/api";
 import {
     catchError,
     combineLatest,
+    delay,
+    first,
     map,
     Observable,
     switchMap,
+    tap,
     throwError,
 } from "rxjs";
 
@@ -78,7 +81,7 @@ export class CrudService<T> {
                         { params: this.genParams(pagination, filter) }
                     )
                     .pipe(
-                        // delay(500),
+                        delay(500),
                         catchError((err) => {
                             this.message.add({
                                 severity: "error",

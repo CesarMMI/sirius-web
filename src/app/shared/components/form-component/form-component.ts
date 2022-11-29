@@ -75,7 +75,7 @@ export class FormComponent<T> {
         this.formLockService.setLock(true);
     }
 
-    private lockEvent(isLocked: boolean): void {
+    lockEvent(isLocked: boolean): void {
         if (isLocked) {
             this.form.disable({ emitEvent: false });
         } else {
@@ -92,7 +92,7 @@ export class FormComponent<T> {
         }
     }
 
-    protected submit(submitObj?: T | Object): void {
+    submit(submitObj?: T | Object): void {
         this.loading = true;
         const mode = this.form.get("id")?.value ? "update" : "create";
 

@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   template: `
     <ng-container *ngIf="title != ''">
       <div class="px-1 bg-white flex align-items-center border-round-top-lg surface-border border-bottom-1">
-        <span class="text-3xl text-color font-bold">{{ title }}</span>
+        <span class="text-2xl text-color font-bold">{{ title }}</span>
         <div class="ml-auto"><ng-content></ng-content></div>
       </div>
     </ng-container>
