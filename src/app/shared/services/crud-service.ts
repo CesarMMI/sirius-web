@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MessageService } from "primeng/api";
 import {
+    BehaviorSubject,
     catchError,
     combineLatest,
     delay,
@@ -11,6 +12,7 @@ import {
     tap,
     throwError,
 } from "rxjs";
+import { ICol } from "../components/custom-table/models/Col";
 
 import { ITableData } from "../components/custom-table/models/TableData";
 import { FilterService } from "./http-params/filter.service";
@@ -38,7 +40,9 @@ export class CrudService<T> {
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
-    });
+    });  
+    
+    cols: ICol[] = [];
 
     constructor(
         protected http: HttpClient,

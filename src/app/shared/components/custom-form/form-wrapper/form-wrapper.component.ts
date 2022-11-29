@@ -23,7 +23,7 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
                 *ngIf="title != ''" 
                 [ngClass]="{
                     'mb-3': margin,
-                    'px-1': !padding 
+                    'px-2': !padding 
                 }"    
                 class="flex align-items-center">
                 <span class="text-2xl text-color font-bold">{{

@@ -1,0 +1,199 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-3"
+            label="ID"
+            [control]="$any(form.controls['Id'])"
+        ></app-input-number>
+        <!-- Serie -->
+        <app-input-text
+            class="col-3"
+            label="Serie"
+            [control]="$any(form.controls['Serie'])"
+        ></app-input-text>
+        <!-- Número -->
+        <app-input-number
+            class="col-3"
+            label="Número"
+            [control]="$any(form.controls['Nnf'])"
+        ></app-input-number>
+        <!-- Chave de Acesso -->
+        <app-input-text
+            class="col-3"
+            label="Chave de Acesso"
+            [control]="$any(form.controls['Chave'])"
+        ></app-input-text>
+
+        <!-- Data de Emissão -->
+        <app-input-text
+            class="col-4"
+            label="Data de Emissão"
+            [control]="$any(form.controls['Dhemi'])"
+        ></app-input-text>
+        <!-- Status -->
+        <app-input-text
+            class="col-4"
+            label="Status"
+            [control]="$any(form.controls['Status'])"
+        ></app-input-text>
+        <!-- Destino da Operação -->
+        <app-input-dropdown
+            class="col-4"
+            label="Destino da Operação"
+            [control]="$any(form.controls['Iddest'])"
+            [options]="[
+                { label: 'Operação Interna', value: '1' },
+                { label: 'Operação Interestadual', value: '2' }
+            ]"
+        ></app-input-dropdown>
+
+        <!-- Tipo de Emissão -->
+        <app-input-dropdown
+            class="col-6"
+            label="Tipo de Emissão"
+            [control]="$any(form.controls['Tpemis'])"
+            [options]="[
+                { value: '1', label: 'Emissão normal (não em contingência)' },
+                {
+                    value: '2',
+                    label: 'Contingência FS-IA, com impressão do DANFE em Formulário de Segurança - Impressor Autônomo'
+                },
+                {
+                    value: '3',
+                    label: 'Contingência SCAN (Sistema de Contingência do Ambiente Nacional)'
+                },
+                {
+                    value: '4',
+                    label: 'Contingência EPEC (Evento Prévio da Emissão em Contingência)'
+                },
+                {
+                    value: '5',
+                    label: 'Contingência FS-DA, com impressão do DANFE em Formulário de Segurança - Documento Auxiliar'
+                },
+                {
+                    value: '6',
+                    label: 'Contingência SVC-AN (SEFAZ Virtual de Contingência do AN)'
+                },
+                {
+                    value: '7',
+                    label: 'Contingência SVC-RS (SEFAZ Virtual de Contingência do RS)'
+                },
+                {
+                    value: '8',
+                    label: 'Contingência off-line da NFC-e'
+                },
+                {
+                    value: '9',
+                    label: 'Emissão normal (não em contingência)'
+                }
+            ]"
+        ></app-input-dropdown>
+        <!-- Finalidade de Emissão -->
+        <app-input-dropdown
+            class="col-6"
+            label="Finalidade de Emissão"
+            [control]="$any(form.controls['Finnfe'])"
+            [options]="[
+                { label: 'NF-e normal', value: '1' },
+                { label: 'NF-e complementar', value: '2' },
+                { label: 'NF-e de ajuste', value: '3' },
+                { label: 'Devolução de mercadoria', value: '4' }
+            ]"
+        ></app-input-dropdown>
+
+        <!-- Tipo de Nota -->
+        <app-input-dropdown
+            class="col-6"
+            label="Tipo de Nota"
+            [control]="$any(form.controls['Tpnf'])"
+            [options]="[
+                { label: 'Entrada', value: '0' },
+                { label: 'Saída', value: '1' }
+            ]"
+        ></app-input-dropdown>
+        <!-- Natureza da Operação -->
+        <app-input-text
+            class="col-6"
+            label="Natureza da Operação"
+            [control]="$any(form.controls['Natop'])"
+        ></app-input-text>
+
+        <!-- Tipo de Atendimento -->
+        <app-input-dropdown
+            class="col-6"
+            label="Tipo de Atendimento"
+            [control]="$any(form.controls['Indpres'])"
+            [options]="[
+                {
+                    label: 'Operação presencial',
+                    value: '1'
+                },
+                {
+                    label: 'Operação não presencial, pela Internet',
+                    value: '2'
+                },
+                {
+                    label: 'Operação não presencial, Teleatendimento',
+                    value: '3'
+                },
+                {
+                    label: 'NFC-e em operação com entrega a domicílio',
+                    value: '4'
+                },
+                {
+                    label: 'Operação presencial, fora do estabelecimento',
+                    value: '5'
+                },
+                {
+                    label: 'Operação não presencial, outros',
+                    value: '9'
+                }
+            ]"
+        ></app-input-dropdown>
+        <!-- Modalidade do Frete -->
+        <app-input-dropdown
+            class="col-6"
+            label="Modalidade do Frete"
+            [control]="$any(form.controls['Modfrete'])"
+            [options]="[
+                {
+                    label: 'Contratação do Frete por conta do Remetente (CIF)',
+                    value: '0'
+                },
+                {
+                    label: 'Contratação do Frete por conta do Destinatário (FOB)',
+                    value: '1'
+                },
+                {
+                    label: 'Contratação do Frete por conta de Terceiros',
+                    value: '2'
+                },
+                {
+                    label: 'Transporte Próprio por conta do Remetente',
+                    value: '3'
+                },
+                {
+                    label: 'Transporte Próprio por conta do Destinatário',
+                    value: '4'
+                },
+                {
+                    label: 'Sem Ocorrência de Transporte',
+                    value: '9'
+                }
+            ]"
+        ></app-input-dropdown>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

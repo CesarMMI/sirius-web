@@ -1,0 +1,21 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <app-input-select-data
+            label="Teste"
+            [service]="clienteService"
+            [control]="$any(form.controls['Id'])"
+        ></app-input-select-data>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

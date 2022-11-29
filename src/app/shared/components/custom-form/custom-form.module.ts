@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { ButtonModule } from "primeng/button";
 import { DropdownModule } from "primeng/dropdown";
@@ -9,7 +9,10 @@ import { InputNumberModule } from "primeng/inputnumber";
 import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { PasswordModule } from "primeng/password";
+import { SidebarModule } from "primeng/sidebar";
 
+import { FilterPopupModule } from "../buttons/filter-popup/filter-popup.module";
+import { CustomTableModule } from "../custom-table/custom-table.module";
 import { FormWrapperComponent } from "./form-wrapper/form-wrapper.component";
 import { InputCepComponent } from "./inputs/input-cep/input-cep.component";
 import { InputCpfCnpjComponent } from "./inputs/input-cpf-cnpj/input-cpf-cnpj.component";
@@ -48,6 +51,10 @@ import { InputTextComponent } from "./inputs/input-text/input-text.component";
         InputNumberModule,
         DropdownModule,
         InputTextareaModule,
+        SidebarModule,
+        FormsModule,
+        CustomTableModule,
+        FilterPopupModule,
         ReactiveFormsModule,
     ],
     exports: [
