@@ -1,0 +1,777 @@
+<app-form-wrapper title="Item" [margin]="false">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <p-tabView class="col-12 p-0">
+            <p-tabPanel header="Geral">
+                <div class="grid">
+                    <!-- Produto ID -->
+                    <app-input-select-data
+                        class="col-12 md:col-2"
+                        (onChoose)="onChooseProduto($event)"
+                        label="Produto ID"
+                        [service]="produtoService"
+                        [control]="$any(form.controls['ProdutoId'])"
+                    ></app-input-select-data>
+                    <!-- Cód Produto -->
+                    <app-input-text
+                        class="col-12 md:col-5"
+                        label="Cód. Produto"
+                        [control]="$any(form.controls['Cprod'])"
+                    ></app-input-text>
+                    <!-- Descrição -->
+                    <app-input-text
+                        class="col-12 md:col-5"
+                        label="Descrição"
+                        [control]="$any(form.controls['Xprod'])"
+                    ></app-input-text>
+
+                    <!-- Quantidade Comercial -->
+                    <app-input-number
+                        class="col-12 md:col-4"
+                        label="Qtd. Comercial"
+                        [control]="$any(form.controls['Qcom'])"
+                    ></app-input-number>
+                    <!-- Unidade Comercial -->
+                    <app-input-text
+                        class="col-12 md:col-4"
+                        label="Unidade Comercial"
+                        [control]="$any(form.controls['Ucom'])"
+                    ></app-input-text>
+                    <!-- Valor Un. Comercial -->
+                    <app-input-currency
+                        class="col-12 md:col-4"
+                        label="Valor Un. Comercial"
+                        [control]="$any(form.controls['Vuncom'])"
+                        F
+                    ></app-input-currency>
+
+                    <!-- Quantidade Tributária -->
+                    <app-input-number
+                        class="col-12 md:col-4"
+                        label="Qtd. Tributária"
+                        [control]="$any(form.controls['Qtrib'])"
+                    ></app-input-number>
+                    <!-- Unidade Tributária -->
+                    <app-input-text
+                        class="col-12 md:col-4"
+                        label="Unidade Tributária"
+                        [control]="$any(form.controls['Utrib'])"
+                    ></app-input-text>
+                    <!-- Valor Un. Tributária -->
+                    <app-input-currency
+                        class="col-12 md:col-4"
+                        label="Valor Un. Tributário"
+                        [control]="$any(form.controls['Vuntrib'])"
+                    ></app-input-currency>
+
+                    <!-- Outras Despesas -->
+                    <app-input-currency
+                        class="col-12 md:col-3"
+                        label="Outras Despesas"
+                        [control]="$any(form.controls['VOutro'])"
+                    ></app-input-currency>
+                    <!-- Desconto -->
+                    <app-input-currency
+                        class="col-12 md:col-3"
+                        label="Desconto"
+                        [control]="$any(form.controls['VDesc'])"
+                    ></app-input-currency>
+                    <!-- Frete -->
+                    <app-input-currency
+                        class="col-12 md:col-3"
+                        label="Frete"
+                        [control]="$any(form.controls['VFrete'])"
+                    ></app-input-currency>
+                    <!-- Valor Total -->
+                    <app-input-currency
+                        class="col-12 md:col-3"
+                        label="Valor Total"
+                        [control]="$any(form.controls['Vprod'])"
+                    ></app-input-currency>
+
+                    <!-- NCM -->
+                    <app-input-text
+                        class="col-12 md:col-3"
+                        label="NCM"
+                        [control]="$any(form.controls['Ncm'])"
+                    ></app-input-text>
+                    <!-- CEST -->
+                    <app-input-text
+                        class="col-12 md:col-3"
+                        label="CEST"
+                        [control]="$any(form.controls['Cest'])"
+                    ></app-input-text>
+                    <!-- CFOP -->
+                    <app-input-text
+                        class="col-12 md:col-3"
+                        label="CFOP"
+                        [control]="$any(form.controls['Cfop'])"
+                    ></app-input-text>
+                    <!-- EAN -->
+                    <app-input-text
+                        class="col-12 md:col-3"
+                        label="EAN"
+                        [control]="$any(form.controls['Cean'])"
+                    ></app-input-text>
+
+                    <!-- Origem -->
+                    <app-input-dropdown
+                        class="col-12"
+                        label="Origem"
+                        [control]="$any(form.controls['Cean'])"
+                        [options]="[
+                            {
+                                value: '0',
+                                label: 'Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8'
+                            },
+                            {
+                                value: '1',
+                                label: 'Estrangeira - Importação direta, exceto a indicada no código 6'
+                            },
+                            {
+                                value: '2',
+                                label: 'Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7'
+                            },
+                            {
+                                value: '3',
+                                label: 'Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%'
+                            },
+                            {
+                                value: '4',
+                                label: 'Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes'
+                            },
+                            {
+                                value: '5',
+                                label: 'Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%'
+                            },
+                            {
+                                value: '6',
+                                label: 'Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural'
+                            },
+                            {
+                                value: '7',
+                                label: 'Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural'
+                            },
+                            {
+                                value: '8',
+                                label: 'Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%'
+                            }
+                        ]"
+                    ></app-input-dropdown>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="ICMS">
+                <!-- ICMS -->
+                <app-input-dropdown
+                    class="col-12"
+                    label="ICMS"
+                    [control]="$any(form.controls['Csosn'])"
+                    [options]="[
+                        {
+                            value: '101',
+                            label: '101 - Com permissão de crédito'
+                        },
+                        {
+                            value: '102',
+                            label: '102 - Sem permissão de crédito'
+                        },
+                        {
+                            value: '103',
+                            label: '103 - Isenção do ICMS para faixa de receita bruta'
+                        },
+                        {
+                            value: '201',
+                            label: '201 - Com permissão de crédito e cobrança do ICMS ST'
+                        },
+                        {
+                            value: '202',
+                            label: '202 - Sem permissão de crédito e cobrança do ICMS ST'
+                        },
+                        {
+                            value: '203',
+                            label: '203 - Isenção do ICMS para faixa de receita bruta e cobrança do ICMS ST'
+                        },
+                        {
+                            value: '300',
+                            label: '300 - Imune'
+                        },
+                        {
+                            value: '400',
+                            label: '400 - Não tributada'
+                        },
+                        {
+                            value: '500',
+                            label: '500 - ICMS ST cobrado anteriormente (substituído) ou por antecipação'
+                        },
+                        {
+                            value: '900',
+                            label: '900 - Outro'
+                        }
+                    ]"
+                ></app-input-dropdown>
+                <!-- Aproveitamento de Crédito -->
+                <div
+                    *ngIf="
+                        form.value['Csosn'] == '101' ||
+                        form.value['Csosn'] == '201'
+                    "
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12"
+                        >Aproveitamento de Crédito</small
+                    >
+                    <!-- Aliquota -->
+                    <app-input-percentage
+                        class="col-12"
+                        label="Alíquota Aplicável de Cálculo de Crédito"
+                        [control]="$any(form.controls['Pcredsn'])"
+                    ></app-input-percentage>
+                    <!-- Valor -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor Crédito do ICMS"
+                        [control]="$any(form.controls['Vcredicmssn'])"
+                    ></app-input-currency>
+                </div>
+                <!-- ICMS -->
+                <div
+                    *ngIf="form.value['Csosn'] == '900'"
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12">ICMS</small>
+                    <!-- Modalidade BC -->
+                    <app-input-dropdown
+                        class="col-12"
+                        label="Modalidade BC"
+                        [control]="$any(form.controls['Modbc'])"
+                        [options]="[
+                            {
+                                value: '0',
+                                label: 'Margem Valor Agregado (%)'
+                            },
+                            { value: '1', label: 'Pauta (Valor)' },
+                            {
+                                value: '2',
+                                label: 'Preço Tabelado Máx. (valor)'
+                            },
+                            { value: '3', label: 'Valor da operação' }
+                        ]"
+                    ></app-input-dropdown>
+                    <!-- Base ICMS -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Base ICMS"
+                        [control]="$any(form.controls['Vbc'])"
+                    ></app-input-currency>
+                    <!-- Alíquota ICMS -->
+                    <app-input-percentage
+                        class="col-12"
+                        label="Alíquota ICMS"
+                        [control]="$any(form.controls['Picms'])"
+                    ></app-input-percentage>
+                    <!-- Valor ICMS -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor ICMS"
+                        [control]="$any(form.controls['Vicms'])"
+                    ></app-input-currency>
+                </div>
+                <!-- ICMS ST -->
+                <div
+                    *ngIf="
+                        form.value['Csosn'] == '900' ||
+                        form.value['Csosn'] == '201' ||
+                        form.value['Csosn'] == '203' ||
+                        form.value['Csosn'] == '202'
+                    "
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12">ICMS ST</small>
+                    <!-- Modalidade BC ST -->
+                    <app-input-dropdown
+                        class="col-12 sm:col-6"
+                        label="Modalidade BC ST"
+                        [control]="$any(form.controls['Modbcst'])"
+                        [options]="[
+                            {
+                                value: '0',
+                                label: 'Preço tabelado ou máximo sugerido'
+                            },
+                            { value: '1', label: 'Lista Negativa (valor)' },
+                            { value: '2', label: 'Lista Positiva (valor)' },
+                            { value: '3', label: 'Lista Neutra (valor)' },
+                            { value: '4', label: 'Margem Valor Agregado (%)' },
+                            { value: '5', label: 'Pauta (valor)' },
+                            {
+                                value: '6',
+                                label: 'Valor da Operação (NT 2019.001)'
+                            }
+                        ]"
+                    ></app-input-dropdown>
+                    <!-- BC ICMS ST -->
+                    <app-input-currency
+                        class="col-12 sm:col-6"
+                        label="BC ICMS ST"
+                        [control]="$any(form.controls['Vbcst'])"
+                    ></app-input-currency>
+                    <!-- Alíquota ICMS ST -->
+                    <app-input-percentage
+                        class="col-12 sm:col-6"
+                        label="Alíquota ICMS ST"
+                        [control]="$any(form.controls['Picmsst'])"
+                    ></app-input-percentage>
+                    <!-- Valor do ICMS ST -->
+                    <app-input-currency
+                        class="col-12 sm:col-6"
+                        label="Valor do ICMS ST"
+                        [control]="$any(form.controls['Vicmsst'])"
+                    ></app-input-currency>
+                    <!-- % de Redução da BC ST -->
+                    <app-input-percentage
+                        class="col-12 sm:col-6"
+                        label="% de Redução da BC ST"
+                        [control]="$any(form.controls['pRedBCST'])"
+                    ></app-input-percentage>
+                    <!-- % Margem do Vlr. Adic. ICMS ST -->
+                    <app-input-percentage
+                        class="col-12 sm:col-6"
+                        label="% Margem do Vlr. Adic. ICMS ST"
+                        [control]="$any(form.controls['pMVAST'])"
+                    ></app-input-percentage>
+                </div>
+                <!-- ICMS Retido Anteriormente -->
+                <div
+                    *ngIf="form.value['Csosn'] == '500'"
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12"
+                        >ICMS Retido Anteriormente</small
+                    >
+                    <!-- Valor da BC do ICMS ST Retido -->
+                    <app-input-currency
+                        class="col-12 sm:col-6"
+                        label="Valor da BC do ICMS ST Retido"
+                        [control]="$any(form.controls['Vbcstret'])"
+                    ></app-input-currency>
+                    <!-- Valor do ICMS ST Retido -->
+                    <app-input-currency
+                        class="col-12 sm:col-6"
+                        label="Valor do ICMS ST Retido"
+                        [control]="$any(form.controls['Vicmsstret'])"
+                    ></app-input-currency>
+                    <!-- Alíquota suportada pelo Consumidor final -->
+                    <app-input-percentage
+                        class="col-12 sm:col-6"
+                        label="Alíquota suportada pelo Consumidor final"
+                        [control]="$any(form.controls['Pst'])"
+                    ></app-input-percentage>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="PIS">
+                <!-- Dropdown -->
+                <app-input-dropdown
+                    class="col-12"
+                    label="Cód de Tributação"
+                    [control]="$any(form.controls['CstPIS'])"
+                    [options]="[
+                        {
+                            value: '01',
+                            label: '01 - Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo));'
+                        },
+                        {
+                            value: '02',
+                            label: '02 - Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada));'
+                        },
+                        {
+                            value: '03',
+                            label: '03 - Operação Tributável (base de cálculo = quantidade vendida x alíquota por unidade de produto);'
+                        },
+                        {
+                            value: '04',
+                            label: '04 - Operação Tributável (tributação monofásica (alíquota zero));'
+                        },
+                        {
+                            value: '05',
+                            label: '05 - Operação Tributável (Substituição Tributária);'
+                        },
+                        {
+                            value: '06',
+                            label: '06 - Operação Tributável (alíquota zero);'
+                        },
+                        {
+                            value: '07',
+                            label: '07 - Operação Isenta da Contribuição;'
+                        },
+                        {
+                            value: '08',
+                            label: '08 - Operação Sem Incidência da Contribuição;'
+                        },
+                        {
+                            value: '09',
+                            label: '09 - Operação com Suspensão da Contribuição;'
+                        },
+                        {
+                            value: '49',
+                            label: '49 - Outras Operações de Saída;'
+                        },
+                        {
+                            value: '50',
+                            label: '50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno;'
+                        },
+                        {
+                            value: '51',
+                            label: '51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno;'
+                        },
+                        {
+                            value: '52',
+                            label: '52 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita de Exportação;'
+                        },
+                        {
+                            value: '53',
+                            label: '53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno;'
+                        },
+                        {
+                            value: '54',
+                            label: '54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação;'
+                        },
+                        {
+                            value: '55',
+                            label: '55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação;'
+                        },
+                        {
+                            value: '56',
+                            label: '56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação;'
+                        },
+                        {
+                            value: '60',
+                            label: '60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno;'
+                        },
+                        {
+                            value: '61',
+                            label: '61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno;'
+                        },
+                        {
+                            value: '62',
+                            label: '62 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação;'
+                        },
+                        {
+                            value: '63',
+                            label: '63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno;'
+                        },
+                        {
+                            value: '64',
+                            label: '64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação;'
+                        },
+                        {
+                            value: '65',
+                            label: '65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação;'
+                        },
+                        {
+                            value: '66',
+                            label: '66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação;'
+                        },
+                        {
+                            value: '67',
+                            label: '67 - Crédito Presumido - Outras Operações;'
+                        },
+                        {
+                            value: '70',
+                            label: '70 - Operação de Aquisição sem Direito a Crédito;'
+                        },
+                        {
+                            value: '71',
+                            label: '71 - Operação de Aquisição com Isenção;'
+                        },
+                        {
+                            value: '72',
+                            label: '72 - Operação de Aquisição com Suspensão;'
+                        },
+                        {
+                            value: '73',
+                            label: '73 - Operação de Aquisição a Alíquota Zero;'
+                        },
+                        {
+                            value: '74',
+                            label: '74 - Operação de Aquisição; sem Incidência da Contribuição;'
+                        },
+                        {
+                            value: '75',
+                            label: '75 - Operação de Aquisição por Substituição Tributária;'
+                        },
+                        {
+                            value: '98',
+                            label: '98 - Outras Operações de Entrada;'
+                        },
+                        {
+                            value: '99',
+                            label: '99 - Outras Operações'
+                        }
+                    ]"
+                ></app-input-dropdown>
+                <!-- PIS -->
+                <div
+                    *ngIf="
+                        form.value['CstPIS'] !== '03' &&
+                        form.value['CstPIS'] !== '07'
+                    "
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12">PIS</small>
+                    <!-- Valor da Base de Cálculo -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor da Base de Cálculo"
+                        [control]="$any(form.controls['VBCPIS'])"
+                    ></app-input-currency>
+                    <!-- Alíquota -->
+                    <app-input-percentage
+                        class="col-12"
+                        label="Alíquota"
+                        [control]="$any(form.controls['PPIS'])"
+                    ></app-input-percentage>
+                    <!-- Valor -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor"
+                        [control]="$any(form.controls['VPIS'])"
+                    ></app-input-currency>
+                </div>
+                <!-- PIS Tributado por Qtd. -->
+                <div
+                    *ngIf="form.value['CstPIS'] == '03'"
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12"
+                        >PIS Tributado por Qtd.</small
+                    >
+                    <!-- Valor da Base de Cálculo -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor da Base de Cálculo"
+                        [control]="$any(form.controls['QBCPISProd'])"
+                    ></app-input-currency>
+                    <!-- Alíquota -->
+                    <app-input-percentage
+                        class="col-12"
+                        label="Alíquota"
+                        [control]="$any(form.controls['VAliqPISProd'])"
+                    ></app-input-percentage>
+                    <!-- Valor -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor"
+                        [control]="$any(form.controls['VPIS'])"
+                    ></app-input-currency>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="COFINS">
+                <!-- Dropdown -->
+                <app-input-dropdown
+                    class="col-12"
+                    label="Cód de Tributação"
+                    [control]="$any(form.controls['CstCOFINS'])"
+                    [options]="[
+                        {
+                            value: '01',
+                            label: '01 - Operação Tributável (base de cálculo  -  valor da operação alíquota normal (cumulativo/não cumulativo))'
+                        },
+                        {
+                            value: '02',
+                            label: '02 - Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))'
+                        },
+                        {
+                            value: '03',
+                            label: '03 - Operação Tributável (base de cálculo = quantidade vendida x alíquota por unidade de produto)'
+                        },
+                        {
+                            value: '04',
+                            label: '04 - Operação Tributável (tributação monofásica, alíquota zero)'
+                        },
+                        {
+                            value: '05',
+                            label: '05 - Operação Tributável (Substituição Tributária)'
+                        },
+                        {
+                            value: '06',
+                            label: '06 - Operação Tributável (alíquota zero)'
+                        },
+                        {
+                            value: '07',
+                            label: '07 - Operação Isenta da Contribuição'
+                        },
+                        {
+                            value: '08',
+                            label: '08 - Operação Sem Incidência da Contribuição'
+                        },
+                        {
+                            value: '09',
+                            label: '09 - Operação com Suspensão da Contribuição'
+                        },
+                        {
+                            value: '49',
+                            label: '49 - Outras Operações de Saída'
+                        },
+                        {
+                            value: '50',
+                            label: '50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno'
+                        },
+                        {
+                            value: '51',
+                            label: '51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno'
+                        },
+                        {
+                            value: '52',
+                            label: '52 - Operação com Direito a Crédito – Vinculada Exclusivamente a Receita de Exportação'
+                        },
+                        {
+                            value: '53',
+                            label: '53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno'
+                        },
+                        {
+                            value: '54',
+                            label: '54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação'
+                        },
+                        {
+                            value: '55',
+                            label: '55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação'
+                        },
+                        {
+                            value: '56',
+                            label: '56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação'
+                        },
+                        {
+                            value: '60',
+                            label: '60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno'
+                        },
+                        {
+                            value: '61',
+                            label: '61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno'
+                        },
+                        {
+                            value: '62',
+                            label: '62 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação'
+                        },
+                        {
+                            value: '63',
+                            label: '63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno'
+                        },
+                        {
+                            value: '64',
+                            label: '64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação'
+                        },
+                        {
+                            value: '65',
+                            label: '65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação'
+                        },
+                        {
+                            value: '66',
+                            label: '66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação'
+                        },
+                        {
+                            value: '67',
+                            label: '67 - Crédito Presumido - Outras Operações'
+                        },
+                        {
+                            value: '70',
+                            label: '70 - Operação de Aquisição sem Direito a Crédito'
+                        },
+                        {
+                            value: '71',
+                            label: '71 - Operação de Aquisição com Isenção;'
+                        },
+                        {
+                            value: '72',
+                            label: '72 - Operação de Aquisição com Suspensão'
+                        },
+                        {
+                            value: '73',
+                            label: '73 - Operação de Aquisição a Alíquota Zero'
+                        },
+                        {
+                            value: '74',
+                            label: '74 - Operação de Aquisição sem Incidência da Contribuição'
+                        },
+                        {
+                            value: '75',
+                            label: '75 - Operação de Aquisição por Substituição Tributária'
+                        },
+                        {
+                            value: '98',
+                            label: '98 - Outras Operações de Entrada'
+                        },
+                        {
+                            value: '99',
+                            label: '99 - Outras Operações'
+                        }
+                    ]"
+                ></app-input-dropdown>
+                <!-- COFINS -->
+                <div
+                    *ngIf="
+                        form.value['CstCOFINS'] !== '03' &&
+                        form.value['CstCOFINS'] !== '07'
+                    "
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12">COFINS</small>
+                    <!-- Valor da Base de Cálculo -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor da Base de Cálculo"
+                        [control]="$any(form.controls['VBCCOFINS'])"
+                    ></app-input-currency>
+                    <!-- Alíquota -->
+                    <app-input-percentage
+                        class="col-12"
+                        label="Alíquota"
+                        [control]="$any(form.controls['PCOFINS'])"
+                    ></app-input-percentage>
+                    <!-- Valor -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor"
+                        [control]="$any(form.controls['VCOFINS'])"
+                    ></app-input-currency>
+                </div>
+                <!-- COFINS Tributado por Qtd. -->
+                <div
+                    *ngIf="form.value['CstCOFINS'] == '03'"
+                    class="col-12 sm:col-6 grid"
+                >
+                    <small class="font-semibold col-12"
+                        >COFINS Tributado por Qtd.</small
+                    >
+                    <!-- Valor da Base de Cálculo -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor da Base de Cálculo"
+                        [control]="$any(form.controls['QBCCOFINSProd'])"
+                    ></app-input-currency>
+                    <!-- Alíquota -->
+                    <app-input-percentage
+                        class="col-12"
+                        label="Alíquota"
+                        [control]="$any(form.controls['VAliqCOFINSProd'])"
+                    ></app-input-percentage>
+                    <!-- Valor -->
+                    <app-input-currency
+                        class="col-12"
+                        label="Valor"
+                        [control]="$any(form.controls['VCOFINS'])"
+                    ></app-input-currency>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

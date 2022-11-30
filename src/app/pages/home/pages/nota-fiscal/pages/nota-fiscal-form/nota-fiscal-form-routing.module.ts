@@ -12,12 +12,32 @@ const routes: Routes = [
         path: "",
         component: NotaFiscalFormComponent,
         children: [
-          { path: "", redirectTo: "geral", pathMatch: "full" },
-          { path: "geral", component: NotaFiscalFormGeralComponent },
-          { path: "destinatario", component: NotaFiscalFormDestinatarioComponent },
-          { path: "infos", component: NotaFiscalFormInfosComponent },
-          { path: "totalizadores", component: NotaFiscalFormTotalizadoresComponent },
-          { path: "retornows", component: NotaFiscalFormRetornowsComponent }
+            { path: "", redirectTo: "geral", pathMatch: "full" },
+            { path: "geral", component: NotaFiscalFormGeralComponent },
+            {
+                path: "destinatario",
+                component: NotaFiscalFormDestinatarioComponent,
+            },
+            { path: "infos", component: NotaFiscalFormInfosComponent },
+            {
+                path: "totalizadores",
+                component: NotaFiscalFormTotalizadoresComponent,
+            },
+            { path: "retornows", component: NotaFiscalFormRetornowsComponent },
+            {
+                path: "itens",
+                loadChildren: () =>
+                    import(
+                        "./pages/nota-fiscal-itens/nota-fiscal-itens.module"
+                    ).then((m) => m.NotaFiscalItensModule),
+            },
+            {
+                path: "pagamentos",
+                loadChildren: () =>
+                    import(
+                        "./pages/nota-fiscal-pagamentos/nota-fiscal-pagamentos.module"
+                    ).then((m) => m.NotaFiscalPagamentosModule),
+            },
         ],
     },
 ];

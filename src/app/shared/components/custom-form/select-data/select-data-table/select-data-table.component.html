@@ -1,18 +1,22 @@
-<ng-container *ngIf="data$ | async as data">
-    <p-table [columns]="data.cols" [value]="data.payload" [tableStyle]="{'min-width': '50rem'}">
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th *ngFor="let col of columns">
-                    {{col.header}}
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr>
-                <td *ngFor="let col of columns">
-                    {{rowData[col.field]}}
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</ng-container>
+<app-custom-table-wrapper
+    [headerButtons]="headerButtons"
+    title="Selecionar"
+    [pageTotal]="data?.pageCount || 0"
+    (onPagination)="onPagination($event)"
+>
+    <app-custom-table-body
+        [cols]="cols"
+        [data]="data?.payload || []"
+        (onSelection)="onSelect($event)"
+        [chooseMode]="true"
+        (onChoose)="onChoose($event)"
+    ></app-custom-table-body>
+</app-custom-table-wrapper>
+
+<ng-template #headerButtons>
+    <app-filter-popup
+        [filterOptions]="cols.slice(0, -1)"
+        [orderOptions]="cols"
+        (onFilter)="onFilter($event)"
+    ></app-filter-popup>
+</ng-template>

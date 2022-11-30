@@ -1,0 +1,68 @@
+<app-form-wrapper title="Item" [margin]="false" [showLock]="false">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            label="ID"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Pedido ID -->
+        <app-input-number
+            label="Pedido ID"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['pedidoId'])"
+        ></app-input-number>
+        <!-- Produto ID -->
+        <app-input-select-data
+            class="col-12 md:col-4"
+            label="Produto ID"
+            (onChoose)="onChooseProduto($event)"
+            [service]="produtoService"
+            [control]="$any(form.controls['produtoId'])"
+        ></app-input-select-data>
+
+        <!-- Unidade -->
+        <app-input-text
+            label="Unidade"
+            class="col-12 md:col-3"
+            [control]="$any(form.controls['unidade'])"
+        ></app-input-text>
+        <!-- Valor Unitario -->
+        <app-input-currency
+            label="Valor Unitario"
+            class="col-12 md:col-3"
+            [control]="$any(form.controls['valorUnitario'])"
+        ></app-input-currency>
+        <!-- Quantidade -->
+        <app-input-number
+            label="Quantidade"
+            class="col-12 md:col-3"
+            [control]="$any(form.controls['quantidade'])"
+        ></app-input-number>
+        <!-- Valor Liquido -->
+        <app-input-currency
+            label="Valor Total"
+            class="col-12 md:col-3"
+            [control]="$any(form.controls['valorTotal'])"
+        ></app-input-currency>
+
+        <!-- Observações -->
+        <app-input-text-area
+            label="Observações"
+            class="col-12 md:col-12"
+            [control]="$any(form.controls['observacoes'])"
+        ></app-input-text-area>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

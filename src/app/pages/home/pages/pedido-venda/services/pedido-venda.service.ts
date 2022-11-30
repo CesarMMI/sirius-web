@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
+import { BehaviorSubject } from "rxjs";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -32,11 +33,16 @@ export class PedidoVendaService extends CrudService<IPedidoVenda> {
                         pageCount: "qtdPaginas",
                     },
                 },
-                getById: "PedidosVenda",
-                post: "PedidosVenda",
-                put: "PedidosVenda",
-                delete: "PedidosVenda",
+                getById: "PedidoVenda",
+                post: "PedidoVenda",
+                put: "PedidoVenda",
+                delete: "PedidoVenda",
             }
         );
+    }
+
+    selectedPedido = new BehaviorSubject<IPedidoVenda | null>(null);
+    getSelectedPedido() {
+        return this.selectedPedido.asObservable();
     }
 }

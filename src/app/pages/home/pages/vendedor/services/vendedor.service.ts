@@ -1,6 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
+import { ICol } from "src/app/shared/components/custom-table/models/Col";
+import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
+import { PhonePipe } from "src/app/shared/pipes/phone.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -39,4 +42,14 @@ export class VendedorService extends CrudService<IVendedor> {
             }
         );
     }
+
+    override cols: ICol[] = [
+        { header: "ID", field: "id" },
+        { header: "Nome", field: "nome" },
+        { header: "Apelido", field: "apelido" },
+        { header: "CNPJ", field: "cnpj", pipe: CpfCnpjPipe },
+        { header: "CPF", field: "cpf", pipe: CpfCnpjPipe },
+        { header: "Telefone", field: "telefone", pipe: PhonePipe },
+        { header: "Email", field: "email" },
+    ];
 }

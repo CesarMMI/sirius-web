@@ -1,0 +1,82 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- COFINS -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="COFINS"
+            [control]="$any(form.controls['Vcofins'])"
+        ></app-input-currency>
+        <!-- PIS -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="PIS"
+            [control]="$any(form.controls['Vpis'])"
+        ></app-input-currency>
+        <!-- Frete -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Frete"
+            [control]="$any(form.controls['Vfrete'])"
+        ></app-input-currency>
+        <!-- Total dos Produtos -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Total dos Produtos"
+            [control]="$any(form.controls['Vprod'])"
+        ></app-input-currency>
+        <!-- Descontos -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Descontos"
+            [control]="$any(form.controls['Vdesc'])"
+        ></app-input-currency>
+        <!-- Outros -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Outros"
+            [control]="$any(form.controls['Voutro'])"
+        ></app-input-currency>
+        <!-- Base ICMS -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Base ICMS"
+            [control]="$any(form.controls['Vbc'])"
+        ></app-input-currency>
+        <!-- Valor ICMS -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Valor ICMS"
+            [control]="$any(form.controls['Vicms'])"
+        ></app-input-currency>
+        <!-- Base ICMS ST -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Base ICMS ST"
+            [control]="$any(form.controls['Vbcst'])"
+        ></app-input-currency>
+        <!-- Valor ICMS ST -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Valor ICMS ST"
+            [control]="$any(form.controls['Vicmsst'])"
+        ></app-input-currency>
+        <!-- Valor da Nota -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Valor da Nota"
+            [control]="$any(form.controls['Vnf'])"
+        ></app-input-currency>
+
+        <!-- Button -->
+        <div class="col-12 md:col-6 md:flex md:align-items-start">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Calcular"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

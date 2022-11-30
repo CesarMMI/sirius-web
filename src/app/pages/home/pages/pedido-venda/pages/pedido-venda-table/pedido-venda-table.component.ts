@@ -14,7 +14,7 @@ import { PaginationService } from "src/app/shared/services/http-params/paginatio
 })
 export class PedidoVendaTableComponent extends TableComponent<IPedidoVenda> {
     constructor(
-        pedidoVendaService: PedidoVendaService,
+        protected pedidoVendaService: PedidoVendaService,
         protected override filterService: FilterService,
         protected override paginationService: PaginationService,
         protected override messageService: MessageService
@@ -55,5 +55,10 @@ export class PedidoVendaTableComponent extends TableComponent<IPedidoVenda> {
             paginationService,
             messageService
         );
+    }
+
+    override onSelect(event: IPedidoVenda | undefined): void {
+        this.pedidoVendaService.selectedPedido.next(event ? event : null);
+        super.onSelect(event);
     }
 }

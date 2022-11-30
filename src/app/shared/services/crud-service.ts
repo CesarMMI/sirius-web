@@ -55,7 +55,7 @@ export class CrudService<T> {
         pagination.setPagination({ page: 1 });
     }
 
-    private genParams(pagination: IPagination, filter: IFilter) {
+    protected genParams(pagination: IPagination, filter: IFilter) {
         let params: any = {
             pag: pagination.page,
             qtdItensPag: pagination.quantityPerPage,

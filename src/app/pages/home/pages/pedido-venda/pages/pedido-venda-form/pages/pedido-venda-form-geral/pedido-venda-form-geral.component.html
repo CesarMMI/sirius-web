@@ -1,0 +1,100 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            label="ID"
+            class="col-12 md:col-2"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Número -->
+        <app-input-number
+            label="Número"
+            class="col-12 md:col-2"
+            [control]="$any(form.controls['numero'])"
+        ></app-input-number>
+        <!-- Data da Criação -->
+        <app-input-date
+            label="Data da Criação"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['dataCriacao'])"
+        ></app-input-date>
+        <!-- Status -->
+        <app-input-dropdown
+            label="Status"
+            class="col-12 md:col-4"
+            [options]="[
+                { label: 'Pendente', value: 'P' },
+                { label: 'Realizado', value: 'R' }
+            ]"
+            [control]="$any(form.controls['status'])"
+        ></app-input-dropdown>
+
+        <!-- Vendedor -->
+        <app-input-select-data
+            class="col-12 md:col-2"
+            (onChoose)="onChooseVendedor($event)"
+            label="Vendedor ID"
+            [service]="vendedorService"
+            [control]="$any(form.controls['vendedorId'])"
+        ></app-input-select-data>
+        <!-- Vendedor Nome -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Nome do Vendedor"
+            [control]="$any(vendedorNome)"
+        ></app-input-text>
+
+        <!-- Cliente -->
+        <app-input-select-data
+            class="col-12 md:col-2"
+            (onChoose)="onChooseCliente($event)"
+            label="Cliente ID"
+            [service]="clienteService"
+            [control]="$any(form.controls['clienteId'])"
+        ></app-input-select-data>
+        <!-- Cliente Nome -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Nome do Cliente"
+            [control]="$any(clienteNome)"
+        ></app-input-text>
+
+        <!-- Valor Bruto -->
+        <app-input-currency
+            label="Valor Bruto"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['valorBruto'])"
+        ></app-input-currency>
+        <!-- Desconto -->
+        <app-input-currency
+            label="Desconto"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['desconto'])"
+        ></app-input-currency>
+        <!-- Valor Liquido -->
+        <app-input-currency
+            label="Valor Liquido"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['valorLiquido'])"
+        ></app-input-currency>
+
+        <!-- Observações -->
+        <app-input-text-area
+            label="Observações"
+            class="col-12 md:col-12"
+            [control]="$any(form.controls['observacoes'])"
+        ></app-input-text-area>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

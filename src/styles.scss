@@ -13,6 +13,6 @@ html {
     padding: 0;
 }
 
-.p-sidebar .p-sidebar-content {
-    padding: 0;
+.p-dialog .p-dialog-content:last-of-type {
+    border-radius: 6px;
 }

@@ -14,7 +14,7 @@ import { NotaFiscalService } from "../../services/nota-fiscal.service";
 })
 export class NotaFiscalTableComponent extends TableComponent<any> {
     constructor(
-        notaFiscalService: NotaFiscalService,
+        protected notaFiscalService: NotaFiscalService,
         protected override filterService: FilterService,
         protected override paginationService: PaginationService,
         protected override messageService: MessageService
@@ -24,9 +24,9 @@ export class NotaFiscalTableComponent extends TableComponent<any> {
                 { field: "Id", header: "ID" },
                 { field: "Serie", header: "Série" },
                 { field: "Chave", header: "Chave" },
-                { field: "Dhemi", header: "Data/Hora da Emissão" },
+                { field: "Dhemi", header: "Data/Hora da Emissão", pipe: DatePipe, pipeArgs: ["dd/MM/yy"]},
                 { field: "Destxnome", header: "Cliente" },
-                { field: "Destcnpjcpf", header: "CPF/CNPJ" },
+                { field: "Destcnpjcpf", header: "CPF/CNPJ", pipe: CpfCnpjPipe },
                 { field: "Enderdestxmun", header: "Município" },
                 { field: "Enderdestuf", header: "UF" },
                 { field: "Status", header: "Status" },
@@ -37,5 +37,10 @@ export class NotaFiscalTableComponent extends TableComponent<any> {
             paginationService,
             messageService
         );
+    }
+
+    override onSelect(event: any): void {
+        this.notaFiscalService.selectedNota = event;
+        super.onSelect(event)
     }
 }

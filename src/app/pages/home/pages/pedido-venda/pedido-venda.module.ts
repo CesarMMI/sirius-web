@@ -13,8 +13,7 @@ import { PedidoVendaRoutingModule } from './pedido-venda-routing.module';
 
 @NgModule({
   declarations: [
-    PedidoVendaTableComponent,
-    PedidoVendaFormComponent
+    PedidoVendaTableComponent
   ],
   imports: [
     CommonModule,

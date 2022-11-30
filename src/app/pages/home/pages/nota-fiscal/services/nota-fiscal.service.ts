@@ -40,8 +40,10 @@ export class NotaFiscalService extends CrudService<any> {
     }
 
     override getById(id: number): Observable<any> {
-        return super.getById(id).pipe(
-            map(response => response['NotaFiscal'])
-        )
+        return super
+            .getById(id)
+            .pipe(map((response) => response["NotaFiscal"]));
     }
+
+    public selectedNota: any;
 }

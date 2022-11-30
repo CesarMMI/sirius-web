@@ -1,0 +1,31 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        
+        <!-- Informações Adicionais de Interesse do Contribuinte -->
+        <app-input-text-area
+            class="col-12"
+            label="Informações Adicionais de Interesse do Contribuinte"
+            [control]="$any(form.controls['infCpl'])"
+        ></app-input-text-area>
+
+        <!-- Informações Adicionais de Interesse do Fisco -->
+        <app-input-text-area
+            class="col-12"
+            label="Informações Adicionais de Interesse do Fisco"
+            [control]="$any(form.controls['infAdFisco'])"
+        ></app-input-text-area>
+        
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

@@ -1,10 +1,121 @@
 <app-form-wrapper>
     <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- Cliente ID -->
         <app-input-select-data
-            label="Teste"
+            class="col-12 md:col-2"
+            (onChoose)="onChooseCliente($event)"
+            label="Cliente ID"
             [service]="clienteService"
-            [control]="$any(form.controls['Id'])"
+            [control]="$any(form.controls['ClienteId'])"
         ></app-input-select-data>
+        <!-- Destxnome -->
+        <app-input-text
+            class="col-12 md:col-5"
+            label="Razão Social"
+            [control]="$any(form.controls['Destxnome'])"
+        ></app-input-text>
+        <!-- CPF/CNPJ -->
+        <app-input-cpf-cnpj
+            class="col-12 md:col-5"
+            label="CPF/CNPJ"
+            [isCnpj]="form.controls['Destcnpjcpf'].value?.length > 11 || false"
+            [control]="$any(form.controls['Destcnpjcpf'])"
+        ></app-input-cpf-cnpj>
+
+        <!-- Celular -->
+        <app-input-phone
+            class="col-12 md:col-6"
+            label="Celular"
+            [control]="$any(form.controls['Enderemitfone'])"
+        ></app-input-phone>
+        <!-- Email -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Email"
+            [control]="$any(form.controls['Destemail'])"
+        ></app-input-text>
+
+        <!-- Indicador da IE -->
+        <app-input-dropdown
+            class="col-12 md:col-5"
+            label="Indicador da IE"
+            [control]="$any(form.controls['Indiedest'])"
+            [options]="[
+                {
+                    label: 'Contribuinte ICMS (informar a IE do destinatário)',
+                    value: '1'
+                },
+                {
+                    label: 'Contribuinte isento de Inscrição no cadastro de Contribuintes',
+                    value: '2'
+                },
+                {
+                    label: 'Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS',
+                    value: '9'
+                }
+            ]"
+        ></app-input-dropdown>
+        <!-- Inscrição Estadual -->
+        <app-input-number
+            class="col-12 md:col-4"
+            label="Inscrição Estadual"
+            [control]="$any(form.controls['Destie'])"
+        ></app-input-number>
+        <!-- Consumidor Final -->
+        <app-input-boolean
+            class="col-12 md:col-3"
+            label="Consumidor Final"
+            [control]="$any(form.controls['Indfinal'])"
+        ></app-input-boolean>
+
+        <!-- Endereço ID -->
+        <app-input-select-data
+            class="col-12 md:col-2"
+            (onChoose)="onChooseEndereco($event)"
+            label="Endereço ID"
+            [await]="true"
+            [targetId]="targetId"
+            [service]="clienteEnderecoService"
+            [control]="$any(form.controls['EnderecoId'])"
+        ></app-input-select-data>
+        <!-- Logradouro -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Logradouro"
+            [control]="$any(form.controls['Enderdestxlgr'])"
+        ></app-input-text>
+        <!-- Número -->
+        <app-input-text
+            class="col-12 md:col-3"
+            label="Número"
+            [control]="$any(form.controls['Enderdestnro'])"
+        ></app-input-text>
+        <!-- Complemento -->
+        <app-input-text
+            class="col-12 md:col-3"
+            label="Complemento"
+            [control]="$any(form.controls['Enderdestxcpl'])"
+        ></app-input-text>
+
+        <!-- Bairro -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Bairro"
+            [control]="$any(form.controls['Enderdestxbairro'])"
+        ></app-input-text>
+        <!-- Cidade -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Cidade"
+            [control]="$any(form.controls['Enderdestxmun'])"
+        ></app-input-text>
+        <!-- UF -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="UF"
+            [control]="$any(form.controls['Enderdestuf'])"
+        ></app-input-text>
+        
 
         <!-- Button -->
         <div class="col-12 flex">

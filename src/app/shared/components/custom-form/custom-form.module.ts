@@ -10,10 +10,12 @@ import { InputTextModule } from "primeng/inputtext";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { PasswordModule } from "primeng/password";
 import { SidebarModule } from "primeng/sidebar";
+import { ToggleButtonModule } from "primeng/togglebutton";
 
 import { FilterPopupModule } from "../buttons/filter-popup/filter-popup.module";
 import { CustomTableModule } from "../custom-table/custom-table.module";
 import { FormWrapperComponent } from "./form-wrapper/form-wrapper.component";
+import { InputBooleanComponent } from "./inputs/input-boolean/input-boolean.component";
 import { InputCepComponent } from "./inputs/input-cep/input-cep.component";
 import { InputCpfCnpjComponent } from "./inputs/input-cpf-cnpj/input-cpf-cnpj.component";
 import { InputCurrencyComponent } from "./inputs/input-currency/input-currency.component";
@@ -25,6 +27,8 @@ import { InputPercentageComponent } from "./inputs/input-percentage/input-percen
 import { InputPhoneComponent } from "./inputs/input-phone/input-phone.component";
 import { InputTextAreaComponent } from "./inputs/input-text-area/input-text-area.component";
 import { InputTextComponent } from "./inputs/input-text/input-text.component";
+import { InputDateComponent } from "./inputs/input-date/input-date.component";
+import { CalendarModule } from "primeng/calendar";
 
 @NgModule({
     declarations: [
@@ -40,6 +44,8 @@ import { InputTextComponent } from "./inputs/input-text/input-text.component";
         InputMaskComponent,
         InputTextAreaComponent,
         InputPercentageComponent,
+        InputBooleanComponent,
+        InputDateComponent,
     ],
     imports: [
         CommonModule,
@@ -56,6 +62,8 @@ import { InputTextComponent } from "./inputs/input-text/input-text.component";
         CustomTableModule,
         FilterPopupModule,
         ReactiveFormsModule,
+        CalendarModule,
+        ToggleButtonModule,
     ],
     exports: [
         InputTextComponent,
@@ -70,6 +78,8 @@ import { InputTextComponent } from "./inputs/input-text/input-text.component";
         InputMaskComponent,
         InputTextAreaComponent,
         InputPercentageComponent,
+        InputBooleanComponent,
+        InputDateComponent,
     ],
 })
 export class CustomFormModule {}

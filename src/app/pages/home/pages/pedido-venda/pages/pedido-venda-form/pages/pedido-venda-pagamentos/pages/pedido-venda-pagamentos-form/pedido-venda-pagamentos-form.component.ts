@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-nota-fiscal-itens',
   template: `
     <p>
-      nota-fiscal-itens works!
+      pedido-venda-pagamentos-form works!
     </p>
   `,
   styles: [
   ]
 })
-export class NotaFiscalItensComponent implements OnInit {
+export class PedidoVendaPagamentosFormComponent implements OnInit {
 
   constructor() { }
 

@@ -1,0 +1,75 @@
+<app-form-wrapper title="Pagamento">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-text
+            class="col-1"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-text>
+        <!-- Ind. Pagamento -->
+        <app-input-dropdown
+            class="col-5"
+            label="Ind. Pagamento"
+            [options]="[
+                { value: '0', label: 'Pagamento à vista' },
+                { value: '1', label: 'Pagamento a prazo' },
+                { value: '2', label: 'Outros' }
+            ]"
+            [control]="$any(form.controls['indicacao'])"
+        ></app-input-dropdown>
+        <!-- Meio de Pagamento -->
+        <app-input-dropdown
+            class="col-6"
+            label="Tipo de Pagamento"
+            [options]="[
+                { value: '01', label: 'Dinheiro' },
+                { value: '02', label: 'Cheque' },
+                { value: '03', label: 'Cartão de Crédito' },
+                { value: '04', label: 'Cartão de Débito' },
+                { value: '05', label: 'Crédito Loja' },
+                { value: '10', label: 'Vale Alimentação' },
+                { value: '11', label: 'Vale Refeição' },
+                { value: '12', label: 'Vale Presente' },
+                { value: '13', label: 'Vale Combustível' },
+                { value: '15', label: 'Boleto Bancário' },
+                { value: '16', label: 'Deposito Bancário' },
+                { value: '17', label: 'Pagamento Instantâneo (PIX)' },
+                {
+                    value: '18',
+                    label: 'Transferência Bancária, Carteira Digital'
+                },
+                {
+                    value: '19',
+                    label: 'Programa de Fidelidade, CashBack, Crédito Virtual, etc.'
+                },
+                { value: '90', label: 'Sem Pagamento' },
+                { value: '99', label: 'Outros' }
+            ]"
+            [control]="$any(form.controls['tipo'])"
+        ></app-input-dropdown>
+        <!-- Valor -->
+        <app-input-currency
+            class="col-6"
+            label="Valor"
+            [control]="$any(form.controls['valor'])"
+        ></app-input-currency>
+        <!-- Data de Vencimento -->
+        <app-input-date
+            class="col-6"
+            label="Data de Vencimento"
+            [control]="$any(form.controls['dataVencimento'])"
+        ></app-input-date>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

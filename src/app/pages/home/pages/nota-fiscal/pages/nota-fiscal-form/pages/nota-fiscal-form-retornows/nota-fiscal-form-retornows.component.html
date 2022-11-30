@@ -1,0 +1,9 @@
+<app-form-wrapper>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <app-input-text-area
+            class="col-12"
+            label="Retorno"
+            [control]="$any(form.controls['RetWS'])"
+        ></app-input-text-area>
+    </form>
+</app-form-wrapper>
