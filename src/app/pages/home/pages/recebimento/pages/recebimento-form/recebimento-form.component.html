@@ -1,0 +1,122 @@
+<app-form-wrapper title="Recebimento">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            label="ID"
+            class="col-1"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Número do Cupom -->
+        <app-input-text
+            label="Número do Cupom"
+            class="col-4"
+            [control]="$any(form.controls['numCupom'])"
+        ></app-input-text>
+        <!-- Número do Pedido -->
+        <app-input-text
+            label="Número do Pedido"
+            class="col-5"
+            [control]="$any(form.controls['numPedido'])"
+        ></app-input-text>
+        <!-- Status -->
+        <app-input-dropdown
+            label="Status"
+            class="col-2"
+            [options]="[
+                { label: 'Pendente', value: 'P' },
+                { label: 'Realizado', value: 'R' }
+            ]"
+            [control]="$any(form.controls['status'])"
+        ></app-input-dropdown>
+
+        <!-- Forma de Pagamento -->
+        <app-input-dropdown
+            label="Forma de Pagamento"
+            class="col-5"
+            [options]="[
+                { value: '01', label: 'Dinheiro' },
+                { value: '02', label: 'Cheque' },
+                { value: '03', label: 'Cartão de Crédito' },
+                { value: '04', label: 'Cartão de Débito' },
+                { value: '05', label: 'Crédito Loja' },
+                { value: '10', label: 'Vale Alimentação' },
+                { value: '11', label: 'Vale Refeição' },
+                { value: '12', label: 'Vale Presente' },
+                { value: '13', label: 'Vale Combustível' },
+                { value: '15', label: 'Boleto Bancário' },
+                { value: '16', label: 'Deposito Bancário' },
+                { value: '17', label: 'Pagamento Instantâneo (PIX)' },
+                {
+                    value: '18',
+                    label: 'Transferência Bancária, Carteira Digital'
+                },
+                {
+                    value: '19',
+                    label: 'Programa de Fidelidade, CashBack, Crédito Virtual, etc.'
+                },
+                { value: '90', label: 'Sem Pagamento' },
+                { value: '99', label: 'Outros' }
+            ]"
+            [control]="$any(form.controls['formaPagamento'])"
+        ></app-input-dropdown>
+
+        <!-- ID Cliente -->
+        <app-input-select-data
+            [service]="clienteService"
+            (onChoose)="onChoose($event)"
+            label="ID Cliente"
+            class="col-2"
+            [control]="$any(form.controls['clienteId'])"
+        ></app-input-select-data>
+        <!-- Cliente -->
+        <app-input-text
+            label="Cliente"
+            class="col-5"
+            [control]="$any(form.controls['clienteRSocial'])"
+        ></app-input-text>
+
+        <!-- Valor Bruto -->
+        <app-input-currency
+            label="Valor Bruto"
+            class="col-6"
+            [control]="$any(form.controls['valorBruto'])"
+        ></app-input-currency>
+        <!-- Valor Recebido -->
+        <app-input-currency
+            label="Valor Recebido"
+            class="col-6"
+            [control]="$any(form.controls['valorRecebido'])"
+        ></app-input-currency>
+
+        <!-- Data Criação -->
+        <app-input-date
+            label="Data da Criação"
+            class="col-4"
+            [control]="$any(form.controls['dataCriacao'])"
+        ></app-input-date>
+        <!-- Data Vencimento -->
+        <app-input-date
+            label="Data do Vencimento"
+            class="col-4"
+            [control]="$any(form.controls['dataVencimento'])"
+        ></app-input-date>
+        <!-- Data Recebido -->
+        <app-input-date
+            label="Data do Recebimento"
+            class="col-4"
+            [control]="$any(form.controls['dataRealizado'])"
+        ></app-input-date>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

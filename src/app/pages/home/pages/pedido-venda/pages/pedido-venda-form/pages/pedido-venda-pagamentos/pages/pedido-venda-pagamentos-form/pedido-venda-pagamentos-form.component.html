@@ -1,0 +1,72 @@
+<app-form-wrapper title="Pagamento">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            label="ID"
+            class="col-12 md:col-2"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        
+        <!-- Forma de Pagamento -->
+        <app-input-dropdown
+            label="Forma de Pagamento"
+            class="col-12 md:col-5"
+            [options]="[
+                { value: '01', label: 'Dinheiro' },
+                { value: '02', label: 'Cheque' },
+                { value: '03', label: 'Cartão de Crédito' },
+                { value: '04', label: 'Cartão de Débito' },
+                { value: '05', label: 'Crédito Loja' },
+                { value: '10', label: 'Vale Alimentação' },
+                { value: '11', label: 'Vale Refeição' },
+                { value: '12', label: 'Vale Presente' },
+                { value: '13', label: 'Vale Combustível' },
+                { value: '15', label: 'Boleto Bancário' },
+                { value: '16', label: 'Deposito Bancário' },
+                { value: '17', label: 'Pagamento Instantâneo (PIX)' },
+                {
+                    value: '18',
+                    label: 'Transferência Bancária, Carteira Digital'
+                },
+                {
+                    value: '19',
+                    label: 'Programa de Fidelidade, CashBack, Crédito Virtual, etc.'
+                },
+                { value: '90', label: 'Sem Pagamento' },
+                { value: '99', label: 'Outros' }
+            ]"
+            [control]="$any(form.controls['formaPagamento'])"
+        ></app-input-dropdown>
+        <!-- Valor -->
+        <app-input-currency
+            label="Valor"
+            class="col-12 md:col-5"
+            [control]="$any(form.controls['valor'])"
+        ></app-input-currency>
+
+        <!-- Data de Criação -->
+        <app-input-date
+            label="Data de Criação"
+            class="col-12 md:col-6"
+            [control]="$any(form.controls['dataCriacao'])"
+        ></app-input-date>
+        <!-- Data de Vencimento -->
+        <app-input-date
+            label="Data de Vencimento"
+            class="col-12 md:col-6"
+            [control]="$any(form.controls['dataVencimento'])"
+        ></app-input-date>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

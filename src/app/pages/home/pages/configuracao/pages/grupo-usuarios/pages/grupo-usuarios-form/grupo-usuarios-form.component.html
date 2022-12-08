@@ -1,0 +1,86 @@
+<app-form-wrapper title="Grupo">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-2"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Nome -->
+        <app-input-text
+            class="col-7"
+            label="Nome"
+            [control]="$any(form.controls['nome'])"
+        ></app-input-text>
+
+        <!-- Button -->
+        <div class="col-3">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="w-full"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+    <p-table
+        [value]="permissoes$ | async"
+        sortField="tabela"
+        sortMode="single"
+        dataKey="tabela"
+        rowGroupMode="subheader"
+        groupRowsBy="tabela"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Ação</th>
+                <th>Permite</th>
+            </tr>
+        </ng-template>
+        <ng-template
+            pTemplate="groupheader"
+            let-permissao
+            let-rowIndex="rowIndex"
+            let-expanded="expanded"
+        >
+            <tr>
+                <td colspan="5">
+                    <button
+                        type="button"
+                        pButton
+                        pRipple
+                        [pRowToggler]="permissao"
+                        class="p-button-text p-button-rounded p-button-plain mr-2"
+                        [icon]="
+                            expanded
+                                ? 'pi pi-chevron-down'
+                                : 'pi pi-chevron-right'
+                        "
+                    ></button>
+                    <span class="font-bold ml-2">{{ permissao.tabela }}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-permissao>
+            <tr>
+                <td>
+                    {{ permissao.id }}
+                </td>
+                <td>
+                    {{ permissao.desc }}
+                </td>
+                <td>
+                    <p-toggleButton
+                        onIcon="pi pi-check"
+                        offIcon="pi pi-times"
+                        [(ngModel)]="permissao.permite"
+                        (onChange)="onPermissaoClick($event, permissao)"
+                    ></p-toggleButton>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</app-form-wrapper>

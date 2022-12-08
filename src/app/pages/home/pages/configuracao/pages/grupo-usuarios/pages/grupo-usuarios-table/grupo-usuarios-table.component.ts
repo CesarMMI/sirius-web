@@ -1,29 +1,26 @@
 import { Component } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { TableComponent } from "src/app/shared/components/table-component/table-component";
-import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
-import { PhonePipe } from "src/app/shared/pipes/phone.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 
-import { IFornecedor } from "../../models/fornecedor";
-import { FornecedorService } from "../../services/fornecedor.service";
+import { GrupoUsuariosService } from "../../services/grupo-usuarios.service";
 
 @Component({
-    templateUrl: "./fornecedor-table.component.html",
+    templateUrl: "./grupo-usuarios-table.component.html",
     styles: [],
 })
-export class FornecedorTableComponent extends TableComponent<IFornecedor> {
+export class GrupoUsuariosTableComponent extends TableComponent<any> {
     constructor(
-        fornecedorService: FornecedorService,
+        grupoUsuariosService: GrupoUsuariosService,
         protected override filterService: FilterService,
         protected override paginationService: PaginationService,
         protected override messageService: MessageService
     ) {
         super(
-            fornecedorService.cols,
-            "Fornecedor removido com sucesso!",
-            fornecedorService,
+            grupoUsuariosService.cols,
+            "grupoUsuario removido com sucesso!",
+            grupoUsuariosService,
             filterService,
             paginationService,
             messageService

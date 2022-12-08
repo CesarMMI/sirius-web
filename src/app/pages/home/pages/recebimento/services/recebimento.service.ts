@@ -30,7 +30,7 @@ export class RecebimentoService extends CrudService<any> {
                         pageCount: "qtdPaginas",
                     },
                 },
-                getById: "GetVendedorDetail",
+                getById: "GetRecebimentoDetail",
                 post: "Recebimento",
                 put: "Recebimento",
                 delete: "Recebimento",
