@@ -13,8 +13,10 @@ import { IDropdownItem } from "src/app/shared/components/custom-form/models/Drop
           class="w-full"
           [style]="{ width: '100%' }"
           [options]="options"
+          appendTo="body"
           optionLabel="label"
           optionValue="value"
+          [autoDisplayFirst]="false"
         ></p-dropdown >
         <label [for]="inputId">{{ label }}</label>
       </span>

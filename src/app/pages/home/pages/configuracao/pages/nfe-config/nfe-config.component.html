@@ -1,0 +1,56 @@
+<div class="surface-0 border-round-lg px-1 py-1">
+    <header class="flex align-items-center mb-3">
+        <span class="text-2xl text-color font-bold">Configurações da NFe</span>
+        <button
+            pButton
+            *ngIf="showLock"
+            [icon]="(isLocked$ | async) ? 'bi bi-lock' : 'bi bi-unlock'"
+            (click)="switchLock()"
+            class="p-button-sm p-button-text p-button-rounded"
+            [ngClass]="{
+                'p-button-secondary': (isLocked$ | async)
+            }"
+        ></button>
+    </header>
+    <div>
+        <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+            <!-- Tipo de Ambiente -->
+            <app-input-dropdown
+                class="col-12"
+                label="Tipo de Ambiente"
+                [control]="$any(form.controls['Tpamb'])"
+                [options]="[
+                    { label: 'Produção', value: '1' },
+                    { label: 'Homologação', value: '2' }
+                ]"
+            ></app-input-dropdown>
+
+            <!-- Tipo de Impressão -->
+            <app-input-dropdown
+                class="col-12"
+                label="Tipo de Impressão"
+                [control]="$any(form.controls['Tpimp'])"
+                [options]="[
+                    { label: 'Sem Geração de DANFE', value: '0' },
+                    { label: 'DANFE Normal, Retrato', value: '1' },
+                    { label: 'DANFE Normal, Paisagem', value: '2' },
+                    { label: 'DANFE Simplificado', value: '3' },
+                    { label: 'DANFE NFC-e', value: '4' },
+                    { label: 'DANFE NFC-e em Mensagem Eletrônica', value: '5' }
+                ]"
+            ></app-input-dropdown>
+
+            <!-- Button -->
+            <div class="col-12 flex">
+                <button
+                    pButton
+                    [loading]="loading"
+                    [disabled]="form.invalid || form.disabled"
+                    class="ml-auto"
+                    type="submit"
+                    label="Salvar"
+                ></button>
+            </div>
+        </form>
+    </div>
+</div>

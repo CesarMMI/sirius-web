@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { NfeConfigRoutingModule } from './nfe-config-routing.module';
 import { NfeConfigComponent } from './nfe-config.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CustomFormModule } from 'src/app/shared/components/custom-form/custom-form.module';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { NfeConfigComponent } from './nfe-config.component';
   ],
   imports: [
     CommonModule,
-    NfeConfigRoutingModule
+    NfeConfigRoutingModule,
+    ReactiveFormsModule,
+    CustomFormModule,
+    ButtonModule
   ]
 })
 export class NfeConfigModule { }
