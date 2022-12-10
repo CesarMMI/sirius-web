@@ -14,6 +14,7 @@ import { FormControl } from "@angular/forms";
         <input
           pInputText
           type="text"
+          [type]="password ? 'password' : 'text'"
           [id]="inputId"
           class="w-full"
           [formControl]="control"
@@ -28,6 +29,8 @@ import { FormControl } from "@angular/forms";
 export class InputTextComponent {
   @Input() label: string = "";
   @Input() control!: FormControl;
+
+  @Input() password: boolean = false;
 
   protected inputId: string;
 

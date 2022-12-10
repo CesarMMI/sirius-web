@@ -1,0 +1,49 @@
+<div class="surface-0 border-round-lg px-1 py-1">
+    <header class="flex align-items-center m-2 mt-0">
+        <span class="text-2xl text-color font-bold">Certificado</span>
+        <button
+            pButton
+            *ngIf="showLock"
+            [icon]="(isLocked$ | async) ? 'bi bi-lock' : 'bi bi-unlock'"
+            (click)="switchLock()"
+            class="p-button-sm p-button-text p-button-rounded"
+            [ngClass]="{
+                'p-button-secondary': (isLocked$ | async)
+            }"
+        ></button>
+        <div class="ml-auto">
+            <p-message
+                [severity]="hasCertificado ? 'info' : 'warn'"
+                [text]="
+                    hasCertificado
+                        ? form.controls['nomeCert'].value
+                        : 'Não há certificado salvo'
+                "
+            ></p-message>
+        </div>
+    </header>
+    <div>
+        <form [formGroup]="form" class="grid m-0">
+            <!-- Upload -->
+            <p-fileUpload
+                class="col-12"
+                [customUpload]="true"
+                chooseIcon="pi pi-search"
+                chooseLabel="Procurar"
+                uploadLabel="Enviar"
+                cancelLabel="Cancelar"
+                [disabled]="!!(isLocked$ | async)"
+                (uploadHandler)="uploadHandler($event)"
+                invalidFileTypeMessageSummary="Tipo de arquivo inválido"
+            ></p-fileUpload>
+
+            <!-- Senha do Arquivo -->
+            <app-input-text
+                class="col-12"
+                [password]="true"
+                label="Senha do Arquivo"
+                [control]="$any(form.controls['senhaCert'])"
+            ></app-input-text>
+        </form>
+    </div>
+</div>

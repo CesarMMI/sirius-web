@@ -45,7 +45,7 @@
                 <button
                     pButton
                     [loading]="loading"
-                    [disabled]="form.invalid || form.disabled"
+                    [disabled]="form.invalid || (isLocked$ | async)"
                     class="ml-auto"
                     type="submit"
                     label="Salvar"
