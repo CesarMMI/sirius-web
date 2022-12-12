@@ -43,6 +43,7 @@ import { ConfirmationService } from "primeng/api";
 export class  CrudButtonsetComponent {
   @Input() targetId?: number;
   @Input() message: string = "";
+  @Input() permissaoName: string = '';
 
   @Output() onDelete = new EventEmitter();
 

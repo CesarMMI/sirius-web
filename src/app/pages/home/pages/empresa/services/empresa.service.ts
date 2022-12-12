@@ -1,11 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, first, Observable, tap } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
+import { UserInfoService } from "src/app/shared/services/user-info/user-info.service";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -13,6 +15,8 @@ import { environment } from "src/environments/environment";
 })
 export class EmpresaService extends CrudService<IEmpresa> {
     constructor(
+        protected router: Router,
+        protected userInfoService: UserInfoService,
         protected override http: HttpClient,
         protected override pagination: PaginationService,
         protected override filter: FilterService,
@@ -61,5 +65,25 @@ export class EmpresaService extends CrudService<IEmpresa> {
         return this.http.get<IEmpresa>(
             `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa/GetEmpresa`
         );
+    }
+
+    public selectEmpresa(id: number) {
+        return this.http
+            .post(
+                `http://${environment.api_host}:8083/datasnap/rest/TSMEmpresa/SelectEmpresa/${id}`,
+                {}
+            )
+            .pipe(first())
+            .subscribe({
+                next: (res: any) => {
+                    this.userInfoService.setUserInfo({
+                        paginaInicial: res["paginaInicial"],
+                        permissoes: res["permissões"],
+                        vendedorId: res["vendedorId"],
+                    });
+                    if (res["paginaInicial"])
+                        this.router.navigate([`home/${res["paginaInicial"]}`]);
+                },
+            });
     }
 }

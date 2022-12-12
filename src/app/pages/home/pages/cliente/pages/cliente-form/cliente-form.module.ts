@@ -8,6 +8,7 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { CustomFormModule } from 'src/app/shared/components/custom-form/custom-form.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { SelectDataModule } from 'src/app/shared/components/custom-form/select-data/select-data.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ButtonModule } from 'primeng/button';
     ReactiveFormsModule,
     TabMenuModule,
     CustomFormModule,
-    ButtonModule
+    ButtonModule,
+    SelectDataModule
   ]
 })
 export class ClienteFormModule { }

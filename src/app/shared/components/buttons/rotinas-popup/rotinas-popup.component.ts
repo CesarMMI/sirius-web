@@ -25,7 +25,7 @@ import { MenuItem } from "primeng/api";
         ></button>
     `,
     styles: [],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RotinasPopupComponent implements OnInit {
     @Input() items: MenuItem[] = [];

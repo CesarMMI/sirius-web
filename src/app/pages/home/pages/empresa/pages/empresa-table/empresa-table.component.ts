@@ -1,5 +1,6 @@
 import { DatePipe } from "@angular/common";
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { Observable, tap } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
@@ -46,6 +47,7 @@ export class EmpresaTableComponent extends TableComponent<IEmpresa> {
     protected onChoose(event: IEmpresa) {
         this.empresaService.chosenEmpresa$.next(event);
         this.tokensService.token = event.token;
+        this.empresaService.selectEmpresa(event.id);
     }
 
 }

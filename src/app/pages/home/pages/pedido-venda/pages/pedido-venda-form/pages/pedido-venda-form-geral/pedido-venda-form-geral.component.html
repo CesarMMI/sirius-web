@@ -31,7 +31,8 @@
 
         <!-- Vendedor -->
         <app-input-select-data
-            class="col-12 md:col-2"
+            *ngIf="!isVendedor"
+            [class]="isVendedor ? '' : 'col-12 md:col-2'"
             (onChoose)="onChooseVendedor($event)"
             label="Vendedor ID"
             [service]="vendedorService"
@@ -39,14 +40,15 @@
         ></app-input-select-data>
         <!-- Vendedor Nome -->
         <app-input-text
-            class="col-12 md:col-4"
+            *ngIf="!isVendedor"
+            [class]="isVendedor ? '' : 'col-12 md:col-4'"
             label="Nome do Vendedor"
             [control]="$any(vendedorNome)"
         ></app-input-text>
 
         <!-- Cliente -->
         <app-input-select-data
-            class="col-12 md:col-2"
+            [class]="isVendedor? 'col-12 md:col-4' : 'col-12 md:col-2'"
             (onChoose)="onChooseCliente($event)"
             label="Cliente ID"
             [service]="clienteService"
@@ -54,7 +56,7 @@
         ></app-input-select-data>
         <!-- Cliente Nome -->
         <app-input-text
-            class="col-12 md:col-4"
+            [class]="isVendedor? 'col-12 md:col-8' : 'col-12 md:col-4'"
             label="Nome do Cliente"
             [control]="$any(clienteNome)"
         ></app-input-text>

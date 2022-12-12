@@ -1,5 +1,5 @@
 import { MessageService } from "primeng/api";
-import { first, Observable, shareReplay } from "rxjs";
+import { BehaviorSubject, first, Observable, shareReplay } from "rxjs";
 import { CrudService } from "../../services/crud-service";
 import { FilterService } from "../../services/http-params/filter.service";
 import { IFilter } from "../../services/http-params/models/filter";
@@ -10,7 +10,9 @@ import { ITableData } from "../custom-table/models/TableData";
 
 export class TableComponent<T> {
     protected data$!: Observable<ITableData<T>>;
-    protected selectedData?: T;
+
+    protected selectedData: T | null = null;
+    protected selectedData$ = new BehaviorSubject<T | null>(null);
 
     constructor(
         protected cols: ICol[],
@@ -27,8 +29,9 @@ export class TableComponent<T> {
         this.data$ = this.crudService.get().pipe(first(), shareReplay());
     }
 
-    onSelect(event: T | undefined) {
+    onSelect(event: T | null) {
         this.selectedData = event;
+        this.selectedData$.next(event ? event : null);
     }
 
     onPagination(event: IPageEvent) {

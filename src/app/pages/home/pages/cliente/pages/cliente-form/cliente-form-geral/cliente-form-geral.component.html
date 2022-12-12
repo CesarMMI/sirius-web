@@ -63,6 +63,38 @@
             [control]="$any(form.controls['inscEstadual'])"
         ></app-input-text>
 
+        <!-- Vendedor -->
+        <app-input-select-data
+            *ngIf="!isVendedor"
+            [class]="isVendedor ? '' : 'col-2'"
+            (onChoose)="onChooseVendedor($event)"
+            label="Vendedor ID"
+            [service]="vendedorService"
+            [control]="$any(form.controls['vendedorId'])"
+        ></app-input-select-data>
+        <!-- Vendedor Nome -->
+        <app-input-text
+            *ngIf="!isVendedor"
+            [class]="isVendedor ? '' : 'col-4'"
+            label="Nome do Vendedor"
+            [control]="$any(form.controls['vendedorNome'])"
+        ></app-input-text>
+
+        <!-- Lista Preco -->
+        <app-input-select-data
+            [class]="isVendedor ? 'col-4' : 'col-2'"
+            (onChoose)="onChooseLista($event)"
+            label="Lista ID"
+            [service]="listaPrecosService"
+            [control]="$any(form.controls['listaPrecoId'])"
+        ></app-input-select-data>
+        <!-- Lista Preco Nome -->
+        <app-input-text
+            [class]="isVendedor ? 'col-8' : 'col-4'"
+            label="Nome da Lista de Preços"
+            [control]="$any(form.controls['listaPrecoNome'])"
+        ></app-input-text>
+
         <!-- Button -->
         <div class="col-12 flex">
             <button

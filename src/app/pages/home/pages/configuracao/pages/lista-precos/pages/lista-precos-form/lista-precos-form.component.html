@@ -25,5 +25,7 @@
             ></button>
         </div>
     </form>
+    <ng-container *ngIf="form.controls['id'].value">
+        <router-outlet></router-outlet>
+    </ng-container>
 </app-form-wrapper>
-<router-outlet></router-outlet>

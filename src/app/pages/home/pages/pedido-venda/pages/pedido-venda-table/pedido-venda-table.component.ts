@@ -57,7 +57,7 @@ export class PedidoVendaTableComponent extends TableComponent<IPedidoVenda> {
         );
     }
 
-    override onSelect(event: IPedidoVenda | undefined): void {
+    override onSelect(event: IPedidoVenda | null): void {
         this.pedidoVendaService.selectedPedido.next(event ? event : null);
         super.onSelect(event);
     }

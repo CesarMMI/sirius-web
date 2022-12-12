@@ -2,7 +2,7 @@ import { CurrencyPipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, catchError, first, Observable, tap, throwError } from "rxjs";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
@@ -67,9 +67,7 @@ export class GrupoUsuariosService extends CrudService<any> {
     override getById(id: number): Observable<any> {
         return super.getById(id).pipe(
             tap((response: any) => {
-                this.setPermissoes(
-                    response["permissoes"]
-                );
+                this.setPermissoes(response["permissoes"]);
             })
         );
     }
@@ -84,4 +82,27 @@ export class GrupoUsuariosService extends CrudService<any> {
             field: "nome",
         },
     ];
+
+    public putPerms(permsArr: { id: any; value: any }[]) {
+        return this.http
+            .put(
+                `http://${environment.api_host}:8083/datasnap/rest/TSMGruposUsuarios/Permissoes`,
+                permsArr
+            )
+            .pipe(
+                first(),
+                catchError((err) => {
+                    this.message.add({
+                        severity: "error",
+                        summary:
+                            err.error.erro ||
+                            err.error.error ||
+                            err.error ||
+                            "Erro Desconhecido. Caso persista, entre em contato.",
+                        detail: `${err.statusText || "Erro"} ${err.status}`,
+                    });
+                    return throwError(() => new Error(err));
+                })
+            );
+    }
 }

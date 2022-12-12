@@ -24,47 +24,53 @@ export class FormComponent<T> {
         protected form: FormGroup
     ) {}
 
-    ngOnInit(): void {
-        this.activatedRoute.paramMap
-            .pipe(first())
-            .subscribe((paramMap: ParamMap) => {
-                if (paramMap.has("id")) {
-                    const id = parseInt(paramMap.get("id") || "0");
-                    this.crudService
-                        .getById(id)
-                        .pipe(first())
-                        .subscribe({
-                            next: (response) =>
-                                Object.keys(this.form.controls).forEach((key) =>
-                                    this.form.controls[key].setValue(
-                                        response[key as keyof T]
-                                    )
-                                ),
-                        });
-                } else {
-                    const parentParamMap =
-                        this.activatedRoute.snapshot.parent?.paramMap;
-                    if (parentParamMap?.has("id")) {
-                        const id = parseInt(parentParamMap.get("id") || "0");
+    ngOnInit(getById: boolean = true): void {
+        if (getById)
+            this.activatedRoute.paramMap
+                .pipe(first())
+                .subscribe((paramMap: ParamMap) => {
+                    if (paramMap.has("id")) {
+                        const id = parseInt(paramMap.get("id") || "0");
                         this.crudService
                             .getById(id)
                             .pipe(first())
                             .subscribe({
-                                next: (response) => {
+                                next: (response) =>
                                     Object.keys(this.form.controls).forEach(
-                                        (key) => {
-                                            this.form.controls[key].patchValue(
+                                        (key) =>
+                                            this.form.controls[key].setValue(
                                                 response[key as keyof T]
-                                            );
-                                        }
-                                    );
-                                },
+                                            )
+                                    ),
                             });
                     } else {
-                        this.formLockService.setLock(false);
+                        const parentParamMap =
+                            this.activatedRoute.snapshot.parent?.paramMap;
+                        if (parentParamMap?.has("id")) {
+                            const id = parseInt(
+                                parentParamMap.get("id") || "0"
+                            );
+                            this.crudService
+                                .getById(id)
+                                .pipe(first())
+                                .subscribe({
+                                    next: (response) => {
+                                        Object.keys(this.form.controls).forEach(
+                                            (key) => {
+                                                this.form.controls[
+                                                    key
+                                                ].patchValue(
+                                                    response[key as keyof T]
+                                                );
+                                            }
+                                        );
+                                    },
+                                });
+                        } else {
+                            this.formLockService.setLock(false);
+                        }
                     }
-                }
-            });
+                });
         this.formLockSub = this.formLockService
             .isLocked$()
             .subscribe((isLocked: boolean) => this.lockEvent(isLocked));

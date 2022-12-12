@@ -2,12 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
-import { combineLatest, Subscription } from "rxjs";
+import { combineLatest, first, Subscription } from "rxjs";
 import { combineLatestInit } from "rxjs/internal/observable/combineLatest";
 import { ClienteService } from "src/app/pages/home/pages/cliente/services/cliente.service";
 import { VendedorService } from "src/app/pages/home/pages/vendedor/services/vendedor.service";
 import { FormComponent } from "src/app/shared/components/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
+import { UserInfoService } from "src/app/shared/services/user-info/user-info.service";
 import { PedidoVendaService } from "../../../../services/pedido-venda.service";
 
 @Component({
@@ -19,6 +20,7 @@ export class PedidoVendaFormGeralComponent extends FormComponent<any> {
         formBuilder: FormBuilder,
         public clienteService: ClienteService,
         public vendedorService: VendedorService,
+        protected userInfoService: UserInfoService,
         private pedidoVendaService: PedidoVendaService,
         protected override router: Router,
         protected override messageService: MessageService,
@@ -66,7 +68,19 @@ export class PedidoVendaFormGeralComponent extends FormComponent<any> {
                     );
             })
         );
+        //
+        userInfoService.userInfo$.pipe(first()).subscribe((userInfo) => {
+            if (userInfo!.vendedorId > 0) {
+                this.isVendedor = true;
+                this.form.get('vendedorId')?.patchValue(userInfo?.vendedorId);
+            }else{
+                this.isVendedor = false;
+
+            }
+        });
     }
+
+    protected isVendedor?: boolean;
 
     private valorSub: Subscription[] = [];
     protected vendedorNome = new FormControl("");
@@ -81,10 +95,10 @@ export class PedidoVendaFormGeralComponent extends FormComponent<any> {
     }
 
     override lockEvent(isLocked: boolean): void {
-        if(isLocked){
+        if (isLocked) {
             this.vendedorNome.disable();
             this.clienteNome.disable();
-        }else{
+        } else {
             this.vendedorNome.enable();
             this.clienteNome.enable();
         }

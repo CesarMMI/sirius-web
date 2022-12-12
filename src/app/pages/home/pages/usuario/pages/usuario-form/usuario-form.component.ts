@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { FormComponent } from "src/app/shared/components/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
+import { VendedorService } from "../../../vendedor/services/vendedor.service";
 import { IUsuario } from "../../models/usuario";
 import { UsuarioService } from "../../services/usuario.service";
 
@@ -15,6 +16,7 @@ export class UsuarioFormComponent extends FormComponent<IUsuario> {
     constructor(
         formBuilder: FormBuilder,
         private usuarioService: UsuarioService,
+        protected vendedorService: VendedorService,
         protected override router: Router,
         protected override messageService: MessageService,
         protected override activatedRoute: ActivatedRoute,
@@ -36,7 +38,12 @@ export class UsuarioFormComponent extends FormComponent<IUsuario> {
                 email: null,
                 celular: null,
                 vendedorId: null,
+                vendedorNome: null,
             })
         );
+    }
+
+    onChooseVendedor(event: any): void {
+        this.form.get("vendedorNome")!.setValue(event["nome"]);
     }
 }

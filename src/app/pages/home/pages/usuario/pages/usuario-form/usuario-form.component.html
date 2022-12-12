@@ -32,6 +32,21 @@
             [control]="$any(form.controls['email'])"
         ></app-input-text>
 
+        <!-- Vendedor ID -->
+        <app-input-select-data
+            class="col-12 md:col-3"
+            (onChoose)="onChooseVendedor($event)"
+            label="Vendedor ID"
+            [service]="vendedorService"
+            [control]="$any(form.controls['vendedorId'])"
+        ></app-input-select-data>
+        <!-- Vendedor Nome -->
+        <app-input-text
+            class="col-12 md:col-9"
+            label="Nome Vendedor"
+            [control]="$any(form.controls['vendedorNome'])"
+        ></app-input-text>
+
         <!-- Button -->
         <div class="col-12 flex">
             <button

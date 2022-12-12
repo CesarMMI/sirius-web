@@ -44,4 +44,9 @@ export class ListaPrecosFormComponent extends FormComponent<IListaPrecos> {
     console.log(event)
     console.log(permissao)
   }
+
+  override ngOnDestroy(): void {
+    this.listaPrecosService.setSelectedLista(null)
+    super.ngOnDestroy();
+  }
 }

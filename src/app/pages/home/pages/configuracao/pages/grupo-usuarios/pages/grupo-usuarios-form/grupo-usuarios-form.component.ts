@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
-import { Observable } from "rxjs";
+import { first, Observable } from "rxjs";
 import { FormComponent } from "src/app/shared/components/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 
@@ -40,10 +40,24 @@ export class GrupoUsuariosFormComponent extends FormComponent<any> {
         this.permissoes$ = grupoUsuariosService.permissoes$;
     }
 
-    protected permissoes$: Observable<any>
+    protected permissoes$: Observable<any>;
+    protected permissoesArr: { id: any; value: any }[] = [];
 
     protected onPermissaoClick(event: any, permissao: any) {
-      console.log(event)
-      console.log(permissao)
+        this.permissoesArr.push({
+            id: permissao["id"],
+            value: permissao["permite"],
+        });
+        console.log(permissao);
+    }
+
+    override submit(submitObj?: any): void {
+        super.submit();
+        if (this.form.get("id")?.value) {
+            this.grupoUsuariosService
+                .putPerms(this.permissoesArr)
+                .pipe(first())
+                .subscribe();
+        }
     }
 }

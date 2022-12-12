@@ -1,30 +1,57 @@
+<!-- Tabela -->
 <app-custom-table-wrapper
-  [headerButtons]="headerButtons"
-  title="Usuários"
-  [pageTotal]="(data$ | async)?.pageCount || 0"
-  (onPagination)="onPagination($event)"
+    [headerButtons]="headerButtons"
+    title="Usuários"
+    [pageTotal]="(data$ | async)?.pageCount || 0"
+    (onPagination)="onPagination($event)"
 >
-  <ng-container *ngIf="data$ | async as data; else loading">
-    <app-custom-table-body
-      [cols]="cols"
-      [data]="data.payload"
-      (onSelection)="onSelect($event)"
-    ></app-custom-table-body>
-  </ng-container>
-  <ng-template #loading>
-    <app-custom-table-skeleton [cols]="cols"></app-custom-table-skeleton>
-  </ng-template>
+    <ng-container *ngIf="data$ | async as data; else loading">
+        <app-custom-table-body
+            [cols]="cols"
+            [data]="data.payload"
+            (onSelection)="onSelect($event)"
+        ></app-custom-table-body>
+    </ng-container>
+    <ng-template #loading>
+        <app-custom-table-skeleton [cols]="cols"></app-custom-table-skeleton>
+    </ng-template>
 </app-custom-table-wrapper>
-
+<!-- Botões -->
 <ng-template #headerButtons>
-  <app-filter-popup
-    [filterOptions]="cols.slice(0,-1)"
-    [orderOptions]="cols"
-    (onFilter)="onFilter($event)"
-  ></app-filter-popup>
-  <app-crud-buttonset
-    (onDelete)="onDelete($event)"
-    [targetId]="selectedData?.id"
-    message="Tem certeza que deseja remover da empresa o usuário selecionado?"
-  ></app-crud-buttonset>
+    <app-rotinas-popup [items]="usuarioRotinas"></app-rotinas-popup>
+    <app-filter-popup
+        [filterOptions]="cols.slice(0, -1)"
+        [orderOptions]="cols"
+        (onFilter)="onFilter($event)"
+    ></app-filter-popup>
+    <app-crud-buttonset
+        (onDelete)="onDelete($event)"
+        [targetId]="selectedData?.id"
+        message="Tem certeza que deseja remover da empresa o usuário selecionado?"
+    ></app-crud-buttonset>
 </ng-template>
+<!-- Rotinas -->
+<!-- Adicionar -->
+<p-dialog
+    [(visible)]="displayAdicionar"
+    [modal]="true"
+    [draggable]="false"
+    header="Adicionar Usuário"
+    [style]="{ width: '33vw' }"
+>
+    <app-adicionar-usuario
+        (onSubmitSuccess)="rotinaSuccess()"
+    ></app-adicionar-usuario>
+</p-dialog>
+<!-- Mudar -->
+<p-dialog
+    [(visible)]="displayMudar"
+    [modal]="true"
+    [draggable]="false"
+    header="Mudar Grupo do Usuário"
+    [style]="{ width: '33vw' }"
+>
+    <app-mudar-grupo
+        (onSubmitSuccess)="rotinaSuccess()"
+    ></app-mudar-grupo>
+</p-dialog>

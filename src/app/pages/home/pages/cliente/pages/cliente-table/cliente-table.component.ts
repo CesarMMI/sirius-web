@@ -37,7 +37,7 @@ export class ClienteTableComponent extends TableComponent<ICliente> {
         );
     }
 
-    override onSelect(event: ICliente | undefined): void {
+    override onSelect(event: ICliente | null): void {
         this.clienteService.selectedCliente = event;
         super.onSelect(event)
     }

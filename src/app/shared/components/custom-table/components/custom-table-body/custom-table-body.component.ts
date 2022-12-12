@@ -21,10 +21,10 @@ export class CustomTableBodyComponent extends ResponsiveComponent {
   @Input() cols: ICol[] = [];
 
   protected selectedData: any;
-  @Output() onSelection = new EventEmitter<any | undefined>();
+  @Output() onSelection = new EventEmitter<any | null>();
 
   @Input() chooseMode: boolean = false;
-  @Output() onChoose = new EventEmitter<any | undefined>();
+  @Output() onChoose = new EventEmitter<any | null>();
 
   constructor(responsiveService: ResponsiveService) {
     super(responsiveService);
