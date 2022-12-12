@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-lista-precos',
   template: `
     <p>
-      lista-precos works!
+      lista-precos-regs-form works!
     </p>
   `,
   styles: [
   ]
 })
-export class ListaPrecosComponent implements OnInit {
+export class ListaPrecosRegsFormComponent implements OnInit {
 
   constructor() { }
 

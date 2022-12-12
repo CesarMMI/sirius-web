@@ -1,0 +1,29 @@
+<app-form-wrapper title="Lista de Preços">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- ID -->
+        <app-input-number
+            class="col-2"
+            label="ID"
+            [control]="$any(form.controls['id'])"
+        ></app-input-number>
+        <!-- Descrição -->
+        <app-input-text
+            class="col-7"
+            label="Descrição"
+            [control]="$any(form.controls['descricao'])"
+        ></app-input-text>
+
+        <!-- Button -->
+        <div class="col-3">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="w-full"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>
+<router-outlet></router-outlet>
