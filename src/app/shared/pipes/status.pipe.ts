@@ -15,6 +15,8 @@ export class StatusPipe implements PipeTransform {
         return 'Pendente';
       case 'R':
         return 'Realizado';
+      case 'C':
+        return 'Confirmado';
       default:
         return value;
     }

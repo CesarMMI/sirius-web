@@ -50,8 +50,10 @@ export class NavBarComponent implements OnDestroy {
         this.routerSub = router.events.subscribe(() => this.backEvent());
         // Permissoes Observable
         this.userInfoSub = userInfoService.userInfo$.subscribe((userInfo) => {
-            if (userInfo && userInfo.permissoes)
+            if (userInfo && userInfo.permissoes) {
+                console.log(userInfo.permissoes);
                 this.generateMenuItems(userInfo.permissoes);
+            }
         });
     }
     private userInfoSub: Subscription;
@@ -147,7 +149,9 @@ export class NavBarComponent implements OnDestroy {
                 ],
             },
             {
-                visible: permissoes.notasFiscais.read || permissoes.pedidosVenda.read,
+                visible:
+                    permissoes.notasFiscais.read ||
+                    permissoes.pedidosVenda.read,
                 label: "Vendas",
                 children: [
                     {

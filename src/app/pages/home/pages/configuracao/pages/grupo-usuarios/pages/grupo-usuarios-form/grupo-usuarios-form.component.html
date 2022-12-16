@@ -2,19 +2,37 @@
     <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
         <!-- ID -->
         <app-input-number
-            class="col-2"
+            class="col-1"
             label="ID"
             [control]="$any(form.controls['id'])"
         ></app-input-number>
         <!-- Nome -->
         <app-input-text
-            class="col-7"
+            class="col-5"
             label="Nome"
             [control]="$any(form.controls['nome'])"
         ></app-input-text>
+        <!-- Página Inicial -->
+        <app-input-dropdown
+            label="Página Inicial"
+            class="col-12 md:col-4"
+            [control]="$any(form.controls['paginaInicial'])"
+            [options]="[
+                { value: 'usuarios', label: 'Usuários' },
+                { value: 'clientes', label: 'Clientes' },
+                { value: 'produtos', label: 'Produtos' },
+                { value: 'vendedores', label: 'Vendedores' },
+                { value: 'fornecedores', label: 'Fornecedores' },
+                { value: 'pedidos-compra', label: 'Pedidos de Compra' },
+                { value: 'notas-fiscais', label: 'Notas Fiscais' },
+                { value: 'pedidos-venda', label: 'Pedidos de Venda' },
+                { value: 'recebimentos', label: 'A Receber' },
+                { value: 'pagamentos', label: 'A Pagar' }
+            ]"
+        ></app-input-dropdown>
 
         <!-- Button -->
-        <div class="col-3">
+        <div class="col-2">
             <button
                 pButton
                 [loading]="loading"

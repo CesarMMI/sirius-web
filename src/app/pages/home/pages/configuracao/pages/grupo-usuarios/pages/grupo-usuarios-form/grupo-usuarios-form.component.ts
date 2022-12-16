@@ -33,6 +33,7 @@ export class GrupoUsuariosFormComponent extends FormComponent<any> {
             formBuilder.group({
                 id: { value: null, disabled: true },
                 nome: null,
+                paginaInicial: 'notas-fiscais',
                 id_empresa: null,
                 permissoes: [],
             })

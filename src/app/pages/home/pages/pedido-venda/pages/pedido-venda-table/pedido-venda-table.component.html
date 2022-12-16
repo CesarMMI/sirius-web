@@ -17,6 +17,9 @@
 </app-custom-table-wrapper>
 
 <ng-template #headerButtons>
+  <app-rotinas-popup
+    [items]="rotinas"
+  ></app-rotinas-popup>
   <app-filter-popup
     [filterOptions]="cols.slice(0, -1)"
     [orderOptions]="cols"
