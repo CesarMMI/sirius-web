@@ -10,6 +10,7 @@ import { FilterPopupOrderComponent } from "./components/filter-popup-order/filte
 import { DropdownModule } from "primeng/dropdown";
 import { InputTextModule } from "primeng/inputtext";
 import { FormsModule } from "@angular/forms";
+import { FilterAdvancedModule } from './filter-advanced/filter-advanced.module';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { FormsModule } from "@angular/forms";
         DropdownModule,
         InputTextModule,
         ButtonModule,
+        FilterAdvancedModule,
     ],
     exports: [FilterPopupComponent],
 })

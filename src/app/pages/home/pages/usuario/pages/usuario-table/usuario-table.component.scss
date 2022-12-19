@@ -1,3 +1,9 @@
-:host ::ng-deep .p-dialog .p-dialog-content:last-of-type {
-    border-radius: 0 0 6px 6px;
+:host ::ng-deep .p-dialog {
+    .p-dialog-content {
+        overflow-y: initial;
+    }
+
+    .p-dialog-content:last-of-type {
+        border-radius: 0 0 6px 6px;
+    }
 }

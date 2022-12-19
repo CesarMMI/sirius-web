@@ -10,9 +10,10 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 import { EmpresaRoutingModule } from "./empresa-routing.module";
 import { EmpresaFormComponent } from "./pages/empresa-form/empresa-form.component";
 import { EmpresaTableComponent } from "./pages/empresa-table/empresa-table.component";
+import { EmpresaAdvancedFilterComponent } from './pages/empresa-advanced-filter/empresa-advanced-filter.component';
 
 @NgModule({
-    declarations: [EmpresaFormComponent, EmpresaTableComponent],
+    declarations: [EmpresaFormComponent, EmpresaTableComponent, EmpresaAdvancedFilterComponent],
     imports: [
         CommonModule,
         EmpresaRoutingModule,

@@ -1,13 +1,8 @@
-import { DatePipe } from "@angular/common";
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, Type } from "@angular/core";
 import { MessageService } from "primeng/api";
-import { Observable, tap } from "rxjs";
 import { IEmpresa } from "src/app/pages/home/pages/empresa/models/empresa";
 import { EmpresaService } from "src/app/pages/home/pages/empresa/services/empresa.service";
-import { ICol } from "src/app/shared/components/custom-table/models/Col";
-import { IPageEvent } from "src/app/shared/components/custom-table/models/PageEvent";
-import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
+import { AdvancedFilterForm } from "src/app/shared/components/advanced-filter-form/advanced-filter-form";
 import { TableComponent } from "src/app/shared/components/table-component/table-component";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
@@ -15,11 +10,15 @@ import { FilterService } from "src/app/shared/services/http-params/filter.servic
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 import { TokensService } from "src/app/shared/services/tokens.service";
 
+import { EmpresaAdvancedFilterComponent } from "../empresa-advanced-filter/empresa-advanced-filter.component";
+
 @Component({
     templateUrl: "./empresa-table.component.html",
-    styles: [],
 })
 export class EmpresaTableComponent extends TableComponent<IEmpresa> {
+    empresaAdvancedFilterComponent: Type<AdvancedFilterForm> =
+        EmpresaAdvancedFilterComponent;
+
     constructor(
         protected empresaService: EmpresaService,
         protected tokensService: TokensService,
@@ -49,5 +48,4 @@ export class EmpresaTableComponent extends TableComponent<IEmpresa> {
         this.tokensService.token = event.token;
         this.empresaService.selectEmpresa(event.id);
     }
-
 }
