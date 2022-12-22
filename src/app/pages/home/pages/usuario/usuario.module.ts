@@ -15,6 +15,7 @@ import { AdicionarUsuarioComponent } from "./pages/usuario-table/rotinas/adicion
 import { UsuarioTableComponent } from "./pages/usuario-table/usuario-table.component";
 import { UsuarioRoutingModule } from "./usuario-routing.module";
 import { MudarGrupoComponent } from './pages/usuario-table/rotinas/mudar-grupo/mudar-grupo.component';
+import { UsuarioAdvancedFilterComponent } from './pages/usuario-advanced-filter/usuario-advanced-filter.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { MudarGrupoComponent } from './pages/usuario-table/rotinas/mudar-grupo/m
         UsuarioFormComponent,
         AdicionarUsuarioComponent,
         MudarGrupoComponent,
+        UsuarioAdvancedFilterComponent,
     ],
     imports: [
         CommonModule,

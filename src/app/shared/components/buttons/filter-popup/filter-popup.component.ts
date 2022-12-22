@@ -8,11 +8,10 @@ import {
     ViewChild,
 } from "@angular/core";
 import { OverlayPanel } from "primeng/overlaypanel";
-import { EmpresaAdvancedFilterComponent } from "src/app/pages/home/pages/empresa/pages/empresa-advanced-filter/empresa-advanced-filter.component";
-import { IFilter } from "src/app/shared/services/http-params/models/filter";
-import { AdvancedFilterForm } from "../../advanced-filter-form/advanced-filter-form";
 
 import { ICol } from "../../custom-table/models/Col";
+import { AdvancedFilterForm } from "../../models/advanced-filter-form/advanced-filter-form";
+import { FilterAdvancedService } from "./filter-advanced/services/filter-advanced.service";
 
 @Component({
     selector: "app-filter-popup",
@@ -36,13 +35,20 @@ import { ICol } from "../../custom-table/models/Col";
                             class="p-button-text p-button-sm p-button-rounded align-self-end"
                         ></button>
                     </div>
-                    <app-filter-advanced
-                        class="mt-1" 
-                        [currTagert]="advancedFilterForm"
-                    ></app-filter-advanced>
+                    <span
+                        class="mt-3 text-primary-500 text-sm select-none cursor-pointer"
+                        (click)="displayAdvanced = true; filtroOp.hide()"
+                        >Filtros avançados</span
+                    >
                 </div>
             </ng-template>
         </p-overlayPanel>
+
+        <app-filter-advanced
+            [(display)]="displayAdvanced"
+            (onFilter)="displayAdvanced = false; click()"
+            [currTagert]="advancedFilterForm"
+        ></app-filter-advanced>
 
         <button
             pButton
@@ -57,18 +63,19 @@ import { ICol } from "../../custom-table/models/Col";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterPopupComponent {
-    @ViewChild("filtroOp", { static: true }) filtroOp!: OverlayPanel;
+    constructor(protected filterAdvancedService: FilterAdvancedService) {}
 
-    @Output() onFilter = new EventEmitter<IFilter>();
+    @ViewChild("filtroOp", { static: true }) filtroOp!: OverlayPanel;
 
     @Input() orderOptions: ICol[] = [];
     @Input() filterOptions: ICol[] = [];
-
-    @Input() advancedFilterForm!: Type<AdvancedFilterForm>;
+    @Output() onFilter = new EventEmitter<any>();
 
     protected isFiltered: boolean = false;
 
-    constructor() {}
+    // Advanced Filters
+    @Input() advancedFilterForm!: Type<AdvancedFilterForm>;
+    protected displayAdvanced: boolean = false;
 
     protected filterObj = {
         order: {
@@ -86,9 +93,14 @@ export class FilterPopupComponent {
         this.onFilter.emit({ order: { desc: false, orderBy: "id" } });
     }
 
-    protected click(): void {
+    protected click(advanced: boolean = false): void {
         this.filtroOp.hide();
         this.isFiltered = true;
-        this.onFilter.emit(this.filterObj);
+
+        if (advanced) {
+            this.onFilter.emit(this.filterObj);
+        } else {
+            this.onFilter.emit(this.filterAdvancedService.getFiltersValue());
+        }
     }
 }

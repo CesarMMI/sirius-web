@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { EMPTY, first, iif, Subscription, switchMap } from "rxjs";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { EnderecoService } from "src/app/shared/services/endereco.service";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
+
 import { ClienteService } from "../../../../../services/cliente.service";
 import { ClienteEnderecoService } from "../../services/cliente-endereco.service";
 
@@ -70,12 +71,12 @@ export class ClienteEnderecoFormComponent extends FormComponent<any> {
             )
             .subscribe((response: any) =>
                 this.form.patchValue({
-                    logradouro: response['logradouro'],
-                    bairro: response['bairro'],
-                    codMun: response['ibge'],
-                    cidade: response['localidade'],
-                    uf: response['uf'],
-                    codUf: response['ibge'].substring(0, 2),
+                    logradouro: response["logradouro"],
+                    bairro: response["bairro"],
+                    codMun: response["ibge"],
+                    cidade: response["localidade"],
+                    uf: response["uf"],
+                    codUf: response["ibge"].substring(0, 2),
                 })
             );
     }

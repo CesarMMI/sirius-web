@@ -15,6 +15,7 @@ const routes: Routes = [
             import("./pages/home/home.module").then((m) => m.HomeModule),
         canActivate: [UserTokenGuard],
     },
+    { path: 'cliente-preco', loadChildren: () => import('./pages/home/pages/cliente/pages/cliente-form/cliente-preco/cliente-preco.module').then(m => m.ClientePrecoModule) },
 ];
 
 @NgModule({

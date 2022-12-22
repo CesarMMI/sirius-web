@@ -2,6 +2,9 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { BehaviorSubject, catchError, first, throwError } from "rxjs";
+import { ICol } from "src/app/shared/components/custom-table/models/Col";
+import { PhonePipe } from "src/app/shared/pipes/phone.pipe";
+import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -40,6 +43,15 @@ export class UsuarioService extends CrudService<IUsuario> {
             }
         );
     }
+
+    override cols: ICol[] = [
+        { field: "id", header: "ID" },
+        { field: "nome", header: "Nome" },
+        { field: "email", header: "Email" },
+        { field: "celular", header: "Celular", pipe: PhonePipe },
+        { field: "grupoNome", header: "Grupo" },
+        { field: "status", header: "Status", pipe: StatusPipe },
+    ];
 
     selectedUsuario$ = new BehaviorSubject<IUsuario | null>(null);
 

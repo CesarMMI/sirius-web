@@ -4,8 +4,8 @@ import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { first, from, Subscription } from "rxjs";
 
-import { CrudService } from "../../services/crud-service";
-import { FormLockService } from "../../services/form-lock.service";
+import { CrudService } from "../../../services/crud-service";
+import { FormLockService } from "../../../services/form-lock.service";
 
 @Directive()
 export class FormComponent<T> {

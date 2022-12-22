@@ -51,7 +51,6 @@ export class NavBarComponent implements OnDestroy {
         // Permissoes Observable
         this.userInfoSub = userInfoService.userInfo$.subscribe((userInfo) => {
             if (userInfo && userInfo.permissoes) {
-                console.log(userInfo.permissoes);
                 this.generateMenuItems(userInfo.permissoes);
             }
         });

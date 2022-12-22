@@ -3,8 +3,13 @@ export interface IFilter {
         orderBy: string;
         desc: boolean;
     };
-    search?: {
-        field: string;
-        value: string;
-    };
+    search?:
+        | {
+              field: string;
+              value: string;
+          }
+        | {
+              field: string;
+              value: string;
+          }[];
 }

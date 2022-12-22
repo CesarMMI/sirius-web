@@ -3,7 +3,7 @@ import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { debounceTime, EMPTY, first, iif, Subscription, switchMap } from "rxjs";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { EnderecoService } from "src/app/shared/services/endereco.service";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 

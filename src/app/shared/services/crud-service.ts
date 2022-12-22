@@ -40,8 +40,8 @@ export class CrudService<T> {
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE",
-    });  
-    
+    });
+
     cols: ICol[] = [];
 
     constructor(
@@ -55,7 +55,11 @@ export class CrudService<T> {
         pagination.setPagination({ page: 1 });
     }
 
-    protected genParams(pagination: IPagination, filter: IFilter) {
+    protected genParams(
+        pagination: IPagination,
+        filter: IFilter,
+        customParam?: { field: string; value: string | number }
+    ) {
         let params: any = {
             pag: pagination.page,
             qtdItensPag: pagination.quantityPerPage,
@@ -63,17 +67,29 @@ export class CrudService<T> {
             desc: filter.order.desc,
         };
 
-        if (filter.search)
-            Object.defineProperty(params, filter.search.field, {
-                value: filter.search.value,
-                writable: true,
-                enumerable: true,
-            });
+        if (filter.search) {
+            if (!Array.isArray(filter.search)) {
+                Object.defineProperty(params, filter.search.field, {
+                    value: filter.search.value,
+                    writable: true,
+                    enumerable: true,
+                });
+            } else {
+                for (const obj of filter.search) {
+                    if (obj.value) params[obj.field] = obj.value;
+                }
+            }
+        }
+
+        if (customParam) params[customParam.field] = customParam.value;
 
         return params;
     }
 
-    get(): Observable<ITableData<T>> {
+    get(customParam?: {
+        field: string;
+        value: string | number;
+    }): Observable<ITableData<T>> {
         return combineLatest([
             this.pagination.pagination$,
             this.filter.filter$,
@@ -82,7 +98,13 @@ export class CrudService<T> {
                 return this.http
                     .get<ITableData<T>>(
                         `${this.API_URL}/${this.apiEndPoints.getAll.endPoint}`,
-                        { params: this.genParams(pagination, filter) }
+                        {
+                            params: this.genParams(
+                                pagination,
+                                filter,
+                                customParam
+                            ),
+                        }
                     )
                     .pipe(
                         delay(500),

@@ -3,7 +3,7 @@ import { FormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { first, map, Observable } from "rxjs";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { UserInfoService } from "src/app/shared/services/user-info/user-info.service";
 import { ListaPrecosService } from "../../../../configuracao/pages/lista-precos/services/lista-precos.service";

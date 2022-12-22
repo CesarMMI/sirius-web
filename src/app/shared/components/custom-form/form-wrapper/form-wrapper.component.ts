@@ -23,9 +23,9 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
                 *ngIf="title != ''" 
                 [ngClass]="{
                     'mb-3': margin,
-                    'px-2': !padding 
+                    '': !padding 
                 }"    
-                class="flex align-items-center">
+                class="flex align-items-center px-2">
                 <span class="text-2xl text-color font-bold">{{
                     (isEdit ? "Editar " : "Adicionar ") + title
                 }}</span>

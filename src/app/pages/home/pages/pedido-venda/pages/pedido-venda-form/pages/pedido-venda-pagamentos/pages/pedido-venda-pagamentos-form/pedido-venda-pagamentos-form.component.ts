@@ -3,7 +3,7 @@ import { FormBuilder } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { PedidoVendaService } from "src/app/pages/home/pages/pedido-venda/services/pedido-venda.service";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { PedidoVendaPagamentoService } from "../../services/pedido-venda-pagamento.service";
 

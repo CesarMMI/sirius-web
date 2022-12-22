@@ -7,7 +7,7 @@ import { ClienteEnderecoService } from "src/app/pages/home/pages/cliente/pages/c
 import { ClienteTableComponent } from "src/app/pages/home/pages/cliente/pages/cliente-table/cliente-table.component";
 import { ClienteService } from "src/app/pages/home/pages/cliente/services/cliente.service";
 import { SelectDataService } from "src/app/shared/components/custom-form/select-data/select-data.service";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { NotaFiscalService } from "../../../../services/nota-fiscal.service";
 

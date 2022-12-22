@@ -21,6 +21,7 @@
         [filterOptions]="cols.slice(0, -1)"
         [orderOptions]="cols"
         (onFilter)="onFilter($event)"
+        [advancedFilterForm]="advProdutoFilterForm"
     ></app-filter-popup>
     <app-crud-buttonset
         (onDelete)="onDelete($event)"

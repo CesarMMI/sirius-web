@@ -1,14 +1,16 @@
-import { Component } from "@angular/core";
+import { Component, Type } from "@angular/core";
 import { MenuItem, MessageService } from "primeng/api";
 import { Menu } from "primeng/menu";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
+import { PhonePipe } from "src/app/shared/pipes/phone.pipe";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 
 import { IUsuario } from "../../models/usuario";
 import { UsuarioService } from "../../services/usuario.service";
+import { UsuarioAdvancedFilterComponent } from "../usuario-advanced-filter/usuario-advanced-filter.component";
 
 @Component({
     templateUrl: "./usuario-table.component.html",
@@ -22,14 +24,7 @@ export class UsuarioTableComponent extends TableComponent<IUsuario> {
         protected override messageService: MessageService
     ) {
         super(
-            [
-                { field: "id", header: "ID" },
-                { field: "nome", header: "Nome" },
-                { field: "email", header: "Email" },
-                { field: "celular", header: "Celular", pipe: CpfCnpjPipe },
-                { field: "grupoNome", header: "Grupo" },
-                { field: "status", header: "Status", pipe: StatusPipe },
-            ],
+            usuarioService.cols,
             "Usuário removido com sucesso!",
             usuarioService,
             filterService,
@@ -37,6 +32,14 @@ export class UsuarioTableComponent extends TableComponent<IUsuario> {
             messageService
         );
     }
+
+    protected filterOptions = [
+        { field: "id", header: "ID" },
+        { field: "nome", header: "Nome" },
+        { field: "ultimoNome", header: "Sobrenome" },
+        { field: "email", header: "Email" },
+        { field: "celular", header: "Celular", pipe: PhonePipe },
+    ];
 
     protected displayMudar: boolean = false;
     protected displayAdicionar: boolean = false;
@@ -71,4 +74,7 @@ export class UsuarioTableComponent extends TableComponent<IUsuario> {
         this.usuarioService.selectedUsuario$.next(event);
         super.onSelect(event);
     }
+
+    advForm: Type<UsuarioAdvancedFilterComponent> =
+        UsuarioAdvancedFilterComponent;
 }

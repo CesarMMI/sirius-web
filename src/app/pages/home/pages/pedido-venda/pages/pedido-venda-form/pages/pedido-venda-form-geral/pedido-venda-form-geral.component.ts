@@ -6,7 +6,7 @@ import { combineLatest, first, Subscription } from "rxjs";
 import { combineLatestInit } from "rxjs/internal/observable/combineLatest";
 import { ClienteService } from "src/app/pages/home/pages/cliente/services/cliente.service";
 import { VendedorService } from "src/app/pages/home/pages/vendedor/services/vendedor.service";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { UserInfoService } from "src/app/shared/services/user-info/user-info.service";
 import { PedidoVendaService } from "../../../../services/pedido-venda.service";

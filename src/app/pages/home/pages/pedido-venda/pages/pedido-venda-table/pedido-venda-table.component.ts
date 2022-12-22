@@ -4,7 +4,7 @@ import { MenuItem, MessageService } from "primeng/api";
 import { first } from "rxjs";
 import { IPedidoVenda } from "src/app/pages/home/pages/pedido-venda/models/PedidoVenda";
 import { PedidoVendaService } from "src/app/pages/home/pages/pedido-venda/services/pedido-venda.service";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";

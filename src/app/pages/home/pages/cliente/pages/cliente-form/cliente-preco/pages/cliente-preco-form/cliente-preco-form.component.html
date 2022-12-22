@@ -1,0 +1,37 @@
+<app-form-wrapper title="Preço">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="grid m-0">
+        <!-- Produto -->
+        <app-input-select-data
+            class="col-12 md:col-2"
+            (onChoose)="onChooseProduto($event)"
+            label="Produto ID"
+            [service]="produtoService"
+            [control]="$any(form.controls['produtoId'])"
+        ></app-input-select-data>
+        <!-- Cód. do Produto -->
+        <app-input-text
+            class="col-12 md:col-4"
+            label="Cód. do produto"
+            [control]="$any(form.controls['produtoCod'])"
+        ></app-input-text>
+
+        <!-- Valor -->
+        <app-input-currency
+            class="col-12 md:col-6"
+            label="Valor"
+            [control]="$any(form.controls['valor'])"
+        ></app-input-currency>
+
+        <!-- Button -->
+        <div class="col-12 flex">
+            <button
+                pButton
+                [loading]="loading"
+                [disabled]="form.invalid || form.disabled"
+                class="ml-auto"
+                type="submit"
+                label="Salvar"
+            ></button>
+        </div>
+    </form>
+</app-form-wrapper>

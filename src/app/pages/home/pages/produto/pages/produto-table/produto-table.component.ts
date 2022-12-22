@@ -1,12 +1,13 @@
 import { CurrencyPipe } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, Type } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { IProduto } from "src/app/pages/home/pages/produto/models/Produto";
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
+import { ProdutoAdvancedFilterComponent } from "../produto-advanced-filter/produto-advanced-filter.component";
 
 @Component({
     templateUrl: "./produto-table.component.html",
@@ -24,7 +25,12 @@ export class ProdutoTableComponent extends TableComponent<IProduto> {
                 { field: "id", header: "ID" },
                 { field: "codProduto", header: "Cód. Interno" },
                 { field: "descricao", header: "Descrição" },
-                { field: "vlrUnCom", header: "Valor", pipe: CurrencyPipe, pipeArgs: ["BRL"] },
+                {
+                    field: "vlrUnCom",
+                    header: "Valor",
+                    pipe: CurrencyPipe,
+                    pipeArgs: ["BRL"],
+                },
                 { field: "unCom", header: "Unidade" },
                 { field: "saldo", header: "Saldo" },
                 { field: "status", header: "Status", pipe: StatusPipe },
@@ -36,4 +42,7 @@ export class ProdutoTableComponent extends TableComponent<IProduto> {
             messageService
         );
     }
+
+    advProdutoFilterForm: Type<ProdutoAdvancedFilterComponent> =
+        ProdutoAdvancedFilterComponent;
 }

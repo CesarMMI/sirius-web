@@ -1,12 +1,12 @@
 import { MessageService } from "primeng/api";
 import { BehaviorSubject, first, Observable, shareReplay } from "rxjs";
-import { CrudService } from "../../services/crud-service";
-import { FilterService } from "../../services/http-params/filter.service";
-import { IFilter } from "../../services/http-params/models/filter";
-import { PaginationService } from "../../services/http-params/pagination.service";
-import { ICol } from "../custom-table/models/Col";
-import { IPageEvent } from "../custom-table/models/PageEvent";
-import { ITableData } from "../custom-table/models/TableData";
+
+import { CrudService } from "../../../services/crud-service";
+import { FilterService } from "../../../services/http-params/filter.service";
+import { PaginationService } from "../../../services/http-params/pagination.service";
+import { ICol } from "../../custom-table/models/Col";
+import { IPageEvent } from "../../custom-table/models/PageEvent";
+import { ITableData } from "../../custom-table/models/TableData";
 
 export class TableComponent<T> {
     protected data$!: Observable<ITableData<T>>;
@@ -42,8 +42,9 @@ export class TableComponent<T> {
         this.get();
     }
 
-    onFilter(event: IFilter) {
+    onFilter(event: any) {
         this.filterService.setFilter(event);
+        this.get();
     }
 
     onDelete(event: number) {

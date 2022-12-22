@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { first } from "rxjs";
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { ListaPrecosService } from "../../../../../services/lista-precos.service";
 import { ListaPrecosRegsService } from "../../services/lista-precos-regs.service";

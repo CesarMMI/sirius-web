@@ -29,6 +29,9 @@ import { InputTextAreaComponent } from "./inputs/input-text-area/input-text-area
 import { InputTextComponent } from "./inputs/input-text/input-text.component";
 import { InputDateComponent } from "./inputs/input-date/input-date.component";
 import { CalendarModule } from "primeng/calendar";
+import { InputNumberRangeComponent } from './inputs/input-number-range/input-number-range.component';
+import { InputCurrencyRangeComponent } from './inputs/input-currency-range/input-currency-range.component';
+import { InputOrderComponent } from './inputs/input-order/input-order.component';
 
 @NgModule({
     declarations: [
@@ -46,6 +49,9 @@ import { CalendarModule } from "primeng/calendar";
         InputPercentageComponent,
         InputBooleanComponent,
         InputDateComponent,
+        InputNumberRangeComponent,
+        InputCurrencyRangeComponent,
+        InputOrderComponent,
     ],
     imports: [
         CommonModule,
@@ -80,6 +86,9 @@ import { CalendarModule } from "primeng/calendar";
         InputPercentageComponent,
         InputBooleanComponent,
         InputDateComponent,
+        InputNumberRangeComponent,
+        InputCurrencyRangeComponent,
+        InputOrderComponent
     ],
 })
 export class CustomFormModule {}

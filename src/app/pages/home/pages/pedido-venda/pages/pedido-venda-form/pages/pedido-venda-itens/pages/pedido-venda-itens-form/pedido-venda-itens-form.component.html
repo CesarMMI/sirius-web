@@ -18,6 +18,7 @@
             label="Produto ID"
             (onChoose)="onChooseProduto($event)"
             [service]="produtoService"
+            [filter]="{ field: 'clienteId', value: clienteId! }"
             [control]="$any(form.controls['produtoId'])"
         ></app-input-select-data>
 

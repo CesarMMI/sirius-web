@@ -11,11 +11,13 @@ import { ButtonModule } from "primeng/button";
 import { ProdutoFormComponent } from "src/app/pages/home/pages/produto/pages/produto-form/produto-form.component";
 import { RotinasPopupModule } from '../../../../shared/components/buttons/rotinas-popup/rotinas-popup.module';
 import { FilterPopupModule } from '../../../../shared/components/buttons/filter-popup/filter-popup.module';
+import { ProdutoAdvancedFilterComponent } from './pages/produto-advanced-filter/produto-advanced-filter.component';
 
 @NgModule({
   declarations: [
     ProdutoTableComponent,
-    ProdutoFormComponent
+    ProdutoFormComponent,
+    ProdutoAdvancedFilterComponent
   ],
   imports: [
     CommonModule,

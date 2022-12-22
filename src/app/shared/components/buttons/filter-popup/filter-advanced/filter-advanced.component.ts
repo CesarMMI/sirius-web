@@ -2,48 +2,58 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnDestroy,
     Output,
     Type,
     ViewChild,
     ViewContainerRef,
 } from "@angular/core";
-import { EmpresaAdvancedFilterComponent } from "src/app/pages/home/pages/empresa/pages/empresa-advanced-filter/empresa-advanced-filter.component";
-import { AdvancedFilterForm } from "../../../advanced-filter-form/advanced-filter-form";
+import { Subscription } from "rxjs";
+
+import { AdvancedFilterForm } from "../../../models/advanced-filter-form/advanced-filter-form";
+import { FilterAdvancedService } from "./services/filter-advanced.service";
 
 @Component({
     selector: "app-filter-advanced",
     template: `
         <p-sidebar
-            appendTo="body"
             position="right"
-            [baseZIndex]="10000"
+            [dismissible]="false"
             [(visible)]="display"
+            (visibleChange)="visibleChange($event)"
         >
             <ng-container #container></ng-container>
         </p-sidebar>
-
-        <span
-            class="text-primary-500 text-sm select-none cursor-pointer"
-            (click)="renderComponent(); display = true"
-            >Filtros avançados</span
-        >
     `,
-    styles: [],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./filter-advanced.component.scss']
 })
-export class FilterAdvancedComponent {
+export class FilterAdvancedComponent implements OnDestroy {
+    private filtersSub!: Subscription;
+    constructor(protected filterAdvancedService: FilterAdvancedService) {
+        this.filtersSub = filterAdvancedService.getFilters().subscribe((filters) => {
+            if (filters) this.onFilter.emit(filters)
+        });
+    }
+    ngOnDestroy(): void {
+        this.filtersSub.unsubscribe();
+    }
+
     @Input() currTagert!: Type<AdvancedFilterForm>;
     @ViewChild("container", { read: ViewContainerRef })
     container!: ViewContainerRef;
 
-    protected display: boolean = false;
+    @Input() display!: boolean;
+    @Output() displayChange = new EventEmitter<boolean>();
 
-    constructor() {}
+    @Output() onFilter = new EventEmitter<any>();
 
-    ngOnInit(): void {}
+    protected visibleChange(isVisible: boolean) {
+        this.displayChange.emit(isVisible);
+        if (isVisible) this.renderComponent();
+    }
 
-    renderComponent() {
-      this.container.clear();
-      this.container.createComponent(this.currTagert);
+    protected renderComponent() {
+        this.container.clear();
+        this.container.createComponent(this.currTagert);
     }
 }

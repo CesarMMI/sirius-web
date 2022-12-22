@@ -77,6 +77,7 @@ export class SelectDataInputComponent implements OnInit, OnChanges {
 
     @Input() service!: CrudService<any>;
 
+    @Input() filter?: { field: string, value: string | number };
     @Input() await: boolean = false;
     @Input() targetId?: number;
 
@@ -103,7 +104,6 @@ export class SelectDataInputComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: any): void {
         if (this.await && changes.targetId.currentValue) {
-            debugger;
             this.getEvent();
         }
     }
@@ -116,6 +116,6 @@ export class SelectDataInputComponent implements OnInit, OnChanges {
     }
 
     getEvent() {
-        this.data$ = this.service.get();
+        this.data$ = this.service.get(this.filter);
     }
 }

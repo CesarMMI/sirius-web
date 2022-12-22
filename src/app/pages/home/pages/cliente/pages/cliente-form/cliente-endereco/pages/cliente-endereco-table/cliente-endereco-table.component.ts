@@ -1,13 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { Component } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
-import { first, shareReplay, switchMap } from "rxjs";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { CepPipe } from "src/app/shared/pipes/cep.pipe";
-import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
-import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
+
 import { ClienteEnderecoService } from "../../services/cliente-endereco.service";
 
 @Component({

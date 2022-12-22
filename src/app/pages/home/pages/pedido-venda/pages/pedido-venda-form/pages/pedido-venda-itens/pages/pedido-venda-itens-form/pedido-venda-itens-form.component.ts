@@ -6,7 +6,7 @@ import { combineLatest, Subscription } from "rxjs";
 import { PedidoVendaService } from "src/app/pages/home/pages/pedido-venda/services/pedido-venda.service";
 
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { PedidoVendaItemService } from "../../services/pedido-venda-item.service";
 
@@ -36,10 +36,7 @@ export class PedidoVendaItensFormComponent extends FormComponent<any> {
             ["id"],
             formBuilder.group({
                 id: { value: null, disabled: true },
-                pedidoId: {
-                    value: pedidoVendaService.selectedPedido.value?.id,
-                    disabled: true,
-                },
+                pedidoId: { value: pedidoVendaService.selectedPedido.value?.id, disabled: true },
                 produtoId: null,
                 unidade: "",
                 valorUnitario: null,
@@ -73,8 +70,10 @@ export class PedidoVendaItensFormComponent extends FormComponent<any> {
                         );
                 })
         );
+        this.clienteId = pedidoVendaService.selectedPedido.value?.clienteId;
     }
 
+    public clienteId: number | undefined;
     private valorSub: Subscription[] = [];
 
     onChooseProduto(event: any) {

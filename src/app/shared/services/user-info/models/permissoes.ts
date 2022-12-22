@@ -10,7 +10,7 @@ export interface IPermissoes {
         read: boolean;
         update: boolean;
         delete: boolean;
-        clientesExclusivos: boolean;
+        precosExclusivos: boolean;
     };
     produtos: {
         create: boolean;
@@ -23,6 +23,7 @@ export interface IPermissoes {
         read: boolean;
         update: boolean;
         delete: boolean;
+        clientesExclusivos: boolean;
     };
     fornecedores: {
         create: boolean;

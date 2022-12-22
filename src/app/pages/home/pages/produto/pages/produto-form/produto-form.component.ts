@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { IProduto } from "src/app/pages/home/pages/produto/models/Produto";
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
-import { FormComponent } from "src/app/shared/components/form-component/form-component";
+import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 
 @Component({

@@ -2,7 +2,7 @@ import { CurrencyPipe, DatePipe } from "@angular/common";
 import { Component } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { BehaviorSubject } from "rxjs";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";

@@ -17,6 +17,13 @@ const routes: Routes = [
                         "./cliente-endereco/cliente-endereco.module"
                     ).then((m) => m.ClienteEnderecoModule),
             },
+            {
+                path: "precos",
+                loadChildren: () =>
+                    import(
+                        "./cliente-preco/cliente-preco.module"
+                    ).then((m) => m.ClientePrecoModule),
+            },
         ],
     },
 ];

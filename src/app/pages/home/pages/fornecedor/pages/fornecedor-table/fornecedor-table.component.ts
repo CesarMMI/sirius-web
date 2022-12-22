@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { MessageService } from "primeng/api";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
 import { PhonePipe } from "src/app/shared/pipes/phone.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";

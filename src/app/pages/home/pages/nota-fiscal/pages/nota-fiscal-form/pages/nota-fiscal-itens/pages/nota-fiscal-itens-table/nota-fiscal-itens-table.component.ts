@@ -16,7 +16,7 @@ import { ClienteService } from "src/app/pages/home/pages/cliente/services/client
 import { NotaFiscalService } from "src/app/pages/home/pages/nota-fiscal/services/nota-fiscal.service";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
 import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
-import { TableComponent } from "src/app/shared/components/table-component/table-component";
+import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { CepPipe } from "src/app/shared/pipes/cep.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";

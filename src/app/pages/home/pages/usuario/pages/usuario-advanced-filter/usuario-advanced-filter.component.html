@@ -1,0 +1,67 @@
+<form class="grid mt-3" [formGroup]="form">
+    <!-- Ordem -->
+    <app-input-order
+        class="col-12"
+        label="Ordem"
+        [fieldControl]="$any(form.controls['orderBy'])"
+        [orderControl]="$any(form.controls['desc'])"
+        [options]="usuarioService.cols"
+    ></app-input-order>
+
+    <!-- Status -->
+    <app-input-dropdown
+        class="col-12"
+        label="Status"
+        [control]="$any(form.controls['status'])"
+        [options]="[
+            { label: 'Ativo', value: 'A' },
+            { label: 'Inativo', value: 'I' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Grupo de Usuários -->
+    <app-input-dropdown
+        class="col-12"
+        label="Grupo de Usuários"
+        [control]="$any(form.controls['grupo'])"
+        [options]="grupos"
+    ></app-input-dropdown>
+
+    <!-- Nome -->
+    <app-input-text
+        class="col-12"
+        label="Nome"
+        [control]="$any(form.controls['nome'])"
+    ></app-input-text>
+
+    <!-- Sobrenome -->
+    <app-input-text
+        class="col-12"
+        label="Sobrenome"
+        [control]="$any(form.controls['ultimoNome'])"
+    ></app-input-text>
+
+    <!-- Celular -->
+    <app-input-phone
+        class="col-12"
+        label="Celular"
+        [control]="$any(form.controls['celular'])"
+    ></app-input-phone>
+
+    <!-- Email -->
+    <app-input-text
+        class="col-12"
+        label="Email"
+        [control]="$any(form.controls['email'])"
+    ></app-input-text>
+
+    <!-- Botão -->
+    <div class="col-12">
+        <button
+            pButton
+            class="w-full"
+            label="Filtrar"
+            (click)="onFilter()"
+        ></button>
+    </div>
+</form>

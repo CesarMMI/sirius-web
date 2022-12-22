@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: "app-input-number",
@@ -18,7 +18,6 @@ import { FormControl } from "@angular/forms";
     </div>
   `,
   styles: [],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNumberComponent {
   @Input() label: string = "";

@@ -1,0 +1,76 @@
+<form class="grid mt-3" [formGroup]="form">
+    <!-- Ordem -->
+    <app-input-order
+        class="col-12"
+        label="Ordem"
+        [fieldControl]="$any(form.controls['orderBy'])"
+        [orderControl]="$any(form.controls['desc'])"
+        [options]="produtoService.cols"
+    ></app-input-order>
+
+    <!-- Status -->
+    <app-input-dropdown
+        class="col-12"
+        label="Status"
+        [control]="$any(form.controls['status'])"
+        [options]="[
+            { label: 'Ativo', value: 'A' },
+            { label: 'Inativo', value: 'I' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Intervalo ID -->
+    <app-input-number-range
+        class="col-12"
+        label="Intervalo ID"
+        [minControl]="$any(form.controls['minId'])"
+        [maxControl]="$any(form.controls['maxId'])"
+    ></app-input-number-range>
+
+    <!-- Cód. Interno -->
+    <app-input-text
+        class="col-12"
+        label="Cód. Interno"
+        [control]="$any(form.controls['codProduto'])"
+    ></app-input-text>
+
+    <!-- Descrição -->
+    <app-input-text
+        class="col-12"
+        label="Descrição"
+        [control]="$any(form.controls['descricao'])"
+    ></app-input-text>
+
+    <!-- Valor -->
+    <app-input-currency-range
+        class="col-12"
+        label="Valor"
+        [minControl]="$any(form.controls['minValor'])"
+        [maxControl]="$any(form.controls['maxValor'])"
+    ></app-input-currency-range>
+
+    <!-- Unidade -->
+    <app-input-text
+        class="col-12"
+        label="Unidade"
+        [control]="$any(form.controls['unidade'])"
+    ></app-input-text>
+
+    <!-- Saldo -->
+    <app-input-currency-range
+        class="col-12"
+        label="Saldo"
+        [minControl]="$any(form.controls['minSaldo'])"
+        [maxControl]="$any(form.controls['maxSaldo'])"
+    ></app-input-currency-range>
+
+    <!-- Botão -->
+    <div class="col-12">
+        <button
+            pButton
+            class="w-full"
+            label="Filtrar"
+            (click)="onFilter()"
+        ></button>
+    </div>
+</form>
