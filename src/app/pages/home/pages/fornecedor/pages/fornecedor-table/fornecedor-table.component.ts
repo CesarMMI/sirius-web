@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Type } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
@@ -8,6 +8,7 @@ import { PaginationService } from "src/app/shared/services/http-params/paginatio
 
 import { IFornecedor } from "../../models/fornecedor";
 import { FornecedorService } from "../../services/fornecedor.service";
+import { FornecedorAdvancedFilterComponent } from "../fornecedor-advanced-filter/fornecedor-advanced-filter.component";
 
 @Component({
     templateUrl: "./fornecedor-table.component.html",
@@ -29,4 +30,7 @@ export class FornecedorTableComponent extends TableComponent<IFornecedor> {
             messageService
         );
     }
+
+    advForm: Type<FornecedorAdvancedFilterComponent> =
+        FornecedorAdvancedFilterComponent;
 }

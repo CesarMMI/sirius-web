@@ -15,7 +15,7 @@ import { ClienteService } from "src/app/pages/home/pages/cliente/services/client
 import { NotaFiscalService } from "src/app/pages/home/pages/nota-fiscal/services/nota-fiscal.service";
 import { ProdutoService } from "src/app/pages/home/pages/produto/services/produto.service";
 import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
-import { EnderecoService } from "src/app/shared/services/endereco.service";
+import { EnderecoService } from "src/app/shared/services/endereco/endereco.service";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { NotaFiscalItemService } from "../../services/nota-fiscal-item.service";
 

@@ -5,7 +5,7 @@
         label="Ordem"
         [fieldControl]="$any(form.controls['orderBy'])"
         [orderControl]="$any(form.controls['desc'])"
-        [options]="produtoService.cols"
+        [options]="vendedorService.cols"
     ></app-input-order>
 
     <!-- Status -->
@@ -25,44 +25,50 @@
         label="Intervalo ID"
         [minControl]="$any(form.controls['minId'])"
         [maxControl]="$any(form.controls['maxId'])"
-    ></app-input-number-range>
-
-    <!-- Cód. Interno -->
+        ></app-input-number-range>
+        
+    <!-- Nome -->
     <app-input-text
         class="col-12 md:col-6"
-        label="Cód. Interno"
-        [control]="$any(form.controls['codProduto'])"
+        label="Nome"
+        [control]="$any(form.controls['nome'])"
     ></app-input-text>
 
-    <!-- Descrição -->
+    <!-- Apelido -->
     <app-input-text
         class="col-12 md:col-6"
-        label="Descrição"
-        [control]="$any(form.controls['descricao'])"
+        label="Apelido"
+        [control]="$any(form.controls['apelido'])"
     ></app-input-text>
-
-    <!-- Valor -->
-    <app-input-currency-range
+    
+    <!-- CPF -->
+    <app-input-cpf-cnpj
         class="col-12 md:col-6"
-        label="Valor"
-        [minControl]="$any(form.controls['minValor'])"
-        [maxControl]="$any(form.controls['maxValor'])"
-    ></app-input-currency-range>
+        label="CPF"
+        [control]="$any(form.controls['cpf'])"
+    ></app-input-cpf-cnpj>
 
-    <!-- Unidade -->
+    <!-- CNPJ -->
+    <app-input-cpf-cnpj
+        class="col-12 md:col-6"
+        label="CNPJ"
+        [isCnpj]="true"
+        [control]="$any(form.controls['cnpj'])"
+    ></app-input-cpf-cnpj>
+
+    <!-- Celular -->
+    <app-input-phone  
+        class="col-12 md:col-6"
+        label="Celular"
+        [control]="$any(form.controls['celular'])"
+    ></app-input-phone>
+
+    <!-- Email -->
     <app-input-text
         class="col-12 md:col-6"
-        label="Unidade"
-        [control]="$any(form.controls['unidade'])"
+        label="Email"
+        [control]="$any(form.controls['email'])"
     ></app-input-text>
-
-    <!-- Saldo -->
-    <app-input-currency-range
-        class="col-12 md:col-6"
-        label="Saldo"
-        [minControl]="$any(form.controls['minSaldo'])"
-        [maxControl]="$any(form.controls['maxSaldo'])"
-    ></app-input-currency-range>
 
     <!-- Botão -->
     <div class="col-12">

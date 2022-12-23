@@ -20,6 +20,7 @@ import { ICol } from "src/app/shared/components/custom-table/models/Col";
             <input
                 pInputText
                 type="text"
+                class="w-full"
                 placeholder="Começa com..."
                 [(ngModel)]="object.value"
             />

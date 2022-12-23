@@ -1,0 +1,128 @@
+<form class="grid mt-3" [formGroup]="form">
+    <!-- Ordem -->
+    <app-input-order
+        class="col-12 md:col-6"
+        label="Ordem"
+        [fieldControl]="$any(form.controls['orderBy'])"
+        [orderControl]="$any(form.controls['desc'])"
+        [options]="notaFiscalService.cols"
+    ></app-input-order>
+
+    <!-- Status -->
+    <app-input-dropdown
+        class="col-12 md:col-6"
+        label="Status"
+        [control]="$any(form.controls['status'])"
+        [options]="[
+            { label: 'Em digitação', value: 'Em digitação' },
+            { label: 'XML Gerado', value: 'XML Gerado' },
+            { label: 'Autorizada', value: 'Autorizada' },
+            { label: 'Cancelada', value: 'Cancelada' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Intervalo ID -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo ID"
+        [minControl]="$any(form.controls['minId'])"
+        [maxControl]="$any(form.controls['maxId'])"
+    ></app-input-number-range>
+
+    <!-- Intervalo Série -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo Série"
+        [minControl]="$any(form.controls['minSerie'])"
+        [maxControl]="$any(form.controls['maxSerie'])"
+    ></app-input-number-range>
+
+    <!-- Intervalo Chave -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo Chave"
+        [minControl]="$any(form.controls['minChave'])"
+        [maxControl]="$any(form.controls['maxChave'])"
+    ></app-input-number-range>
+
+    <!-- Intervalo Data -->
+    <app-input-date-range
+        class="col-12 md:col-6"
+        label="Intervalo Data"
+        [control]="$any(form.controls['DhEmi'])"
+    ></app-input-date-range>
+
+    <!-- Tipo de Cliente -->
+    <app-input-dropdown
+        class="col-12 md:col-6"
+        label="Tipo de Cliente"
+        [control]="tipoCliente"
+        [options]="[
+            { label: 'Pessoa Física', value: 'F' },
+            { label: 'Pessoa Jurídica', value: 'J' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Nome do Dest. -->
+    <app-input-text
+        class="col-12 md:col-6"
+        label="Nome do Dest."
+        [control]="$any(form.controls['destxnome'])"
+    ></app-input-text>
+
+    <!-- CPF/CNPJ do Dest. -->
+    <app-input-cpf-cnpj
+        class="col-12 md:col-6"
+        [label]="(isPF ? 'CPF' : 'CNPJ') + ' do Dest.'"
+        [isCnpj]="!isPF"
+        [control]="$any(form.controls['destcnpjcpf'])"
+    ></app-input-cpf-cnpj>
+
+    <!-- UF do Dest. -->
+    <ng-container *ngIf="ufs.length > 0; else ufText">
+        <!-- Dropdown -->
+        <app-input-dropdown
+            class="col-12 md:col-6"
+            label="UF do Dest."
+            [control]="$any(form.controls['enderdestuf'])"
+            [options]="ufs"
+        ></app-input-dropdown>
+    </ng-container>
+    <ng-template #ufText>
+        <!-- Text -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="UF do Dest."
+            [control]="$any(form.controls['enderdestuf'])"
+        ></app-input-text>
+    </ng-template>
+
+    <!-- Município do Dest. -->
+    <ng-container *ngIf="ufs.length > 0; else municipioText">
+        <!-- Dropdown -->
+        <app-input-dropdown
+            class="col-12 md:col-6"
+            label="Município do Dest."
+            [control]="$any(form.controls['enderdestxmun'])"
+            [options]="municipios"
+        ></app-input-dropdown>
+    </ng-container>
+    <ng-template #municipioText>
+        <!-- Text -->
+        <app-input-text
+            class="col-12 md:col-6"
+            label="Município do Dest."
+            [control]="$any(form.controls['enderdestxmun'])"
+        ></app-input-text>
+    </ng-template>
+
+    <!-- Botão -->
+    <div class="col-12">
+        <button
+            pButton
+            class="w-full"
+            label="Filtrar"
+            (click)="onFilter()"
+        ></button>
+    </div>
+</form>

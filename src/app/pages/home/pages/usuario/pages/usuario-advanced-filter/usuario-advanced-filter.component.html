@@ -1,7 +1,7 @@
 <form class="grid mt-3" [formGroup]="form">
     <!-- Ordem -->
     <app-input-order
-        class="col-12"
+        class="col-12 md:col-6"
         label="Ordem"
         [fieldControl]="$any(form.controls['orderBy'])"
         [orderControl]="$any(form.controls['desc'])"
@@ -10,7 +10,7 @@
 
     <!-- Status -->
     <app-input-dropdown
-        class="col-12"
+        class="col-12 md:col-6"
         label="Status"
         [control]="$any(form.controls['status'])"
         [options]="[
@@ -19,38 +19,46 @@
         ]"
     ></app-input-dropdown>
 
+    <!-- Intervalo ID -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo ID"
+        [minControl]="$any(form.controls['minId'])"
+        [maxControl]="$any(form.controls['maxId'])"
+    ></app-input-number-range>
+
     <!-- Grupo de Usuários -->
     <app-input-dropdown
-        class="col-12"
+        class="col-12 md:col-6"
         label="Grupo de Usuários"
-        [control]="$any(form.controls['grupo'])"
+        [control]="$any(form.controls['grupoId'])"
         [options]="grupos"
     ></app-input-dropdown>
 
     <!-- Nome -->
     <app-input-text
-        class="col-12"
+        class="col-12 md:col-6"
         label="Nome"
         [control]="$any(form.controls['nome'])"
     ></app-input-text>
 
     <!-- Sobrenome -->
     <app-input-text
-        class="col-12"
+        class="col-12 md:col-6"
         label="Sobrenome"
         [control]="$any(form.controls['ultimoNome'])"
     ></app-input-text>
 
     <!-- Celular -->
     <app-input-phone
-        class="col-12"
+        class="col-12 md:col-6"
         label="Celular"
         [control]="$any(form.controls['celular'])"
     ></app-input-phone>
 
     <!-- Email -->
     <app-input-text
-        class="col-12"
+        class="col-12 md:col-6"
         label="Email"
         [control]="$any(form.controls['email'])"
     ></app-input-text>

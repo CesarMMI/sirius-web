@@ -5,7 +5,7 @@
         label="Ordem"
         [fieldControl]="$any(form.controls['orderBy'])"
         [orderControl]="$any(form.controls['desc'])"
-        [options]="produtoService.cols"
+        [options]="fornecedorService.cols"
     ></app-input-order>
 
     <!-- Status -->
@@ -27,42 +27,53 @@
         [maxControl]="$any(form.controls['maxId'])"
     ></app-input-number-range>
 
-    <!-- Cód. Interno -->
+    <!-- Tipo de Fornecedor -->
+    <app-input-dropdown
+        class="col-12 md:col-6"
+        label="Tipo de Fornecedor"
+        [control]="$any(form.controls['tipo'])"
+        [options]="[
+            { label: 'Pessoa Física', value: 'F' },
+            { label: 'Pessoa Jurídica', value: 'J' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Razão Social -->
     <app-input-text
         class="col-12 md:col-6"
-        label="Cód. Interno"
-        [control]="$any(form.controls['codProduto'])"
+        label="Razão Social"
+        [control]="$any(form.controls['razaoSocial'])"
     ></app-input-text>
 
-    <!-- Descrição -->
+    <!-- Fantasia -->
     <app-input-text
         class="col-12 md:col-6"
-        label="Descrição"
-        [control]="$any(form.controls['descricao'])"
+        label="Fantasia"
+        *ngIf="!isPF"
+        [control]="$any(form.controls['fantasia'])"
     ></app-input-text>
 
-    <!-- Valor -->
-    <app-input-currency-range
+    <!-- CPF/CNPJ -->
+    <app-input-cpf-cnpj
         class="col-12 md:col-6"
-        label="Valor"
-        [minControl]="$any(form.controls['minValor'])"
-        [maxControl]="$any(form.controls['maxValor'])"
-    ></app-input-currency-range>
+        [label]="isPF ? 'CPF' : 'CNPJ'"
+        [isCnpj]="!isPF"
+        [control]="$any(form.controls['cpfCnpj'])"
+    ></app-input-cpf-cnpj>
 
-    <!-- Unidade -->
+    <!-- Celular -->
+    <app-input-phone
+        class="col-12 md:col-6"
+        label="Celular"
+        [control]="$any(form.controls['celular'])"
+    ></app-input-phone>
+
+    <!-- Email -->
     <app-input-text
         class="col-12 md:col-6"
-        label="Unidade"
-        [control]="$any(form.controls['unidade'])"
+        label="Email"
+        [control]="$any(form.controls['email'])"
     ></app-input-text>
-
-    <!-- Saldo -->
-    <app-input-currency-range
-        class="col-12 md:col-6"
-        label="Saldo"
-        [minControl]="$any(form.controls['minSaldo'])"
-        [maxControl]="$any(form.controls['maxSaldo'])"
-    ></app-input-currency-range>
 
     <!-- Botão -->
     <div class="col-12">

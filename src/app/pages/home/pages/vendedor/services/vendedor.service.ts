@@ -49,7 +49,7 @@ export class VendedorService extends CrudService<IVendedor> {
         { header: "Apelido", field: "apelido" },
         { header: "CNPJ", field: "cnpj", pipe: CpfCnpjPipe },
         { header: "CPF", field: "cpf", pipe: CpfCnpjPipe },
-        { header: "Telefone", field: "telefone", pipe: PhonePipe },
+        { header: "Celular", field: "celular", pipe: PhonePipe },
         { header: "Email", field: "email" },
     ];
 }

@@ -5,6 +5,8 @@ import { MessageService } from "primeng/api";
 import { map, Observable } from "rxjs";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
 import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
+import { StatusPipe } from "src/app/shared/pipes/status.pipe";
+import { TipoClientePipe } from "src/app/shared/pipes/tipo-cliente.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -46,16 +48,11 @@ export class ClienteService extends CrudService<ICliente> {
 
     override cols: ICol[] = [
         { header: "ID", field: "id" },
-        { header: "Tipo", field: "tipoCliente" },
+        { header: "Tipo", field: "tipoCliente", pipe: TipoClientePipe },
         { header: "Razão Social", field: "razaoSocial" },
         { header: "Fantasia", field: "fantasia" },
         { header: "CPF/CNPJ", field: "cpfCnpj", pipe: CpfCnpjPipe },
-        {
-            header: "Ultima Atualização",
-            field: "dataUltimaAtualizacao",
-            pipe: DatePipe,
-            pipeArgs: ["dd/MM/yy"],
-        },
+        { header: "Status", field: "status", pipe: StatusPipe },
     ];
 
     override getById(id: number): Observable<ICliente> {

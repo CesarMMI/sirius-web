@@ -18,35 +18,40 @@ import { FilterAdvancedService } from "./filter-advanced/services/filter-advance
     template: `
         <p-overlayPanel #filtroOp>
             <ng-template pTemplate>
-                <div class="p-2">
-                    <div class="gap-3 flex align-items-center">
-                        <app-filter-popup-search
-                            [options]="filterOptions"
-                            [object]="filterObj.search"
-                        ></app-filter-popup-search>
-                        <app-filter-popup-order
-                            [options]="orderOptions"
-                            [object]="filterObj.order"
-                        ></app-filter-popup-order>
+                <div class="p-2 flex flex-column gap-3">
+                    <!-- <div class="gap-3 flex align-items-center">
+                    </div> -->
+                    <app-filter-popup-search
+                        class="w-12"
+                        [options]="filterOptions"
+                        [object]="filterObj.search"
+                    ></app-filter-popup-search>
+                    <app-filter-popup-order
+                        class="w-12"
+                        [options]="orderOptions"
+                        [object]="filterObj.order"
+                    ></app-filter-popup-order>
+                    <div class="w-12 flex flex-column gap-2">
                         <button
                             pButton
                             (click)="click()"
+                            label="Filtrar"
                             icon="bi bi-search"
-                            class="p-button-text p-button-sm p-button-rounded align-self-end"
+                            class="p-button-outlined"
                         ></button>
+                        <small
+                            class="text-primary-500 select-none cursor-pointer ml-auto"
+                            (click)="displayAdvanced = true; filtroOp.hide()"
+                            >Filtros avançados...</small
+                        >
                     </div>
-                    <span
-                        class="mt-3 text-primary-500 text-sm select-none cursor-pointer"
-                        (click)="displayAdvanced = true; filtroOp.hide()"
-                        >Filtros avançados</span
-                    >
                 </div>
             </ng-template>
         </p-overlayPanel>
 
         <app-filter-advanced
             [(display)]="displayAdvanced"
-            (onFilter)="displayAdvanced = false; click()"
+            (onFilter)="displayAdvanced = false; click(true)"
             [currTagert]="advancedFilterForm"
         ></app-filter-advanced>
 
@@ -98,9 +103,9 @@ export class FilterPopupComponent {
         this.isFiltered = true;
 
         if (advanced) {
-            this.onFilter.emit(this.filterObj);
-        } else {
             this.onFilter.emit(this.filterAdvancedService.getFiltersValue());
+        } else {
+            this.onFilter.emit(this.filterObj);
         }
     }
 }

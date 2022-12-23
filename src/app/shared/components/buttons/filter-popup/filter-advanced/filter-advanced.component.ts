@@ -20,6 +20,7 @@ import { FilterAdvancedService } from "./services/filter-advanced.service";
             position="right"
             [dismissible]="false"
             [(visible)]="display"
+            styleClass="p-sidebar-lg"
             (visibleChange)="visibleChange($event)"
         >
             <ng-container #container></ng-container>

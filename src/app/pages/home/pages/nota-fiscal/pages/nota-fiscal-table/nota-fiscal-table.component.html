@@ -21,10 +21,11 @@
     [filterOptions]="cols"
     [orderOptions]="cols"
     (onFilter)="onFilter($event)"
+    [advancedFilterForm]="advForm"
   ></app-filter-popup>
   <app-crud-buttonset
     (onDelete)="onDelete($event)"
-    [targetId]="selectedData?.Id"
+    [targetId]="selectedData?.id"
     message="Tem certeza que deseja excluir a nota fiscal selecionada?"
   ></app-crud-buttonset>
 </ng-template>

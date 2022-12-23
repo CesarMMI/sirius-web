@@ -28,7 +28,7 @@ export class NotaFiscalFormComponent {
         //
         this.items = [
             { label: "Geral", routerLink: "geral" },
-            { label: "Destinatário", routerLink: "destinatario", disabled: !this.editMode },
+            { label: "Destinatário", routerLink: "destinatario" },
             { label: "Informações Adicionais", routerLink: "infos", disabled: !this.editMode },
             { label: "Itens", routerLink: "itens", disabled: !this.editMode },
             { label: "Pagamentos", routerLink: "pagamentos", disabled: !this.editMode },

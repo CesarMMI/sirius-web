@@ -1,18 +1,18 @@
-import { DatePipe } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, Type } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
-import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
+import { INotaFiscalList } from "../../models/nota-fiscal-list";
 
 import { NotaFiscalService } from "../../services/nota-fiscal.service";
+import { NotaFiscalAdvancedFilterComponent } from "../nota-fiscal-advanced-filter/nota-fiscal-advanced-filter.component";
 
 @Component({
     templateUrl: "./nota-fiscal-table.component.html",
     styles: [],
 })
-export class NotaFiscalTableComponent extends TableComponent<any> {
+export class NotaFiscalTableComponent extends TableComponent<INotaFiscalList> {
     constructor(
         protected notaFiscalService: NotaFiscalService,
         protected override filterService: FilterService,
@@ -20,17 +20,7 @@ export class NotaFiscalTableComponent extends TableComponent<any> {
         protected override messageService: MessageService
     ) {
         super(
-            [
-                { field: "Id", header: "ID" },
-                { field: "Serie", header: "Série" },
-                { field: "Chave", header: "Chave" },
-                { field: "Dhemi", header: "Data/Hora da Emissão", pipe: DatePipe, pipeArgs: ["dd/MM/yy"]},
-                { field: "Destxnome", header: "Cliente" },
-                { field: "Destcnpjcpf", header: "CPF/CNPJ", pipe: CpfCnpjPipe },
-                { field: "Enderdestxmun", header: "Município" },
-                { field: "Enderdestuf", header: "UF" },
-                { field: "Status", header: "Status" },
-            ],
+            notaFiscalService.cols,
             "Nota fiscal removida com sucesso!",
             notaFiscalService,
             filterService,
@@ -39,8 +29,12 @@ export class NotaFiscalTableComponent extends TableComponent<any> {
         );
     }
 
-    override onSelect(event: any): void {
+    advForm: Type<NotaFiscalAdvancedFilterComponent> =
+        NotaFiscalAdvancedFilterComponent;
+
+    override onSelect(event: INotaFiscalList | null): void {
         this.notaFiscalService.selectedNota = event;
-        super.onSelect(event)
+        console.log(event);
+        super.onSelect(event);
     }
 }

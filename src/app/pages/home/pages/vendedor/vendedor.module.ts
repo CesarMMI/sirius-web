@@ -10,9 +10,10 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 import { VendedorFormComponent } from "./pages/vendedor-form/vendedor-form.component";
 import { VendedorTableComponent } from "./pages/vendedor-table/vendedor-table.component";
 import { VendedorRoutingModule } from "./vendedor-routing.module";
+import { VendedorAdvancedFilterComponent } from './pages/vendedor-advanced-filter/vendedor-advanced-filter.component';
 
 @NgModule({
-  declarations: [VendedorTableComponent, VendedorFormComponent],
+  declarations: [VendedorTableComponent, VendedorFormComponent, VendedorAdvancedFilterComponent],
   imports: [
     CommonModule,
     VendedorRoutingModule,

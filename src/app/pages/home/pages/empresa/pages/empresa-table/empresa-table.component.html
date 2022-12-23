@@ -22,12 +22,12 @@
 </app-custom-table-wrapper>
 
 <ng-template #headerButtons>
-    <app-filter-popup
+    <!-- <app-filter-popup
         [filterOptions]="cols.slice(0, -1)"
         [orderOptions]="cols"
         (onFilter)="onFilter($event)"
         [advancedFilterForm]="empresaAdvancedFilterComponent"
-    ></app-filter-popup>
+    ></app-filter-popup> -->
     <app-crud-buttonset
         (onDelete)="onDelete($event)"
         [targetId]="selectedData?.id"

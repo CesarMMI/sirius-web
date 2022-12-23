@@ -22,6 +22,8 @@ export class UsuarioAdvancedFilterComponent extends AdvancedFilterForm {
               orderBy: "id",
               desc: false,
               status: null,
+              minId: null,
+              maxId: null,
               grupoId: null,
               nome: null,
               ultimoNome: null,

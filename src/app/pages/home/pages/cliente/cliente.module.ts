@@ -10,9 +10,10 @@ import { CustomTableModule } from 'src/app/shared/components/custom-table/custom
 
 import { ClienteRoutingModule } from './cliente-routing.module';
 import { ClienteTableComponent } from './pages/cliente-table/cliente-table.component';
+import { ClienteAdvancedFilterComponent } from './pages/cliente-advanced-filter/cliente-advanced-filter.component';
 
 @NgModule({
-  declarations: [ClienteTableComponent],
+  declarations: [ClienteTableComponent, ClienteAdvancedFilterComponent],
   imports: [
     CommonModule,
     ClienteRoutingModule,

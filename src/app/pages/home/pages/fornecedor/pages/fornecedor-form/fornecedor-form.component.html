@@ -34,7 +34,7 @@
         <app-input-dropdown
             class="col-12 md:col-3"
             label="Tipo do Fornecedor"
-            [control]="tipoFornecedor"
+            [control]="$any(form.controls['tipo'])"
             [options]="[
                 { label: 'Pessoa Física', value: 'F' },
                 { label: 'Pessoa Jurídica', value: 'J' }
@@ -44,16 +44,16 @@
         <app-input-cpf-cnpj
             class="col-12"
             [ngClass]="{
-                'md:col-9': tipoFornecedor.value === 'F',
-                'md:col-5': tipoFornecedor.value === 'J'
+                'md:col-9': isPF,
+                'md:col-5': !isPF
             }"
-            [label]="tipoFornecedor.value === 'F' ? 'CPF' : 'CNPJ'"
-            [isCnpj]="tipoFornecedor.value != 'F'"
+            [label]="isPF ? 'CPF' : 'CNPJ'"
+            [isCnpj]="!isPF"
             [control]="$any(form.controls['cpfCnpj'])"
         ></app-input-cpf-cnpj>
         <!-- Inscrição Estadual -->
         <app-input-mask
-            *ngIf="tipoFornecedor.value === 'J'"
+            *ngIf="!isPF"
             class="col-12 md:col-4"
             label="Inscrição Estadual"
             mask="999.999.999.999"

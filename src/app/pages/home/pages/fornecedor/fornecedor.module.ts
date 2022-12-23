@@ -10,9 +10,10 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 import { FornecedorRoutingModule } from "./fornecedor-routing.module";
 import { FornecedorFormComponent } from "./pages/fornecedor-form/fornecedor-form.component";
 import { FornecedorTableComponent } from "./pages/fornecedor-table/fornecedor-table.component";
+import { FornecedorAdvancedFilterComponent } from './pages/fornecedor-advanced-filter/fornecedor-advanced-filter.component';
 
 @NgModule({
-  declarations: [FornecedorTableComponent, FornecedorFormComponent],
+  declarations: [FornecedorTableComponent, FornecedorFormComponent, FornecedorAdvancedFilterComponent],
   imports: [
     CommonModule,
     FornecedorRoutingModule,

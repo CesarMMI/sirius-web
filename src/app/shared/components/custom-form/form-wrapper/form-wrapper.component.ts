@@ -13,31 +13,25 @@ import { FormLockService } from "src/app/shared/services/form-lock.service";
 @Component({
     selector: "app-form-wrapper",
     template: `
-        <div
-            [ngClass]="{
-                'px-1 py-1': padding
-            }"
-            class="surface-0 border-round-lg"
-        >
+        <div class="surface-0 border-round-lg">
             <header
-                *ngIf="title != ''" 
+                *ngIf="title != ''"
                 [ngClass]="{
-                    'mb-3': margin,
-                    '': !padding 
-                }"    
-                class="flex align-items-center px-2">
-                <span class="text-2xl text-color font-bold">{{
-                    (isEdit ? "Editar " : "Adicionar ") + title
-                }}</span>
+                    'mb-4': margin,
+                    '': !padding
+                }"
+                class="p-1 flex align-items-center surface-border border-bottom-1"
+            >
+                <span class="text-2xl text-color font-bold">
+                    {{ (isEdit ? "Editar " : "Adicionar ") + title }}
+                </span>
                 <button
                     pButton
                     *ngIf="isEdit && showLock"
                     [icon]="(isLocked$ | async) ? 'bi bi-lock' : 'bi bi-unlock'"
                     (click)="switchLock()"
                     class="p-button-sm p-button-text p-button-rounded"
-                    [ngClass]="{
-                        'p-button-secondary': (isLocked$ | async)
-                    }"
+                    [ngClass]="{ 'p-button-secondary': (isLocked$ | async) }"
                 ></button>
                 <button
                     pButton
@@ -67,7 +61,7 @@ export class FormWrapperComponent implements OnInit, OnDestroy {
     protected isEdit?: boolean;
 
     @Input() isChild: boolean = false;
-    
+
     @Output() lockEvent = new EventEmitter<boolean>();
     protected isLocked: boolean = true;
 

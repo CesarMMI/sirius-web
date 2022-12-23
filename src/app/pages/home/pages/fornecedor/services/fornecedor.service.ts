@@ -45,8 +45,8 @@ export class FornecedorService extends CrudService<IFornecedor> {
 
     override cols: ICol[] = [
         { header: "ID", field: "id" },
-        { header: "Fantasia", field: "fantasia" },
         { header: "Razão Social", field: "razaoSocial" },
+        { header: "Fantasia", field: "fantasia" },
         { header: "CPF/CNPJ", field: "cpfCnpj", pipe: CpfCnpjPipe },
         { header: "Email", field: "email" },
         { header: "Celular", field: "celular", pipe: PhonePipe },

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { Subscription, switchMap, iif, first, EMPTY } from "rxjs";
 import { FormComponent } from "src/app/shared/components/models/form-component/form-component";
-import { EnderecoService } from "src/app/shared/services/endereco.service";
+import { EnderecoService } from "src/app/shared/services/endereco/endereco.service";
 import { FormLockService } from "src/app/shared/services/form-lock.service";
 import { IFornecedor } from "../../models/fornecedor";
 import { FornecedorService } from "../../services/fornecedor.service";
@@ -14,7 +14,6 @@ import { FornecedorService } from "../../services/fornecedor.service";
     styles: [],
 })
 export class FornecedorFormComponent extends FormComponent<IFornecedor> {
-    protected tipoFornecedor = new FormControl("F");
     private cepSub?: Subscription;
 
     constructor(
@@ -40,6 +39,7 @@ export class FornecedorFormComponent extends FormComponent<IFornecedor> {
                 fantasia: null,
                 razaoSocial: null,
                 status: "A",
+                tipo: "F",
                 cpfCnpj: null,
                 inscEstadual: null,
                 cep: null,
@@ -82,10 +82,8 @@ export class FornecedorFormComponent extends FormComponent<IFornecedor> {
             );
     }
 
-    override lockEvent(isLocked: boolean): void {
-        if (isLocked) this.tipoFornecedor.disable();
-        else this.tipoFornecedor.enable();
-        super.lockEvent(isLocked);
+    protected get isPF(): boolean {
+        return this.form.get('tipo')!.value === 'F';
     }
 
     override ngOnDestroy(): void {

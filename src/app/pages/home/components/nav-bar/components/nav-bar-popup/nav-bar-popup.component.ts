@@ -15,7 +15,7 @@ import { Subscription } from "rxjs";
       pButton
       icon="bi bi-list"
       (click)="navbarOp.toggle($event)"
-      class="p-button-sm p-button-text p-button-plain"
+      class="p-button-sm p-button-text p-button-raised p-button-rounded"
     ></button>
 
     <p-overlayPanel #navbarOp>

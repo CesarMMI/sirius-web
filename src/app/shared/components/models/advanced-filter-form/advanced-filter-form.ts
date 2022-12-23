@@ -9,7 +9,7 @@ export class AdvancedFilterForm {
         protected filterAdvancedService: FilterAdvancedService
     ) {}
 
-    protected onFilter() {
+    protected onFilter(obj: any = this.form.getRawValue()) {
         // Ordenação
         let filters: IFilter = {
             order: {
@@ -19,10 +19,10 @@ export class AdvancedFilterForm {
         };
         // Cria array e popula com campos para filtrar
         filters.search = [];
-        for (const key in this.form.getRawValue()) {
+        for (const key in obj) {
             if (
                 Object.prototype.hasOwnProperty.call(
-                    this.form.getRawValue(),
+                    obj,
                     key
                 )
             ) {
@@ -30,7 +30,7 @@ export class AdvancedFilterForm {
 
                 const element = {
                     field: key,
-                    value: this.form.getRawValue()[key],
+                    value: obj[key],
                 };
                 filters.search.push(element);
             }

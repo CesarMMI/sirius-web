@@ -32,6 +32,7 @@ import { CalendarModule } from "primeng/calendar";
 import { InputNumberRangeComponent } from './inputs/input-number-range/input-number-range.component';
 import { InputCurrencyRangeComponent } from './inputs/input-currency-range/input-currency-range.component';
 import { InputOrderComponent } from './inputs/input-order/input-order.component';
+import { InputDateRangeComponent } from './inputs/input-date-range/input-date-range.component';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import { InputOrderComponent } from './inputs/input-order/input-order.component'
         InputNumberRangeComponent,
         InputCurrencyRangeComponent,
         InputOrderComponent,
+        InputDateRangeComponent,
     ],
     imports: [
         CommonModule,
@@ -88,7 +90,8 @@ import { InputOrderComponent } from './inputs/input-order/input-order.component'
         InputDateComponent,
         InputNumberRangeComponent,
         InputCurrencyRangeComponent,
-        InputOrderComponent
+        InputOrderComponent,
+        InputDateRangeComponent
     ],
 })
 export class CustomFormModule {}

@@ -1,13 +1,12 @@
-import { Component } from "@angular/core";
+import { Component, Type } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
-import { CpfCnpjPipe } from "src/app/shared/pipes/cpf-cnpj.pipe";
-import { PhonePipe } from "src/app/shared/pipes/phone.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
 
 import { IVendedor } from "../../models/vendedor";
 import { VendedorService } from "../../services/vendedor.service";
+import { VendedorAdvancedFilterComponent } from "../vendedor-advanced-filter/vendedor-advanced-filter.component";
 
 @Component({
     templateUrl: "./vendedor-table.component.html",
@@ -21,15 +20,7 @@ export class VendedorTableComponent extends TableComponent<IVendedor> {
         protected override messageService: MessageService
     ) {
         super(
-            [
-                { header: "ID", field: "id" },
-                { header: "Nome", field: "nome" },
-                { header: "Apelido", field: "apelido" },
-                { header: "CNPJ", field: "cnpj", pipe: CpfCnpjPipe },
-                { header: "CPF", field: "cpf", pipe: CpfCnpjPipe },
-                { header: "Telefone", field: "telefone", pipe: PhonePipe },
-                { header: "Email", field: "email" },
-            ],
+            vendedorService.cols,
             "Vendedor removido com sucesso!",
             vendedorService,
             filterService,
@@ -37,4 +28,7 @@ export class VendedorTableComponent extends TableComponent<IVendedor> {
             messageService
         );
     }
+
+    advForm: Type<VendedorAdvancedFilterComponent> =
+        VendedorAdvancedFilterComponent;
 }

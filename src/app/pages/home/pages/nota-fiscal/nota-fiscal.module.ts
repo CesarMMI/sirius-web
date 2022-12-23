@@ -9,9 +9,10 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 
 import { NotaFiscalRoutingModule } from "./nota-fiscal-routing.module";
 import { NotaFiscalTableComponent } from "./pages/nota-fiscal-table/nota-fiscal-table.component";
+import { NotaFiscalAdvancedFilterComponent } from './pages/nota-fiscal-advanced-filter/nota-fiscal-advanced-filter.component';
 
 @NgModule({
-    declarations: [NotaFiscalTableComponent],
+    declarations: [NotaFiscalTableComponent, NotaFiscalAdvancedFilterComponent],
     imports: [
         CommonModule,
         NotaFiscalRoutingModule,

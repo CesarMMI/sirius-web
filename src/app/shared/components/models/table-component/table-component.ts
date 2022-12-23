@@ -1,3 +1,4 @@
+import { Type } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { BehaviorSubject, first, Observable, shareReplay } from "rxjs";
 
@@ -7,6 +8,7 @@ import { PaginationService } from "../../../services/http-params/pagination.serv
 import { ICol } from "../../custom-table/models/Col";
 import { IPageEvent } from "../../custom-table/models/PageEvent";
 import { ITableData } from "../../custom-table/models/TableData";
+import { AdvancedFilterForm } from "../advanced-filter-form/advanced-filter-form";
 
 export class TableComponent<T> {
     protected data$!: Observable<ITableData<T>>;
@@ -20,7 +22,7 @@ export class TableComponent<T> {
         private crudService: CrudService<T>,
         protected filterService: FilterService,
         protected paginationService: PaginationService,
-        protected messageService: MessageService
+        protected messageService: MessageService,
     ) {
         this.get();
     }

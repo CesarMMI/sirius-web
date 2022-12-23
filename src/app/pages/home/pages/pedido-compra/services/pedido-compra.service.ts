@@ -21,7 +21,7 @@ export class PedidoCompraService extends CrudService<any> {
             pagination,
             filter,
             message,
-            `http://${environment.api_host}:8088/datasnap/rest/TSMPedidoCompra`,
+            `http://${environment.api_host}:8089/datasnap/rest/TSMPedidoCompra`,
             {
                 getAll: {
                     endPoint: "PedidosCompra",
