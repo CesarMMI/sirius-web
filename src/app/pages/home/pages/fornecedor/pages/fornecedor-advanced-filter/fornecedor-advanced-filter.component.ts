@@ -18,7 +18,7 @@ export class FornecedorAdvancedFilterComponent extends AdvancedFilterForm {
             formBuilder.group({
                 orderBy: "id",
                 desc: false,
-                status: 'A',
+                status: null,
                 minId: null,
                 maxId: null,
                 tipo: 'F',

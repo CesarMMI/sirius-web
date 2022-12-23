@@ -9,14 +9,17 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 
 import { PedidoVendaTableComponent } from "./pages/pedido-venda-table/pedido-venda-table.component";
 import { PedidoVendaRoutingModule } from "./pedido-venda-routing.module";
+import { PedidoVendaAdvancedFilterComponent } from './pages/pedido-venda-advanced-filter/pedido-venda-advanced-filter.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-    declarations: [PedidoVendaTableComponent],
+    declarations: [PedidoVendaTableComponent, PedidoVendaAdvancedFilterComponent],
     imports: [
         CommonModule,
         PedidoVendaRoutingModule,
         CustomTableModule,
         CustomFormModule,
+        ReactiveFormsModule,
         ButtonModule,
         CrudButtonsetModule,
         FilterPopupModule,

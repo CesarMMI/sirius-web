@@ -1,7 +1,10 @@
+import { CurrencyPipe, DatePipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { BehaviorSubject, catchError, first, throwError } from "rxjs";
+import { ICol } from "src/app/shared/components/custom-table/models/Col";
+import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -40,6 +43,36 @@ export class PedidoVendaService extends CrudService<IPedidoVenda> {
             }
         );
     }
+
+    override cols: ICol[] = [
+        { field: "id", header: "ID" },
+        {
+            field: "dataCriacao",
+            header: "Data de Criação",
+            pipe: DatePipe,
+            pipeArgs: ["dd/MM/yyyy"],
+        },
+        { field: "numero", header: "Número" },
+        {
+            field: "valorBruto",
+            header: "Valor Bruto",
+            pipe: CurrencyPipe,
+            pipeArgs: ["BRL"],
+        },
+        {
+            field: "desconto",
+            header: "Desconto",
+            pipe: CurrencyPipe,
+            pipeArgs: ["BRL"],
+        },
+        {
+            field: "valorLiquido",
+            header: "Valor Líquido",
+            pipe: CurrencyPipe,
+            pipeArgs: ["BRL"],
+        },
+        { field: "status", header: "Status", pipe: StatusPipe },
+    ];
 
     selectedPedido = new BehaviorSubject<IPedidoVenda | null>(null);
     getSelectedPedido() {

@@ -11,6 +11,7 @@ import { UserTokenInterceptor } from "src/app/shared/interceptors/user-token.int
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { DateIso8601Interceptor } from "./shared/interceptors/date-iso8601.interceptor";
 import { UserInfoInterceptor } from "./shared/interceptors/user-info.interceptor";
 import { CepPipe } from "./shared/pipes/cep.pipe";
 import { CpfCnpjPipe } from "./shared/pipes/cpf-cnpj.pipe";
@@ -49,6 +50,11 @@ import { ResponsiveService } from "./shared/services/responsive.service";
         {
             provide: HTTP_INTERCEPTORS,
             useClass: UserInfoInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: DateIso8601Interceptor,
             multi: true,
         },
     ],

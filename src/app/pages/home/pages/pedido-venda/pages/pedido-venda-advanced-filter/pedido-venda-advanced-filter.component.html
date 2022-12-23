@@ -1,0 +1,70 @@
+<form class="grid mt-3" [formGroup]="form">
+    <!-- Ordem -->
+    <app-input-order
+        class="col-12 md:col-6"
+        label="Ordem"
+        [fieldControl]="$any(form.controls['orderBy'])"
+        [orderControl]="$any(form.controls['desc'])"
+        [options]="pedidoVendaService.cols"
+    ></app-input-order>
+
+    <!-- Status -->
+    <app-input-dropdown
+        class="col-12 md:col-6"
+        label="Status"
+        [control]="$any(form.controls['status'])"
+        [options]="[
+            { label: 'Ativo', value: 'A' },
+            { label: 'Inativo', value: 'I' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Intervalo ID -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo ID"
+        [minControl]="$any(form.controls['minId'])"
+        [maxControl]="$any(form.controls['maxId'])"
+    ></app-input-number-range>
+
+    <!-- Intervalo Data de Criação -->
+    <app-input-date-range
+        class="col-12 md:col-6"
+        label="Intervalo Data de Criação"
+        [control]="$any(form.controls['dataCriacao'])"
+    ></app-input-date-range>
+
+    <!-- Intervalo Número -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo Número"
+        [minControl]="$any(form.controls['minNumero'])"
+        [maxControl]="$any(form.controls['maxNumero'])"
+    ></app-input-number-range>
+
+    <!-- Intervalo Valor Bruto -->
+    <app-input-currency-range
+        class="col-12 md:col-6"
+        label="Intervalo Valor Bruto"
+        [minControl]="$any(form.controls['minValorBruto'])"
+        [maxControl]="$any(form.controls['maxValorBruto'])"
+    ></app-input-currency-range>
+
+    <!-- Intervalo Valor Líquido -->
+    <app-input-currency-range
+        class="col-12 md:col-6"
+        label="Intervalo Valor Líquido"
+        [minControl]="$any(form.controls['minValorLiquido'])"
+        [maxControl]="$any(form.controls['maxValorLiquido'])"
+    ></app-input-currency-range>
+
+    <!-- Botão -->
+    <div class="col-12">
+        <button
+            pButton
+            class="w-full"
+            label="Filtrar"
+            (click)="onFilter()"
+        ></button>
+    </div>
+</form>

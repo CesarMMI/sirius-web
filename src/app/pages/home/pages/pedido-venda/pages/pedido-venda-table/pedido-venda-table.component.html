@@ -21,9 +21,10 @@
     [items]="rotinas"
   ></app-rotinas-popup>
   <app-filter-popup
-    [filterOptions]="cols.slice(0, -1)"
+    [filterOptions]="filterOptions"
     [orderOptions]="cols"
     (onFilter)="onFilter($event)"
+    [advancedFilterForm]="advForm"
   ></app-filter-popup>
   <app-crud-buttonset
     (onDelete)="onDelete($event)"

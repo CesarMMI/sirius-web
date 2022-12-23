@@ -9,7 +9,7 @@ import { FormControl } from "@angular/forms";
                 <p-inputNumber
                     (onFocus)="showPlaceholder = true"
                     (onBlur)="showPlaceholder = false"
-                    [max]="maxControl.value - 1"
+                    [max]="maxControl.value ? maxControl.value - 1 : 9999"
                     [inputId]="minInputId"
                     [formControl]="minControl"
                     class="w-full"
