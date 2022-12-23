@@ -11,9 +11,10 @@ import { CustomTableModule } from "src/app/shared/components/custom-table/custom
 import { RecebimentoFormComponent } from "./pages/recebimento-form/recebimento-form.component";
 import { RecebimentoTableComponent } from "./pages/recebimento-table/recebimento-table.component";
 import { RecebimentoRoutingModule } from "./recebimento-routing.module";
+import { RecebimentoAdvancedFilterComponent } from './pages/recebimento-advanced-filter/recebimento-advanced-filter.component';
 
 @NgModule({
-    declarations: [RecebimentoTableComponent, RecebimentoFormComponent],
+    declarations: [RecebimentoTableComponent, RecebimentoFormComponent, RecebimentoAdvancedFilterComponent],
     imports: [
         CommonModule,
         RecebimentoRoutingModule,
