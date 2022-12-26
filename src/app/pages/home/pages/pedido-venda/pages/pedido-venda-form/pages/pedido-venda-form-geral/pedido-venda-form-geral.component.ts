@@ -35,7 +35,7 @@ export class PedidoVendaFormGeralComponent extends FormComponent<any> {
             "Pedido de Venda",
             "/home/pedidos-venda",
             pedidoVendaService,
-            ["id", "dataCriacao", "valorLiquido"],
+            ["id", "dataCriacao", "valorLiquido", "valorBruto"],
             formBuilder.group({
                 id: { value: null, disabled: true },
                 numero: null,
@@ -43,7 +43,7 @@ export class PedidoVendaFormGeralComponent extends FormComponent<any> {
                 status: null,
                 vendedorId: 0,
                 clienteId: null,
-                valorBruto: null,
+                valorBruto: { value: null, disabled: true },
                 desconto: null,
                 valorLiquido: { value: null, disabled: true },
                 observacoes: "",

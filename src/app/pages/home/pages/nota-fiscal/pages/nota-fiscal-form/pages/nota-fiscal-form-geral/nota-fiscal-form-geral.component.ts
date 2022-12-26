@@ -27,25 +27,25 @@ export class NotaFiscalFormGeralComponent extends FormComponent<any> {
             "notaFiscal",
             "/home/notaFiscals",
             notaFiscalService,
-            ["Id", "Nnf", "Chave", "Dhemi", "Status"],
+            ["id", "nnf", "chave", "dhemi", "status"],
             formBuilder.group({
-                Id: [{ value: null, disabled: true }],
-                Serie: null,
-                Nnf: [{ value: null, disabled: true }],
-                Chave: [{ value: null, disabled: true }],
+                id: [{ value: null, disabled: true }],
+                serie: null,
+                nnf: [{ value: null, disabled: true }],
+                chave: [{ value: null, disabled: true }],
 
-                Dhemi: [{ value: null, disabled: true }],
-                Status: [{ value: null, disabled: true }],
-                Iddest: null,
+                dhemi: [{ value: null, disabled: true }],
+                status: [{ value: null, disabled: true }],
+                iddest: null,
 
-                Tpemis: null,
-                Finnfe: null,
+                tpemis: null,
+                finnfe: null,
 
-                Tpnf: null,
-                Natop: null,
+                tpnf: null,
+                natop: null,
 
-                Indpres: null,
-                Modfrete: null,
+                indpres: null,
+                modfrete: null,
             })
         );
     }

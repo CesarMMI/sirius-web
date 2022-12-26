@@ -6,17 +6,11 @@
             class="col-1"
             [control]="$any(form.controls['id'])"
         ></app-input-number>
-        <!-- Número do Cupom -->
+        <!-- Identificador do Documento -->
         <app-input-text
-            label="Número do Cupom"
-            class="col-4"
-            [control]="$any(form.controls['numCupom'])"
-        ></app-input-text>
-        <!-- Número do Pedido -->
-        <app-input-text
-            label="Número do Pedido"
-            class="col-5"
-            [control]="$any(form.controls['numPedido'])"
+            label="Identificador do Documento"
+            class="col-9"
+            [control]="$any(form.controls['documento'])"
         ></app-input-text>
         <!-- Status -->
         <app-input-dropdown

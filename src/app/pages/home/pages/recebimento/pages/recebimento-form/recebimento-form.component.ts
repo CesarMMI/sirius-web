@@ -33,8 +33,7 @@ export class RecebimentoFormComponent extends FormComponent<any> {
             ["id", "dataCriacao"],
             formBuilder.group({
                 id: [{ value: null, disabled: true }],
-                numCupom: [null],
-                numPedido: [null],
+                documento: [null],
                 status: ["P"],
                 formaPagamento: [null],
                 clienteId: [null],

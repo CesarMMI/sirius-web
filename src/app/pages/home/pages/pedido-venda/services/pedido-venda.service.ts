@@ -94,6 +94,7 @@ export class PedidoVendaService extends CrudService<IPedidoVenda> {
                     this.message.add({
                         severity: "error",
                         summary:
+                            err.error.erro.erro ||
                             err.error.erro ||
                             err.error.error ||
                             err.error ||

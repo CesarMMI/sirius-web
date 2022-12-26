@@ -59,21 +59,31 @@ export class PedidoVendaTableComponent extends TableComponent<IPedidoVenda> {
         ];
     }
 
+    protected enviarPedidoLoading: boolean = false;
     protected enviarPedido() {
         let status =
             this.userInfoService.userInfoValue!.vendedorId > 0
                 ? "Confirmado"
                 : "Realizado";
 
+        this.enviarPedidoLoading = true;
+
         this.pedidoVendaService
             .changeStatus(this.selectedData!.id, status)
             .pipe(first())
-            .subscribe(() => {
-                this.messageService.add({
-                    severity: "success",
-                    summary: "Pedido " + status + " com sucesso!",
-                });
-                this.get();
+            .subscribe({
+                next: () => {
+                    this.enviarPedidoLoading = false;
+                    this.messageService.add({
+                        severity: "success",
+                        summary: "Pedido " + status + " com sucesso!",
+                    });
+                    this.get();
+                },
+                error: (err) => {
+                    this.enviarPedidoLoading = false;
+                    this.get();
+                }
             });
     }
 }

@@ -6,40 +6,40 @@
             (onChoose)="onChooseCliente($event)"
             label="Cliente ID"
             [service]="clienteService"
-            [control]="$any(form.controls['ClienteId'])"
+            [control]="$any(form.controls['clienteId'])"
         ></app-input-select-data>
         <!-- Destxnome -->
         <app-input-text
             class="col-12 md:col-5"
             label="Razão Social"
-            [control]="$any(form.controls['Destxnome'])"
+            [control]="$any(form.controls['destxnome'])"
         ></app-input-text>
         <!-- CPF/CNPJ -->
         <app-input-cpf-cnpj
             class="col-12 md:col-5"
             label="CPF/CNPJ"
-            [isCnpj]="form.controls['Destcnpjcpf'].value?.length > 11 || false"
-            [control]="$any(form.controls['Destcnpjcpf'])"
+            [isCnpj]="form.controls['destcnpjcpf'].value?.length > 11 || false"
+            [control]="$any(form.controls['destcnpjcpf'])"
         ></app-input-cpf-cnpj>
 
         <!-- Celular -->
         <app-input-phone
             class="col-12 md:col-6"
             label="Celular"
-            [control]="$any(form.controls['Enderemitfone'])"
+            [control]="$any(form.controls['enderemitfone'])"
         ></app-input-phone>
         <!-- Email -->
         <app-input-text
             class="col-12 md:col-6"
             label="Email"
-            [control]="$any(form.controls['Destemail'])"
+            [control]="$any(form.controls['destemail'])"
         ></app-input-text>
 
         <!-- Indicador da IE -->
         <app-input-dropdown
             class="col-12 md:col-5"
             label="Indicador da IE"
-            [control]="$any(form.controls['Indiedest'])"
+            [control]="$any(form.controls['indiedest'])"
             [options]="[
                 {
                     label: 'Contribuinte ICMS (informar a IE do destinatário)',
@@ -59,13 +59,13 @@
         <app-input-number
             class="col-12 md:col-4"
             label="Inscrição Estadual"
-            [control]="$any(form.controls['Destie'])"
+            [control]="$any(form.controls['destie'])"
         ></app-input-number>
         <!-- Consumidor Final -->
         <app-input-boolean
             class="col-12 md:col-3"
             label="Consumidor Final"
-            [control]="$any(form.controls['Indfinal'])"
+            [control]="$any(form.controls['indfinal'])"
         ></app-input-boolean>
 
         <!-- Endereço ID -->
@@ -76,44 +76,44 @@
             [await]="true"
             [targetId]="targetId"
             [service]="clienteEnderecoService"
-            [control]="$any(form.controls['EnderecoId'])"
+            [control]="$any(form.controls['enderecoId'])"
         ></app-input-select-data>
         <!-- Logradouro -->
         <app-input-text
             class="col-12 md:col-4"
             label="Logradouro"
-            [control]="$any(form.controls['Enderdestxlgr'])"
+            [control]="$any(form.controls['enderdestxlgr'])"
         ></app-input-text>
         <!-- Número -->
         <app-input-text
             class="col-12 md:col-3"
             label="Número"
-            [control]="$any(form.controls['Enderdestnro'])"
+            [control]="$any(form.controls['enderdestnro'])"
         ></app-input-text>
         <!-- Complemento -->
         <app-input-text
             class="col-12 md:col-3"
             label="Complemento"
-            [control]="$any(form.controls['Enderdestxcpl'])"
+            [control]="$any(form.controls['enderdestxcpl'])"
         ></app-input-text>
 
         <!-- Bairro -->
         <app-input-text
             class="col-12 md:col-4"
             label="Bairro"
-            [control]="$any(form.controls['Enderdestxbairro'])"
+            [control]="$any(form.controls['enderdestxbairro'])"
         ></app-input-text>
         <!-- Cidade -->
         <app-input-text
             class="col-12 md:col-4"
             label="Cidade"
-            [control]="$any(form.controls['Enderdestxmun'])"
+            [control]="$any(form.controls['enderdestxmun'])"
         ></app-input-text>
         <!-- UF -->
         <app-input-text
             class="col-12 md:col-4"
             label="UF"
-            [control]="$any(form.controls['Enderdestuf'])"
+            [control]="$any(form.controls['enderdestuf'])"
         ></app-input-text>
         
 

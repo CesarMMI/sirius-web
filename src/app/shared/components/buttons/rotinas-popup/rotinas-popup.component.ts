@@ -19,16 +19,18 @@ import { MenuItem } from "primeng/api";
             #btn
             pButton
             type="text"
+            [loading]="loading"
             icon="bi bi-gear-wide-connected"
             class="p-button-sm p-button-text p-button-rounded p-button-plain"
             (click)="op.toggle($event)"
         ></button>
     `,
     styles: [],
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RotinasPopupComponent implements OnInit {
     @Input() items: MenuItem[] = [];
+    @Input() loading: boolean = false;
 
     constructor() {}
 

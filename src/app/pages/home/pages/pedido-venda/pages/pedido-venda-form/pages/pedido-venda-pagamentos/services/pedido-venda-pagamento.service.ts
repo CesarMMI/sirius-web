@@ -13,6 +13,7 @@ import {
 } from "rxjs";
 import { ICol } from "src/app/shared/components/custom-table/models/Col";
 import { ITableData } from "src/app/shared/components/custom-table/models/TableData";
+import { PaymentPipe } from "src/app/shared/pipes/payment.pipe";
 import { CrudService } from "src/app/shared/services/crud-service";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -69,6 +70,7 @@ export class PedidoVendaPagamentoService extends CrudService<any> {
         {
             field: "formaPagamento",
             header: "Forma de Pagamento",
+            pipe: PaymentPipe
         },
         { field: "valor", header: "Valor", pipe: CurrencyPipe },
     ];

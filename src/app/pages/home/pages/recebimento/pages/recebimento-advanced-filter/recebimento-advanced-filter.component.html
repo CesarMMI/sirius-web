@@ -1,0 +1,115 @@
+<form class="grid mt-3" [formGroup]="form">
+    <!-- Ordem -->
+    <app-input-order
+        class="col-12 md:col-6"
+        label="Ordem"
+        [fieldControl]="$any(form.controls['orderBy'])"
+        [orderControl]="$any(form.controls['desc'])"
+        [options]="recebimentoService.cols"
+    ></app-input-order>
+
+    <!-- Status -->
+    <app-input-dropdown
+        class="col-12 md:col-6"
+        label="Status"
+        [control]="$any(form.controls['status'])"
+        [options]="[
+            { label: 'Pendente', value: 'P' },
+            { label: 'Confirmado', value: 'C' },
+            { label: 'Realizado', value: 'R' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Intervalo ID -->
+    <app-input-number-range
+        class="col-12 md:col-6"
+        label="Intervalo ID"
+        [minControl]="$any(form.controls['minId'])"
+        [maxControl]="$any(form.controls['maxId'])"
+    ></app-input-number-range>
+
+    <!-- Identificador do Documento -->
+    <app-input-text
+        class="col-12 md:col-6"
+        label="Identificador do Documento"
+        [control]="$any(form.controls['documento'])"
+    ></app-input-text>
+
+    <!-- Intervalo Valor Bruto -->
+    <app-input-currency-range
+        class="col-12 md:col-6"
+        label="Intervalo Valor Bruto"
+        [minControl]="$any(form.controls['minValorBruto'])"
+        [maxControl]="$any(form.controls['maxValorBruto'])"
+    ></app-input-currency-range>
+
+    <!-- Intervalo Valor Recebido -->
+    <app-input-currency-range
+        class="col-12 md:col-6"
+        label="Intervalo Valor Recebido"
+        [minControl]="$any(form.controls['minValorRecebido'])"
+        [maxControl]="$any(form.controls['maxValorRecebido'])"
+    ></app-input-currency-range>
+
+    <!-- Forma de Pagamento -->
+    <app-input-dropdown
+        class="col-12"
+        label="Forma de Pagamento"
+        [control]="$any(form.controls['formaPagamento'])"
+        [options]="[
+            { value: '01', label: 'Dinheiro' },
+            { value: '02', label: 'Cheque' },
+            { value: '03', label: 'Cartão de Crédito' },
+            { value: '04', label: 'Cartão de Débito' },
+            { value: '05', label: 'Crédito Loja' },
+            { value: '10', label: 'Vale Alimentação' },
+            { value: '11', label: 'Vale Refeição' },
+            { value: '12', label: 'Vale Presente' },
+            { value: '13', label: 'Vale Combustível' },
+            { value: '15', label: 'Boleto Bancário' },
+            { value: '16', label: 'Deposito Bancário' },
+            { value: '17', label: 'Pagamento Instantâneo (PIX)' },
+            {
+                value: '18',
+                label: 'Transferência Bancária, Carteira Digital'
+            },
+            {
+                value: '19',
+                label: 'Programa de Fidelidade, CashBack, Crédito Virtual, etc.'
+            },
+            { value: '90', label: 'Sem Pagamento' },
+            { value: '99', label: 'Outros' }
+        ]"
+    ></app-input-dropdown>
+
+    <!-- Intervalo Data de Criação -->
+    <app-input-date-range
+        class="col-12 md:col-4"
+        label="Intervalo Data de Criação"
+        [control]="$any(form.controls['dataCriacao'])"
+    ></app-input-date-range>
+    
+    <!-- Intervalo Data de Vencimento -->
+    <app-input-date-range
+        class="col-12 md:col-4"
+        label="Intervalo Data de Vencimento"
+        [control]="$any(form.controls['dataVencimento'])"
+    ></app-input-date-range>
+    
+    <!-- Intervalo Data de Recebimento -->
+    <app-input-date-range
+        class="col-12 md:col-4"
+        label="Intervalo Data de Recebimento"
+        [control]="$any(form.controls['dataRealizado'])"
+    ></app-input-date-range>
+
+    <!-- Botão -->
+    <div class="col-12">
+        <button
+            pButton
+            class="w-full"
+            label="Filtrar"
+            (click)="onFilter()"
+        ></button>
+    </div>
+</form>

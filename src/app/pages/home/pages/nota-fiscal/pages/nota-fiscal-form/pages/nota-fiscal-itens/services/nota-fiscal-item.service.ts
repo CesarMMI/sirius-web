@@ -28,7 +28,7 @@ export class NotaFiscalItemService extends CrudService<any> {
             `http://${environment.api_host}:8082/datasnap/rest/TSMItens`,
             {
                 getAll: {
-                    endPoint: `GetItens/${notaFiscalService.selectedNota?.Id}`,
+                    endPoint: `GetItens/${notaFiscalService.selectedNota?.id}`,
                     response: {
                         payload: "Itens",
                         pageCount: "QuantidadePaginas",

@@ -19,6 +19,7 @@
 <ng-template #headerButtons>
   <app-rotinas-popup
     [items]="rotinas"
+    [loading]="enviarPedidoLoading"
   ></app-rotinas-popup>
   <app-filter-popup
     [filterOptions]="filterOptions"

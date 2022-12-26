@@ -21,22 +21,7 @@ export class PagamentoTableComponent extends TableComponent<any> {
         protected override messageService: MessageService
     ) {
         super(
-            [
-                { header: "ID", field: "id" },
-                { header: "Status", field: "status", pipe: StatusPipe },
-                { header: "Forma de Pagamento", field: "formaPagamento" },
-                {
-                    header: "Valor Bruto",
-                    field: "valorBruto",
-                    pipe: CurrencyPipe,
-                },
-                {
-                    header: "Data de Vencimento",
-                    field: "dataVencimento",
-                    pipe: DatePipe,
-                    pipeArgs: ["dd/MM/yy"],
-                },
-            ],
+            pagamentoService.cols,
             "Pagamento removido com sucesso!",
             pagamentoService,
             filterService,

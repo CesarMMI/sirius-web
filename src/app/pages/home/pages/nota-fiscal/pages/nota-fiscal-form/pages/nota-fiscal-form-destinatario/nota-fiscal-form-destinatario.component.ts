@@ -39,21 +39,21 @@ export class NotaFiscalFormDestinatarioComponent extends FormComponent<any> {
             notaFiscalService,
             [],
             formBuilder.group({
-                ClienteId: [null, Validators.required],
-                Destxnome: null,
-                Destcnpjcpf: null,
-                Indiedest: null,
-                Destie: null,
-                Indfinal: null,
-                EnderecoId: null,
-                Enderdestxlgr: null,
-                Enderdestnro: null,
-                Enderdestxcpl: null,
-                Enderdestxbairro: null,
-                Enderdestxmun: null,
-                Enderdestuf: null,
-                Destemail: null,
-                Enderemitfone: null,
+                clienteId: [null, Validators.required],
+                destxnome: null,
+                destcnpjcpf: null,
+                indiedest: null,
+                destie: null,
+                indfinal: null,
+                enderecoId: null,
+                enderdestxlgr: null,
+                enderdestnro: null,
+                enderdestxcpl: null,
+                enderdestxbairro: null,
+                enderdestxmun: null,
+                enderdestuf: null,
+                destemail: null,
+                enderemitfone: null,
             })
         );
         this.indfinalSub = this.form
@@ -61,10 +61,10 @@ export class NotaFiscalFormDestinatarioComponent extends FormComponent<any> {
             ?.valueChanges.subscribe((value) => {
                 switch (value) {
                     case "0":
-                        this.form.get("Indfinal")?.setValue(false);
+                        this.form.get("indfinal")?.setValue(false);
                         break;
                     case "1":
-                        this.form.get("Indfinal")?.setValue(true);
+                        this.form.get("indfinal")?.setValue(true);
                         break;
                 }
             });

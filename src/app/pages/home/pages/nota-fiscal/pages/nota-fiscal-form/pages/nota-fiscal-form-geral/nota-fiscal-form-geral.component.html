@@ -4,44 +4,44 @@
         <app-input-number
             class="col-3"
             label="ID"
-            [control]="$any(form.controls['Id'])"
+            [control]="$any(form.controls['id'])"
         ></app-input-number>
         <!-- Serie -->
         <app-input-text
             class="col-3"
             label="Serie"
-            [control]="$any(form.controls['Serie'])"
+            [control]="$any(form.controls['serie'])"
         ></app-input-text>
         <!-- Número -->
         <app-input-number
             class="col-3"
             label="Número"
-            [control]="$any(form.controls['Nnf'])"
+            [control]="$any(form.controls['nnf'])"
         ></app-input-number>
         <!-- Chave de Acesso -->
         <app-input-text
             class="col-3"
             label="Chave de Acesso"
-            [control]="$any(form.controls['Chave'])"
+            [control]="$any(form.controls['chave'])"
         ></app-input-text>
 
         <!-- Data de Emissão -->
         <app-input-text
             class="col-4"
             label="Data de Emissão"
-            [control]="$any(form.controls['Dhemi'])"
+            [control]="$any(form.controls['dhemi'])"
         ></app-input-text>
         <!-- Status -->
         <app-input-text
             class="col-4"
             label="Status"
-            [control]="$any(form.controls['Status'])"
+            [control]="$any(form.controls['status'])"
         ></app-input-text>
         <!-- Destino da Operação -->
         <app-input-dropdown
             class="col-4"
             label="Destino da Operação"
-            [control]="$any(form.controls['Iddest'])"
+            [control]="$any(form.controls['iddest'])"
             [options]="[
                 { label: 'Operação Interna', value: '1' },
                 { label: 'Operação Interestadual', value: '2' }
@@ -52,7 +52,7 @@
         <app-input-dropdown
             class="col-6"
             label="Tipo de Emissão"
-            [control]="$any(form.controls['Tpemis'])"
+            [control]="$any(form.controls['tpemis'])"
             [options]="[
                 { value: '1', label: 'Emissão normal (não em contingência)' },
                 {
@@ -93,7 +93,7 @@
         <app-input-dropdown
             class="col-6"
             label="Finalidade de Emissão"
-            [control]="$any(form.controls['Finnfe'])"
+            [control]="$any(form.controls['finnfe'])"
             [options]="[
                 { label: 'NF-e normal', value: '1' },
                 { label: 'NF-e complementar', value: '2' },
@@ -106,7 +106,7 @@
         <app-input-dropdown
             class="col-6"
             label="Tipo de Nota"
-            [control]="$any(form.controls['Tpnf'])"
+            [control]="$any(form.controls['tpnf'])"
             [options]="[
                 { label: 'Entrada', value: '0' },
                 { label: 'Saída', value: '1' }
@@ -116,14 +116,14 @@
         <app-input-text
             class="col-6"
             label="Natureza da Operação"
-            [control]="$any(form.controls['Natop'])"
+            [control]="$any(form.controls['natop'])"
         ></app-input-text>
 
         <!-- Tipo de Atendimento -->
         <app-input-dropdown
             class="col-6"
             label="Tipo de Atendimento"
-            [control]="$any(form.controls['Indpres'])"
+            [control]="$any(form.controls['indpres'])"
             [options]="[
                 {
                     label: 'Operação presencial',
@@ -155,7 +155,7 @@
         <app-input-dropdown
             class="col-6"
             label="Modalidade do Frete"
-            [control]="$any(form.controls['Modfrete'])"
+            [control]="$any(form.controls['modfrete'])"
             [options]="[
                 {
                     label: 'Contratação do Frete por conta do Remetente (CIF)',

@@ -2,6 +2,7 @@ import { CurrencyPipe, DatePipe } from "@angular/common";
 import { Component, Type } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { TableComponent } from "src/app/shared/components/models/table-component/table-component";
+import { PaymentPipe } from "src/app/shared/pipes/payment.pipe";
 import { StatusPipe } from "src/app/shared/pipes/status.pipe";
 import { FilterService } from "src/app/shared/services/http-params/filter.service";
 import { PaginationService } from "src/app/shared/services/http-params/pagination.service";
@@ -21,22 +22,7 @@ export class RecebimentoTableComponent extends TableComponent<any> {
         protected override messageService: MessageService
     ) {
         super(
-            [
-                { header: "ID", field: "id" },
-                { header: "Status", field: "status", pipe: StatusPipe },
-                { header: "Forma de Pagamento", field: "formaPagamento" },
-                {
-                    header: "Valor Bruto",
-                    field: "valorBruto",
-                    pipe: CurrencyPipe,
-                },
-                {
-                    header: "Data de Vencimento",
-                    field: "dataVencimento",
-                    pipe: DatePipe,
-                    pipeArgs: ["dd/MM/yy"],
-                },
-            ],
+            recebimentoService.cols,
             "Recebimento removido com sucesso!",
             recebimentoService,
             filterService,

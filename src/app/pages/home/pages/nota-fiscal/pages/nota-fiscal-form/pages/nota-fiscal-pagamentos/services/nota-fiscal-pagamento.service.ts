@@ -29,7 +29,7 @@ export class NotaFiscalPagamentoService extends CrudService<any> {
           `http://${environment.api_host}:8082/datasnap/rest/TSMPagamentos`,
           {
               getAll: {
-                  endPoint: `GetPagamentos/${notaFiscalService.selectedNota?.Id}`,
+                  endPoint: `GetPagamentos/${notaFiscalService.selectedNota?.id}`,
                   response: {
                       payload: "pagamentos",
                       pageCount: "quantidadePaginas",
